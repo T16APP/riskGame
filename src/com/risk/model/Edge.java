@@ -5,24 +5,24 @@ package com.risk.model;
 public class Edge implements Comparable{
 	private static int counter=0;
 	private  int id;
-	private String country1;
-	private String country2;
+	private int countryId1;
+	private int countryId2;
 	
-	public Edge(String new_country1, String new_country2)
+	public Edge(int new_countryId1, int new_countryId2)
 	{
 		counter++;
 		this.id=this.counter;
-		this.country1=new_country1;
-		this.country2=new_country2;
+		this.countryId1=new_countryId1;
+		this.countryId2=new_countryId2;
 	}
     
-	public String GetCountry1()
+	public int GetCountryId1()
 	{
-		return this.country1;
+		return this.countryId1;
 	}
-	public String GetCountry2()
+	public int GetCountryId2()
 	{
-		return this.country2;
+		return this.countryId2;
 	}
 	public int GetId()
 	{
@@ -32,13 +32,38 @@ public class Edge implements Comparable{
 	public int compareTo(Object o) {
 		// TODO Auto-generated method stub
 		Edge edge = (Edge)o;
-		if((this.GetCountry1().equals(edge.GetCountry1()) && this.GetCountry2().equals(edge.GetCountry2()))
-		|| (this.GetCountry1().equals(edge.GetCountry2()) && this.GetCountry2().equals(edge.GetCountry1())))
+		if((this.GetCountryId1()==edge.GetCountryId1() && this.GetCountryId2()==edge.GetCountryId2())
+		|| (this.GetCountryId1()==edge.GetCountryId2() && this.GetCountryId2()==edge.GetCountryId1()))
 		{
 			return 0;
 		}
 		else return -1;
 				
+		
+	}
+	public boolean DoesExistCountry(int new_countryId)
+	{
+		boolean result = false;
+		if(this.GetCountryId1()==new_countryId || this.GetCountryId2()==new_countryId  )
+		{
+			return true;
+		}
+		return result;
+	}
+	public int GetNeighborId(int new_countryId)
+	{
+		if(this.countryId1==new_countryId)
+		{
+			return this.countryId2;
+		}
+		else if(this.countryId2==new_countryId)
+		{
+			return this.countryId1;
+		}
+		else
+		{
+		return -1;	
+		}
 		
 	}
 

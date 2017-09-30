@@ -14,7 +14,9 @@ import com.risk.model.FactoryLand;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
  public class MapParser {
@@ -71,7 +73,11 @@ import java.util.ArrayList;
 	    }
         br.close();
         //building map
-        //building continents
+        //set map properties
+        for(Object o:arrMap)
+        {
+        	ParseMap((String) o);
+        }
         int continentCount=1;
         for(Object o:arrContinents)
         {
@@ -90,13 +96,11 @@ import java.util.ArrayList;
         for(Object o : arrCountries)
         {
         	strLines = ((String)o).split(",");
-        	((Continent)map.GetLandByName(strLines[3])).countries.add((Country)map.GetLandByName(strLines[0]));
         	if(strLines.length>4)
         	{
         		for(int i=4;i<strLines.length;i++)
         		{
-        			((Country)map.GetLandByName(strLines[0])).neighbers.add(((Country)map.GetLandByName(strLines[i])));
-        			map.AddEdge(new Edge(strLines[0],strLines[i]));
+        			map.AddEdge(new Edge(map.GetCountryIdByName(strLines[0]),map.GetCountryIdByName(strLines[i])));
         		}
         	}
         	
@@ -106,14 +110,32 @@ import java.util.ArrayList;
 	    
 	}
 	}
-	public void ParseMap(String line){}
+	public void ParseMap(String line)
+	{
+		if(!line.isEmpty())
+		{
+		String[] lines = line.split("=");
+		String strName = lines[0];
+		String strValue = lines[1];
+		switch(strName.toLowerCase())
+		{
+		case "author":
+			map.SetAuthor(strValue);
+			break;
+		case "image":
+			map.SetImage(strValue);
+			break;
+		}
+		}
+		
+	}
 	public Land ParseContinents(String line, int new_id){
 		if(!line.isEmpty())
 		{
 		String[] lines = line.split("=");
 		String strName = lines[0];
-		int int1 = Integer.parseInt(lines[1]);
-		return FactoryLand.GetLand("Continent",new_id, strName);
+		double db1 = Double.parseDouble(lines[1]);
+		return FactoryLand.GetLand("Continent",strName,-1,db1,-1);
 		}
 		else return null;
 	}
@@ -123,11 +145,20 @@ import java.util.ArrayList;
 		{
 		String[] lines = line.split(",");
 		String strName = lines[0];
-		int int1 = Integer.parseInt(lines[1]);
-		int int2 = Integer.parseInt(lines[2]);
+		double db1 = Double.parseDouble(lines[1]);
+		double db2 = Double.parseDouble(lines[2]);
 		String strContinent = lines[3];
-		return FactoryLand.GetLand("Country",new_id, strName);
+		return FactoryLand.GetLand("Country", strName, map.GetContinentIdByName(strContinent),db1,db2);
 		}
 		else return null;
+	}
+	public void WriteMapToFile(Map map,String file) throws IOException
+	{
+		PrintWriter f0 = new PrintWriter(new FileWriter(file));
+        for(String line : map.MapToLines())
+        {
+        	f0.println(line);
+        }
+		f0.close();
 	}
 }

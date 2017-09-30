@@ -11,12 +11,17 @@ public class Console {
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		GameBoard gameboard = GameBoard.GetGameBoard();
-		//String s = ParserHeader.Map.toString();
-	     //System.out.println(s);
-	     MapParser mp = new MapParser();
-	     //Map map = mp.testParser("Earth.map");
-	     gameboard.map = mp.MapParser("Earth.map");
-	     /*for(Object land:gameboard.map.lands)
+		MapParser mp = new MapParser();
+	    gameboard.map = mp.MapParser("Earth.map");
+	    //print map properties
+	    System.out.println("Author = "+gameboard.map.GetAuthor());
+	    System.out.println("Image = "+gameboard.map.GetImage());
+	    for(String l : gameboard.map.MapToLines())
+	    {
+	    	System.out.println(l);
+	    }
+	    mp.WriteMapToFile( gameboard.map,"e:output.txt");
+	    for(Object land:gameboard.map.lands)
 	     {
 	    	 if(land instanceof Continent )
 	    	 {
@@ -26,18 +31,14 @@ public class Console {
 	    	 {
 	    		 System.out.println(((Country)land).GetName());
 	    		 System.out.println("_________List Of Neighbors______________");
-	    		 for(Country neighbor:((Country)land).neighbers)
-	    		 {
-	    			 System.out.println(((Country)neighbor).GetName());
-	    		 }
-	    	 }
+	         }
 	     }
 	     System.out.println("_________List Of Edges______________");
-		 for(Edge e : gameboard.map.edges)
+		 for(Edge e : gameboard.map.edges)  
 	     {
-	    	 System.out.println(e.GetId() + "   " + e.GetCountry1()+"   " + e.GetCountry2());
+	    	 System.out.println(e.GetId() + "   " + gameboard.map.GetCountryNameById(e.GetCountryId1())+"   " 
+	                                               + gameboard.map.GetCountryNameById(e.GetCountryId2()));
 	     }
-		 */
 		 gameboard.SetupPlayers();
 		 gameboard.AssignCountriesRandom();
 		 /*

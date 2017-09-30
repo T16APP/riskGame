@@ -9,16 +9,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Continent  extends Land {
-public List<Country> countries;
 double control;
+double db1;
 int playerId;
 
-public Continent(int new_id,String new_name)
+public Continent(String new_name, double new_db1)
 {
-	super(new_id,new_name);
-	countries = new ArrayList<Country>();
-	playerId=-1;
+	super(new_name);
+	this.db1=new_db1;
 	}
-
+public int GetContinentId()
+{
+	return this.id;
+	}
+public double GetDb1()
+{
+	return db1;
+	}
 
 }

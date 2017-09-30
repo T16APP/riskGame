@@ -1,13 +1,15 @@
 package com.risk.model;
 
 public class Land implements ILand{
-	private int id;
-	private String name;
-	private int playerId;
+	private static int counter=0;
+	protected int id;
+	protected String name;
+	protected int playerId;
 	
-	public Land(int new_id,String new_name)
+	public Land(String new_name)
 	{
-		this.id=new_id;
+		counter++;
+		this.id=this.counter;
 		this.name=new_name;
 		this.playerId=-1;
 	}
