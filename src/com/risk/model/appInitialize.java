@@ -13,11 +13,8 @@ public class appInitialize {
 			{
 				
 						System.out.println("Game started");	
-						
-						
 						applicationWindow appWindow = new applicationWindow();
-				
-						appWindow.open();
+			            appWindow.open();
 				
 			}
 
