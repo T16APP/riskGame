@@ -134,7 +134,7 @@ import java.util.ArrayList;
 		{
 		String[] lines = line.split("=");
 		String strName = lines[0];
-		double db1 = Double.parseDouble(lines[1]);
+		int db1 = Integer.parseInt(lines[1]);
 		return FactoryLand.GetLand("Continent",strName,-1,db1,-1);
 		}
 		else return null;
@@ -145,8 +145,8 @@ import java.util.ArrayList;
 		{
 		String[] lines = line.split(",");
 		String strName = lines[0];
-		double db1 = Double.parseDouble(lines[1]);
-		double db2 = Double.parseDouble(lines[2]);
+		int db1 = Integer.parseInt(lines[1]);
+		int db2 = Integer.parseInt(lines[2]);
 		String strContinent = lines[3];
 		return FactoryLand.GetLand("Country", strName, map.GetContinentIdByName(strContinent),db1,db2);
 		}

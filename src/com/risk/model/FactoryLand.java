@@ -4,7 +4,7 @@ package com.risk.model;
 
 public class FactoryLand {
 	
-	 public static Land GetLand(String type, String new_name, int new_continentId, double new_db1, double new_db2)
+	 public static Land GetLand(String type, String new_name, int new_continentId, int new_db1, int new_db2)
 	 {
 		 switch(type)
 		 {

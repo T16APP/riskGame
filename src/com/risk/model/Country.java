@@ -11,10 +11,10 @@ import java.util.List;
 public class Country extends Land {
 	private Double army;
 	private int continentId;
-	private double db1;
-	private double db2;
+	private int db1;
+	private int db2;
 	
-	public Country(String new_name, int new_continentId, double new_db1, double new_db2)
+	public Country(String new_name, int new_continentId, int new_db1, int new_db2)
 	{
 		super(new_name);
 		this.continentId = new_continentId;
@@ -29,11 +29,11 @@ public class Country extends Land {
 	{
 		this.playerId=new_playerId;
 	}
-	public double GetDb1()
+	public int GetDb1()
 	{
 		return this.db1;
 	}
-	public double GetDb2()
+	public int GetDb2()
 	{
 		return this.db2;
 	}
