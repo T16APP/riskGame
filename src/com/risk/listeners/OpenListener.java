@@ -1,7 +1,5 @@
 package com.risk.listeners;
 
-
-
 import com.risk.model.GraphAdapter;
 
 import java.awt.event.ActionListener;
@@ -23,80 +21,80 @@ import com.risk.view.applicationWindow;
 /**
  * An object of this class listens to presses of the "Open" menu item of the
  * "File" menu of the main user interface. It's responsible for requesting the
- * user for a file to open, and then tries to open it and display it in the
- * main user interface.
+ * user for a file to open, and then tries to open it and display it in the main
+ * user interface.
  */
-public class OpenListener implements ActionListener 
-{
+public class OpenListener implements ActionListener {
 	/**
 	 * Used to gain access to the globally shared graph, which needs to be altered
 	 * in this class.
 	 */
-    private applicationWindow gui ;
-    /**
-     * Constructor. Initializes the variable that references the gui.
-     */
-    public OpenListener() 
-    {
-        gui = applicationWindow.getInstance();
-    }
-    /**
-     * This method is called when the "Open" menu item is selected.
-     * @param actionEvent Not used.
-     */
-    @Override
-    public void actionPerformed(ActionEvent actionEvent) 
-    {
-    	/*if ( !((GraphAdapter) GraphAdapter.getInstance()).isPaused() )
-    	{
-    		return;
-    	}*/
-        JFileChooser chooser = new JFileChooser();
+	private applicationWindow gui;
 
-        // Doesn't allow the user to select more than one file.
-        chooser.setMultiSelectionEnabled(false);
-        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+	/**
+	 * Constructor. Initializes the variable that references the gui.
+	 */
+	public OpenListener() {
+		gui = applicationWindow.getInstance();
+	}
 
-        // Allows the user to select files with the map extension only.
-        FileNameExtensionFilter mapFileFilter = new FileNameExtensionFilter("Map files", "map");
-        chooser.setFileFilter(mapFileFilter);
-        int selection = chooser.showOpenDialog(gui.getContentPane());
+	/**
+	 * This method is called when the "Open" menu item is selected.
+	 * 
+	 * @param actionEvent
+	 *            Not used.
+	 */
+	@Override
+	public void actionPerformed(ActionEvent actionEvent) {
+		/*
+		 * if ( !((GraphAdapter) GraphAdapter.getInstance()).isPaused() ) { return; }
+		 */
+		JFileChooser chooser = new JFileChooser();
 
-        // If the user has selected a file.
-        if (selection != JFileChooser.CANCEL_OPTION) 
-        {
-            try {
-                File openFromFile = chooser.getSelectedFile();
+		// Doesn't allow the user to select more than one file.
+		chooser.setMultiSelectionEnabled(false);
+		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
-                // Gives the user a chance to save the work he's presently
-                // working on. If the user chooses to proceed, all of his/her
-                // work is lost forever.
-                int userResponse = JOptionPane.showConfirmDialog(gui.getContentPane(),
-                        "If you open this file without saving the one you're\n" +
-                        "already working on, all of your work will be lost.\n" +
-                        "Click yes if you don't want to save your work.\n",
-                        "Open Without Saving Confirmation",
-                        JOptionPane.YES_NO_OPTION);
+		// Allows the user to select files with the map extension only.
+		FileNameExtensionFilter mapFileFilter = new FileNameExtensionFilter("Map files", "map");
+		chooser.setFileFilter(mapFileFilter);
+		int selection = chooser.showOpenDialog(gui.getContentPane());
 
-                if (userResponse == JOptionPane.YES_OPTION) 
-                {
-                    // Retrieve the file, and update the graph in the user
-                    // interface.
-                
-                	XMLDecoder decoder = new XMLDecoder(new FileInputStream(openFromFile));
-                    
-              //   GraphLayoutCache view = (GraphLayoutCache)decoder.readObject();
-                    
-                    System.out.println("HERE");
-                    
-                    decoder.close();
-                //  gui.getGraph().setGraphLayoutCache(view);
-                }
-            }
-            catch (FileNotFoundException fnfe) 
-            {
-                JOptionPane.showMessageDialog(gui.getContentPane(),fnfe.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    }
+		// If the user has selected a file.
+		if (selection != JFileChooser.CANCEL_OPTION) {
+			try {
+				File openFromFile = chooser.getSelectedFile();
+
+				// Gives the user a chance to save the work he's presently
+				// working on. If the user chooses to proceed, all of his/her
+				// work is lost forever.
+				int userResponse = JOptionPane.showConfirmDialog(gui.getContentPane(),
+						"If you open this file without saving the one you're\n"
+								+ "already working on, all of your work will be lost.\n"
+								+ "Click yes if you don't want to save your work.\n",
+						"Open Without Saving Confirmation", JOptionPane.YES_NO_OPTION);
+
+				if (userResponse == JOptionPane.YES_OPTION) {
+					// Retrieve the file, and update the graph in the user
+					// interface.
+
+					XMLDecoder decoder = new XMLDecoder(new FileInputStream(openFromFile));
+
+					// GraphLayoutCache view = (GraphLayoutCache)decoder.readObject();
+
+					System.out.println("HERE");
+
+					decoder.close();
+					// gui.getGraph().setGraphLayoutCache(view);
+				} else {
+					JOptionPane.showMessageDialog(gui.getContentPane(), "Start Working on the current file", "MESSAGE",
+							JOptionPane.INFORMATION_MESSAGE);
+				}
+
+			} catch (FileNotFoundException fnfe) {
+				JOptionPane.showMessageDialog(gui.getContentPane(), fnfe.getMessage(), "ERROR",
+						JOptionPane.ERROR_MESSAGE);
+			}
+		}
+	}
 }

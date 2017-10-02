@@ -1,4 +1,4 @@
-package com.risk.model;
+/**package com.risk.model;
 
 import com.risk.view.applicationWindow;
 
@@ -21,3 +21,4 @@ public class appInitialize {
 		}
 
 	}
+*/
