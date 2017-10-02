@@ -6,13 +6,13 @@ public class GraphAdapter {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	public synchronized boolean isPaused()
-	{
+
+	public synchronized boolean isPaused() {
 		return true;
 	}
-	/*public synchronized boolean isPaused()
-	//{
-	//	return ((Map)((DefaultGraphCell)GraphicalUserInterface.getInstance().getGraph().
-      //  		getModel().getRootAt(0)).getUserObject()).isPaused();
-//	}*/
+	/*
+	 * public synchronized boolean isPaused() //{ // return
+	 * ((Map)((DefaultGraphCell)GraphicalUserInterface.getInstance().getGraph(). //
+	 * getModel().getRootAt(0)).getUserObject()).isPaused(); // }
+	 */
 }
