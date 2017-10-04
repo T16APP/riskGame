@@ -3,4 +3,16 @@
 Unit test : http://junit.org/junit4/javadoc/latest/
 Java8: https://docs.oracle.com/javase/8/docs/api/
 
+To add JavaDoc into JAVA IDE:
+1. Right Click on the Project Properties
+2. JavaDocLocation 
+3. Add --> https://docs.oracle.com/javase/8/docs/api
+
+Use below Annotation for decalration:
+@param
+@return
+@throws
+{@value #obj}
+
+
 
