@@ -1,3 +1,8 @@
+/*
+ * This class is kept as alternative for initializing
+ * 
+ */
+
 /**
  * package com.risk.model;
  * 

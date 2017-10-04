@@ -7,6 +7,9 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+/*
+ * This class is used for the lower window of the main frame
+ */
 public class gameGuiPanel extends JPanel {
 
 	public gameGuiPanel(int width, int height) {

@@ -16,8 +16,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.risk.view.applicationWindow;
 
-//import GraphAdapter.GraphAdapter;
-
 /**
  * An object of this class listens to presses of the "Open" menu item of the
  * "File" menu of the main user interface. It's responsible for requesting the
@@ -26,8 +24,8 @@ import com.risk.view.applicationWindow;
  */
 public class OpenListener implements ActionListener {
 	/**
-	 * Used to gain access to the globally shared graph, which needs to be altered
-	 * in this class.
+	 * Used to gain access to the globally shared graph, which needs to be
+	 * altered in this class.
 	 */
 	private applicationWindow gui;
 
@@ -47,7 +45,8 @@ public class OpenListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		/*
-		 * if ( !((GraphAdapter) GraphAdapter.getInstance()).isPaused() ) { return; }
+		 * if ( !((GraphAdapter) GraphAdapter.getInstance()).isPaused() ) {
+		 * return; }
 		 */
 		JFileChooser chooser = new JFileChooser();
 
@@ -80,7 +79,8 @@ public class OpenListener implements ActionListener {
 
 					XMLDecoder decoder = new XMLDecoder(new FileInputStream(openFromFile));
 
-					// GraphLayoutCache view = (GraphLayoutCache)decoder.readObject();
+					// GraphLayoutCache view =
+					// (GraphLayoutCache)decoder.readObject();
 
 					System.out.println("HERE");
 
