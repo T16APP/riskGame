@@ -7,15 +7,18 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.risk.model.Continent;
+import com.risk.model.Map;
 import com.risk.utility.staticApplicationVariables;
 
 public class RemoveContinentListener extends JFrame implements ActionListener{
 	static JFrame frame;
+	JLabel lblContinentNametoberemoved;
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -29,7 +32,7 @@ public class RemoveContinentListener extends JFrame implements ActionListener{
         panel.setLayout(new FlowLayout(FlowLayout.CENTER));
         panel.setBorder(new EmptyBorder(20, 10, 10, 10));
         
-        
+        lblContinentNametoberemoved = new JLabel("Select the Continent: ");
         JPanel panelComboBox = new JPanel();
         panelComboBox.setLayout(new FlowLayout());
         
@@ -46,25 +49,23 @@ public class RemoveContinentListener extends JFrame implements ActionListener{
         buttonOK.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
-            	//System.out.println("OK pressed:");
-            	String name = comboBoxList.getSelectedItem().toString(); 
-            	int ID = staticApplicationVariables.gb.map.GetContinentIdByName(name);
-                 Continent cont1 = new Continent(name,ID);
-                 System.out.println(cont1.GetName());
-         
-        if(staticApplicationVariables.gb.map.DoesExistContinent(cont1)==true){
-                         			
-                 	
-        	    staticApplicationVariables.gb.map.RemoveContinent(cont1);
-                JOptionPane.showMessageDialog(null, cont1.GetName() + " Continent was deleted!"); }
+            	  System.out.println("OK pressed:");   
+            	  String name = comboBoxList.getSelectedItem().toString(); 
+                 // int ID = staticApplicationVariables.gb.map.GetContinentIdByName(name);
+                  Continent cont1 = new Continent(name,25);
+                  System.out.println(cont1.GetName());
+                  
+                  System.out.println("Before" + staticApplicationVariables.gb.map.GetContinents().size());
+                 // System.out.println("Before once again" + staticApplicationVariables.gb.map.GetContinents().size());     	  
+        	   staticApplicationVariables.gb.map.RemoveContinent(staticApplicationVariables.gb.map.GetContinentByName(name));
+                JOptionPane.showMessageDialog(null, cont1.GetName() + " Continent was deleted!"); 
+                System.out.println("After " + staticApplicationVariables.gb.map.GetContinents().size());	        
+        
                
                 
                          
                              
-           else
-            	{
-            		JOptionPane.showMessageDialog(null, cont1.GetName() + " Continent Does not Exist");
-            	}
+          
             	
             
             	frame.dispose();

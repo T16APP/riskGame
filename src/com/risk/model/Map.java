@@ -416,15 +416,16 @@ public class Map {
 	}
 		return result;
 	}
-	/*public Continent GetContinentByName(String new_cont) {
-		int id = -1;
+	public Continent GetContinentByName(String new_cont) {
+		
 		for (Continent c : this.GetContinents()) {
-			if (c instanceof Continent && c.GetName().equals(new_cont.GetName())) 
-				return c.GetName();
+			if (c instanceof Continent && c.GetName().equals(new_cont)) {
+				return  (Continent)c;
 			}
 		}
-		return id;
-	}*/
+		return null;
+	}
+
 	public String RemoveCountry(Country prm_country)
 	{
 		if(DoesExistCountry(prm_country.GetId()))
