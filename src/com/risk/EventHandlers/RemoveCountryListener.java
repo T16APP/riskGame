@@ -37,10 +37,10 @@ public class RemoveCountryListener implements ActionListener {
         
         
         JPanel panel = new JPanel();
-        
+        JLabel ContinentNametoberemoved = new JLabel("Continent Name:");
         panel.setLayout(new FlowLayout(FlowLayout.CENTER));
         panel.setBorder(new EmptyBorder(20, 10, 10, 10));
-        
+        JLabel CountryNametoberemoved = new JLabel("Country  Name:");
         
         JPanel panelComboBox = new JPanel();
         panelComboBox.setLayout(new FlowLayout());
@@ -54,11 +54,6 @@ public class RemoveCountryListener implements ActionListener {
         }
         
         JComboBox<String> comboBoxList = new JComboBox<>(continentString);
-        
-        
-        
-       
-        
         JComboBox<String> comboBoxList2 = new JComboBox<>(getCountryListStringForCombobox(staticApplicationVariables.gb.map.GetContinents().get(0).GetId()));
         
         int idCountrySelected = 0;
@@ -100,8 +95,9 @@ public class RemoveCountryListener implements ActionListener {
             frame.dispose();
           }
         });
-        
+        panelComboBox.add(ContinentNametoberemoved);
         panelComboBox.add(comboBoxList);
+        panelComboBox.add(CountryNametoberemoved);
         panelComboBox.add(comboBoxList2);
         panel.add(panelComboBox);
         panel.add(buttonOK);

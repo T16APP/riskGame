@@ -91,7 +91,7 @@ public class RemoveContinentListener extends JFrame implements ActionListener{
         
        
         panelComboBox.add(comboBoxList);
-        
+        panel.add(lblContinentNametoberemoved);
         panel.add(panelComboBox);
         panel.add(buttonOK);
         panel.add(buttonCancel);

@@ -1,17 +1,18 @@
 package com.risk.EventHandlers;
 
-
-
-
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Rectangle2D;
 import java.lang.Thread.State;
 import java.util.*;
+import java.util.List;
+
 import javax.swing.*;
 import javax.swing.border.*;
 
+import com.risk.model.Continent;
 import com.risk.model.Country;
+import com.risk.utility.staticApplicationVariables;
 import com.risk.view.applicationWindow;
 
 /**
@@ -20,24 +21,20 @@ import com.risk.view.applicationWindow;
  */
 public class AddCountryListener extends JFrame implements ActionListener {
 
-	applicationWindow gui;
-    Country countries;
+	
+   
     //Color color;
-    Container content;
-    JTextField txtColor, txtNumState, txtCountryName,txtContinentName;
-    JColorChooser chooser;
-    JFrame frame, frameColor;
+	JPanel panel;
+	JFrame frame;
     JLabel lblContinentName, lblCountryName, banner;
-    JPanel panel1, panel2, panel3;
-    JButton btnCreate, btnColor;
+    JTextField  txtCountryName,txtContinentName;
+    JButton buttonOK,buttonCancel ;
 
     /**
      * Constructor.
      * @param gui The user interface that holds the graph to be altered.
      */
-    public AddCountryListener() {
-    	gui = applicationWindow.getInstance();
-    }
+ 
 
     /**
      * Causes a new window to Pop-up. This window then asks
@@ -47,55 +44,96 @@ public class AddCountryListener extends JFrame implements ActionListener {
      * @param actionEvent Not used.
      */
     public void actionPerformed(ActionEvent actionEvent) {
-
-      
-        //JGraph graph = gui.getGraph();
-        frame = new JFrame("MAP Editor");
+    	frame = new JFrame("Add Country Frame");
+        frame.setSize(450, 200);
         Container content = getContentPane();
         content.removeAll();
        
-      
-       lblContinentName = new JLabel("Name of the Continent: ");
-       lblCountryName = new JLabel("Name of Country: ");
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        panel.setBorder(new EmptyBorder(20, 10, 10, 10));
+        
+        JPanel panelComboBox = new JPanel();
+        panelComboBox.setLayout(new FlowLayout());
+        
+        lblContinentName = new JLabel("Select Continent: ");
+        String[] continentString = new String[staticApplicationVariables.gb.map.GetContinents().size()];
+        int i=0;
+        for(Object o: staticApplicationVariables.gb.map.GetContinents()){
+       	continentString[i] = ((Continent)o).GetName();
+       	i++;
+               }
+        JComboBox<String> comboBoxList = new JComboBox<>(continentString);
+        
+        JLabel CountryNametoberemoved = new JLabel("Country Name:");
+        JTextField CountryField = new JTextField(10);
        
-
-        btnCreate = new JButton("ADD CONTINENT ");
+        
        
+       
+       JButton buttonOK = new JButton("ADD COUNTRY ");
+       
+       buttonOK.addActionListener(new ActionListener(){
+           public void actionPerformed(ActionEvent e)
+           {
+           	//System.out.println("OK pressed:");
+        	   String name = comboBoxList.getSelectedItem().toString();
+        	   int id = staticApplicationVariables.gb.map.GetContinentIdByName(name);
+        	   Continent c = new Continent(name,id);
+ //  List<Country> countries= staticApplicationVariables.gb.map.GetCountriesByContinentId(staticApplicationVariables.gb.map.GetContinentIdByName(c.GetName()));
+   //System.out.println(staticApplicationVariables.gb.map.DoesExistCountry(staticApplicationVariables.gb.map.GetCountryIdByName(CountryField.getText())));
+    
+    if( staticApplicationVariables.gb.map.DoesExistCountry(staticApplicationVariables.gb.map.GetCountryIdByName(CountryField.getText()))== true)
+     {JOptionPane.showMessageDialog(null, CountryField.getText() + " Already Exists");
+     }
+        	
+             else
+        {
+        staticApplicationVariables.gb.map.AddCountry(CountryField.getText(), staticApplicationVariables.gb.map.GetContinentIdByName(CountryField.getText()), 999, 999) ; 	 
+    	JOptionPane.showMessageDialog(null, CountryField.getText()+ " Country Added to " + c.GetName()); 
+    	}
+         
+           frame.dispose();
+           }
+       
+       });
+       
+       JButton buttonCancel = new JButton("Cancel");
+       
+       buttonCancel.addActionListener(new ActionListener(){
+         public void actionPerformed(ActionEvent e)
+         {   
+           frame.dispose();
+         }
+       });
+       
+       panelComboBox.add(lblContinentName);
+        panelComboBox.add(comboBoxList);
+        panelComboBox.add(comboBoxList);
+        panelComboBox.add(CountryNametoberemoved);
+        panelComboBox.add(CountryField);
+        panel.add(panelComboBox);
+        panel.add(buttonOK);
+        panel.add(buttonCancel);
+  
+        frame.add(panel);
 
-        panel1 = new JPanel();
-        panel2 = new JPanel();
-        panel3 = new JPanel();
-
-        txtContinentName= new JTextField("Continent Name ");
-        txtContinentName.setBounds(10, 100, 100, 20);
-        txtContinentName = new JTextField("Country Name ");
-
-       panel1.add(lblContinentName);
-        panel1.add(txtContinentName);
-     //   panel1.setBorder(border);
-        panel1.setBounds(10, 20, 300, 50);
-
-        panel2.add(lblCountryName);
-        panel2.add(txtCountryName);
-    //    panel2.setBorder(border);
-        panel2.setBounds(10, 100, 300, 50);
-
-        panel3.add(btnCreate);
-        panel3.add(btnColor);
-        panel3.setBounds(10, 200, 300, 50);
-
-        frame.setLayout(new GridLayout(3, 1));
-        frame.add(panel1);
-        frame.add(panel2);
-        frame.add(panel3);
-
-        frame.setSize(350, 200);
+        
         frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-     //   btnColor.addActionListener(new ColorAction());
-      //  btnCreate.addActionListener(new CreateAction());
-     //   btnColor.setSelected(false);
+     
     }
+  
+    public String[] getCountryListinStringForCombobox(int id){
+		List<Country> countryList = staticApplicationVariables.gb.map.GetCountriesByContinentId(id);
+        String[] countryString = new String[countryList.size()];
+        
+        for(int j=0; j<countryList.size();  j++){
+        	countryString[j] = countryList.get(j).GetName();
+                                                 }
+        return countryString;
+	                                                         }
 
   
 }

@@ -81,7 +81,7 @@ public class OpenListener implements ActionListener {
 				/*for (String l : gameboard.map.MapToLines()) {
 					System.out.println(l);
 				}*/
-				mp.WriteMapToFile(gameboard.map, "e:output.txt");
+				mp.WriteMapToFile(gameboard.map, "output.txt");
 				/*for (Object land : gameboard.map.lands) {
 					if (land instanceof Continent) {
 						System.out.println(((Continent) land).GetName());

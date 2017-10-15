@@ -21,10 +21,21 @@ import com.risk.model.GameBoard;
 import com.risk.model.Map;
 import com.risk.utility.staticApplicationVariables;
 import com.risk.view.applicationWindow;
+/**
+ * This class belongs to a listener which performs action based on the 
+ * events captured from the front end.
+ * @author SSS
+ *
+ */
 
+/**
+ * This class represents adds a new continent as per 
+ * user wants to add and returns the new map 
+ * @author SSS
+ * @version 1.0.0.0
+ */
 public class AddContinentListener implements ActionListener {
 	static JFrame frame;
-	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -55,7 +66,7 @@ public class AddContinentListener implements ActionListener {
             	
           
           GameBoard gameBo = staticApplicationVariables.gb;
-         	Continent cont1 = new Continent(nameTField.getText(),Integer.parseInt(continentfield.getText()));
+         Continent cont1 = new Continent(nameTField.getText(),Integer.parseInt(continentfield.getText()));
             	
             	
             if(staticApplicationVariables.gb.map.DoesExistContinent(cont1)==true){
@@ -83,10 +94,7 @@ public class AddContinentListener implements ActionListener {
         panel.add(continentfield);
         panel.add(buttonOK);
         panel.add(buttonCancel);
-        
         frame.add(panel);
-
-        
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
