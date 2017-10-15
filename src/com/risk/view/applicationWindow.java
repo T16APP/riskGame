@@ -14,10 +14,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import org.jgraph.JGraph;
+//simport org.jgraph.JGraph;
 
-import com.risk.listeners.*;
-
+import com.risk.EventHandlers.*;
 import com.risk.utility.staticApplicationVariables;
 
 /**
@@ -40,12 +39,13 @@ public class applicationWindow extends JFrame {
 	private JMenu helpMenu;
 	private JMenuItem open;
 	private JMenuItem save;
+	private JMenuItem addContinent;
 	private JMenuItem addCountry;
+	private JMenuItem removeContinent;
+	private JMenuItem removeCountry;
 	private JMenuItem addPlayer;
-	private JMenuItem addEdge;
-	private JMenuItem delete;
 	private JMenuItem help;
-	private JGraph graph;
+//	private JGraph graph;
 	private JMenuItem start, pause;
 
 	public static applicationWindow getInstance() {
@@ -55,9 +55,9 @@ public class applicationWindow extends JFrame {
 		return instance;
 	}
 
-	public JGraph getGraph() {
-		return graph;
-	}
+	//public JGraph getGraph() {
+	//	return graph;
+	//}
 
 	/**
 	 * Returns the singleton instance of GraphicalUserInterface
@@ -83,9 +83,11 @@ public class applicationWindow extends JFrame {
 
 		open = new JMenuItem("Open");
 		save = new JMenuItem("Save");
-		addCountry = new JMenuItem("Add Country");
-		addEdge = new JMenuItem("Add Edge");
-		delete = new JMenuItem("Delete");
+		addContinent = new JMenuItem("Add Continent");
+		addCountry = new JMenuItem("Add  Country");
+		removeContinent = new JMenuItem("Remove Continent");
+		removeCountry = new JMenuItem("Remove Country");
+		//delete = new JMenuItem("Delete");
 		addPlayer = new JMenuItem("Add New Player");
 		/*
 		 * Create the menu items for the simulation menu.
@@ -97,22 +99,34 @@ public class applicationWindow extends JFrame {
 		fileMenu.add(open);
 		fileMenu.addSeparator();
 		fileMenu.add(save);
-		editMenu.add(addCountry);
-		editMenu.add(addEdge);
+		
+		editMenu.add(addContinent);
+		editMenu.add(removeContinent);
 		editMenu.addSeparator();
-		editMenu.add(delete);
+		editMenu.add(addCountry);
+		editMenu.add(removeCountry);
+		
+	//	editMenu.add(delete);
 		playerMenu.add(addPlayer);
 		helpMenu.add(help);
+		
 		menuBar.add(fileMenu);
 		menuBar.add(editMenu);
 		menuBar.add(playerMenu);
 		menuBar.add(helpMenu);
 		
 		open.addActionListener(new OpenListener());
+		addContinent.addActionListener(new AddContinentListener());
+		removeContinent.addActionListener(new RemoveContinentListener());
+		addCountry.addActionListener(new AddCountryListener());
+		removeCountry.addActionListener(new RemoveCountryListener());
+		
+		
 		mainFrame.setJMenuBar(menuBar);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		mainFrame.setVisible(true);
 
 	}
+	
 }

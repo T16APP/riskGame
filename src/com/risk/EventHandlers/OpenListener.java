@@ -1,6 +1,12 @@
-package com.risk.listeners;
+package com.risk.EventHandlers;
 
-import com.risk.model.GraphAdapter;
+import com.risk.model.Continent;
+import com.risk.model.Country;
+import com.risk.model.Edge;
+import com.risk.model.GameBoard;
+
+import com.risk.utility.MapParser;
+import com.risk.utility.staticApplicationVariables;
 
 import java.awt.event.ActionListener;
 import java.beans.XMLDecoder;
@@ -10,6 +16,8 @@ import javax.swing.JFileChooser;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 //import org.jgraph.graph.GraphLayoutCache;
@@ -63,6 +71,52 @@ public class OpenListener implements ActionListener {
 		if (selection != JFileChooser.CANCEL_OPTION) {
 			try {
 				File openFromFile = chooser.getSelectedFile();
+				System.out.println();
+				staticApplicationVariables.FILENAME = openFromFile.getPath();
+				GameBoard gameboard = GameBoard.GetGameBoard();
+				MapParser mp = new MapParser();
+				gameboard.map = mp.MapParser(staticApplicationVariables.FILENAME);
+				staticApplicationVariables.gb = gameboard;
+				
+				/*for (String l : gameboard.map.MapToLines()) {
+					System.out.println(l);
+				}*/
+				mp.WriteMapToFile(gameboard.map, "e:output.txt");
+				/*for (Object land : gameboard.map.lands) {
+					if (land instanceof Continent) {
+						System.out.println(((Continent) land).GetName());
+					} else if (land instanceof Country) {
+						//System.out.println(((Country) land).GetName());
+						//System.out.println("_________List Of Neighbors______________");
+					}
+				}*/
+				//System.out.println("_________List Of Edges______________");
+				/*for (Edge e : gameboard.map.edges) {
+					//System.out.println(e.GetId() + "   " + gameboard.map.GetCountryNameById(e.GetCountryId1()) + "   "
+							//+ gameboard.map.GetCountryNameById(e.GetCountryId2()));
+				}*/
+				gameboard.SetupPlayers();
+				gameboard.AssignCountriesRandom();
+				/*
+				 * for(Land l : gameboard.map.lands) { if(l instanceof Country) {
+				 * System.out.println(((Country)l).GetPlayerId()); }
+				 * 
+				 * }
+				 */
+				/*for (int i = 1; i < 20; i++) {
+					//System.out.println(gameboard.GetNextPlayerId());
+				}*/
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 
 				// Gives the user a chance to save the work he's presently
 				// working on. If the user chooses to proceed, all of his/her
@@ -77,14 +131,14 @@ public class OpenListener implements ActionListener {
 					// Retrieve the file, and update the graph in the user
 					// interface.
 
-					XMLDecoder decoder = new XMLDecoder(new FileInputStream(openFromFile));
+					//XMLDecoder decoder = new XMLDecoder(new FileInputStream(openFromFile));
 
 					// GraphLayoutCache view =
 					// (GraphLayoutCache)decoder.readObject();
 
-					System.out.println("HERE");
+					//System.out.println("HERE");
 
-					decoder.close();
+					//decoder.close();
 					// gui.getGraph().setGraphLayoutCache(view);
 				} else {
 					JOptionPane.showMessageDialog(gui.getContentPane(), "Start Working on the current file", "MESSAGE",
@@ -94,6 +148,9 @@ public class OpenListener implements ActionListener {
 			} catch (FileNotFoundException fnfe) {
 				JOptionPane.showMessageDialog(gui.getContentPane(), fnfe.getMessage(), "ERROR",
 						JOptionPane.ERROR_MESSAGE);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 		}
 	}

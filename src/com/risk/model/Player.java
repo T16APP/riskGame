@@ -1,54 +1,109 @@
 package com.risk.model;
 
+
+
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * This class represents a player
+ * it maintains id and name of the player
+ * also it has different methods to change the status of the object
+ * @author Kourosh Aziz-Nejad
+ * @version 1.0.0.0
+ */
 
 public class Player {
 	private int id;
 	private String name;
 	private List<Land> lands;
-
-	public Player(int new_id, String new_name) {
-		this.id = new_id;
-		this.name = new_name;
-		lands = new ArrayList<Land>();
+	private int armies;
+	
+	
+	/**this is the constructor of the class
+	 * it takes id and name and will asign them to the player
+	 * @param prm_id , which its type is integer, will br the id of the player
+	 * @param prm_name, which its type is string, will be the name of the player
+	 */
+	public Player(int prm_id,String prm_name)
+	{
+		this.id=prm_id;
+		this.name=prm_name;
+        lands = new ArrayList<Land>();
+        armies=0;
 	}
-
+    /**this method returns the id of the player
+     * 
+     * @return, which its type is integer, is the id of the player
+     */
 	public int GetId() {
 		return this.id;
 	}
 
+	/**this method returns the name of the player
+     * 
+     * @return, which its type is string, is the name of the player
+     */
 	public String GetName() {
 		return this.name;
 	}
-
-	public int AddLand(Land new_land) {
-		int result = 0;
-		if (!DoesOwnLand(new_land)) {
-			this.lands.add(new_land);
-			result = 1;
+	/**this methos adds a country to the player
+	 * 
+	 * @param prm_land
+	 * @return, which its type is integer, is 1 if it is successful
+	 * otherwise is 0
+	 */
+	public int AddLand(Land prm_land)
+	{
+		int result =0;
+		if(!DoesOwnLand(prm_land))
+		{
+			this.lands.add(prm_land);
+			result=1;
 		}
 		return result;
 	}
-
-	public int RemoveLand(Land new_land) {
-		int result = 0;
-		if (!DoesOwnLand(new_land)) {
-			this.lands.remove(new_land);
-			result = 1;
+	/**this method removes a country from the list of countries that  the player has
+	 * 
+	 * @param prm_land, which its type is Land
+	 * @return, which its type is integer, is 1 if it is successful
+	 * otherwise is 0
+	 */
+	public int RemoveLand(Land prm_land)
+	{
+      int result = 0;
+		if(!DoesOwnLand(prm_land))
+		{
+			this.lands.remove(prm_land);
+			result=1;
 		}
 		return result;
 	}
-
-	public boolean DoesOwnLand(Land new_land) {
-		boolean result = false;
-		for (Land c : this.lands) {
-			if (new_land.GetId() == c.GetId()) {
-				result = true;
-				return result;
+	/**this method verifies if the land belongs to the player 
+	 * 
+	 * @param prm_land, which its type is Land
+	 * @return, which its type is boolean, is true if the land
+	 * belongs to the player
+	 * otherwise is 0
+	 */
+	public boolean DoesOwnLand(Land prm_land)
+	{
+       boolean result = false;
+		for(Land c: this.lands)
+		{
+			if(prm_land.GetId()==c.GetId())
+			{
+                return true;
 			}
 		}
 		return result;
+	}
+	/**this method sets the number of armies of the player
+	 * @param prm_armies, which its type is integer, will assign to the player
+	 */
+	public void SetArmiesToplayer(int prm_armies)
+	{
+		this.armies=prm_armies;
 	}
 
 }
