@@ -1,0 +1,87 @@
+[Map]
+author=Brigham Judd
+image=Earth.bmp
+wrap=yes
+scroll=yes
+warn=yes
+
+[Continents]
+North America=1
+Central America=2
+South America=3
+Africa=4
+Middle East=5
+Europe=6
+Asia=7
+Australia=8
+
+[Territories]
+AA,40,120,North America,AB,CA
+AB,105,155,North America,AA,AC,AF,AJ
+AC,130,130,North America,AB,AF,AG,AD
+AD,210,60,North America,AC,AG,AE,AI
+AE,305,80,North America,AD,AI,AY
+AF,140,165,North America,AB,AC,AG,AJ,AK
+AG,170,165,North America,AC,AD,AF,AH,AK,AL
+AH,200,175,North America,AG,AI,AL,AM
+AI,235,170,North America,AD,AE,AH,AM
+AJ,120,210,North America,AB,AF,AK,AO,AN
+AK,145,205,North America,AF,AG,AJ,AL,AO
+AL,175,215,North America,AG,AH,AK,AM,AO
+AM,205,215,North America,AH,AI,AL,AP
+AN,40,250,North America,AJ,AT,CQ
+AO,160,250,Central America,AJ,AK,AL,AQ
+AP,215,260,Central America,AM,AQ,AS
+AQ,185,270,Central America,AO,AP,AR
+AR,230,300,Central America,AQ,AS,AT
+AS,255,300,Central America,AP,AR,AU,AV
+AT,230,335,South America,AN,AR,AU,AW,AX
+AU,260,340,South America,AS,AT,AV,AX
+AV,300,335,South America,AS,AU,BK,AX
+AW,240,390,South America,AT,AX
+AX,260,395,South America,AT,AU,AV,AW
+AY,370,140,Europe,AE,AZ,BB
+AZ,450,145,Europe,AY,BA,BC
+BA,520,170,Europe,AZ,BV,CD,BR,BQ,BG,BD
+BB,405,190,Europe,AY,BC,BE
+BC,440,190,Europe,AZ,BB,BD,BF,BE
+BD,470,185,Europe,BA,BC,BF,BG
+BE,415,205,Europe,BB,BC,BF,BH
+BF,465,215,Europe,BC,BD,BE,BG,BQ,BJ,BI
+BG,490,200,Europe,BA,BD,BF
+BH,400,225,Europe,BE,BI
+BI,415,260,Africa,BF,BH,BJ,BL,BK
+BJ,455,270,Africa,BF,BI,BT,BU,BL
+BK,390,300,Africa,AV,BI,BL
+BL,440,300,Africa,BI,BJ,BK,BU,BM
+BM,460,335,Africa,BL,BU,BN,BO
+BN,495,335,Africa,BM,BU,BR,BO
+BO,470,385,Africa,BM,BN,BP
+BP,520,380,Africa,BO,BS
+BQ,495,230,Middle East,BA,BF,BR
+BR,520,250,Middle East,BA,BN,BQ,CD,BS,BT
+BS,600,265,Middle East,BP,BR,CD,CE,CG,CL
+BT,480,265,Middle East,BJ,BR,BU
+BU,490,300,Middle East,BJ,BL,BM,BN,BT
+BV,600,150,Asia,BA,BW,CC,CD
+BW,650,125,Asia,BV,BX,CB,CC
+BX,715,140,Asia,BW,BY,CE,CB
+BY,755,130,Asia,BX,BZ,CF,CE
+BZ,785,140,Asia,BY,CA
+CA,815,140,Asia,AA,BZ
+CB,665,170,Asia,BW,BX,CE,CC
+CC,660,200,Asia,BV,BW,CB,CE,CD
+CD,570,210,Asia,BA,BR,BS,BV,CC,CE
+CE,660,230,Asia,BS,BX,BY,CB,CC,CD,CF,CG
+CF,745,235,Asia,BY,CE,CQ
+CG,650,280,Asia,BS,CE,CH
+CH,660,335,Australia,CG,CI,CL
+CI,685,330,Australia,CH,CJ
+CJ,745,340,Australia,CI,CK
+CK,760,345,Australia,CJ,CN,CQ
+CL,705,395,Australia,BS,CH,CM,CO,CN
+CM,730,380,Australia,CL,CN
+CN,760,390,Australia,CK,CL,CM,CO
+CO,760,415,Australia,CL,CN,CP
+CP,800,420,Australia,CO,CQ
+CQ,855,310,Australia,AN,CF,CK,CP

@@ -180,5 +180,23 @@ public class GameBoard {
 		
 		
 	}
+	/**this method will save the current map into a file in the format of Qonquest rules
+	 * @param input, which its type is string, is the fale in which the map will be saved
+	 * @return , which its type is integer, is 1 if the save is successful and is 0 if it is faled
+	 * @throws IOException 
+	 */
+	public int SaveMapToFile(String input) throws IOException
+	{
+		int result = 0;
+		MapParser.WriteMapToFile(map, input);
+		return 1;
+	}
+    /**this methos reset the map and get it ready to build it
+     * 
+     */
+	public void CreateMap()
+    {
+    	this.map=new Map("map1");
+    }
 
 }

@@ -239,7 +239,7 @@ public class MapParser {
 	
 	
 
-	public void WriteMapToFile(Map map, String file) throws IOException {
+	public static void WriteMapToFile(Map map, String file) throws IOException {
 		PrintWriter f0 = new PrintWriter(new FileWriter(file));
 		for (String line : map.MapToLines()) {
 			f0.println(line);

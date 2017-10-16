@@ -13,7 +13,7 @@ package com.risk.model;
  * @version 1.0.0.0
  */
 public class Country extends Land {
-	private Double army;
+	private int army;
 	private int continentId;
 	private int x;
 	private int y;
@@ -73,5 +73,13 @@ public class Country extends Land {
 	{
       return this.continentId;
 	}
+	/**this method returns army of a given country
+	 * @param prm_countryId, which is the id of the given country
+	 * @return , which its type is integer, is the number of army of the country
+	 */
+     public int GetArmies()
+     {
+    	 return this.army;
+     }
 
 }

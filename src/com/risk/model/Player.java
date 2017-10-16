@@ -105,5 +105,13 @@ public class Player {
 	{
 		this.armies=prm_armies;
 	}
+	/**this method returns the number of armies that the player has
+	 * @param prm_playerId is the id of the player
+	 * @return the number of armies of the player
+	 */
+	public int GetArmies()
+	{
+		return this.armies;
+	}
 
 }

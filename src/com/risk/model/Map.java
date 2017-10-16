@@ -551,4 +551,31 @@ public class Map {
 		}
 		return countries;
 		}
+	/**this method return the id of the player to which a given country belong
+	 * @param prm_countryId, which is the id of the player
+	 * @return prm_playerId, which is the id of the player to which the country belongs
+	 */
+	public int GetPlayerIdByCountryId(int prm_countryId)
+	{
+		return GetCountryById(prm_countryId).GetPlayerId();
+	}
+	
+	/**this method returns the adjacent country of a given country
+	 * which belong to the same player
+	 * @param prm_countryId, which is the id of the given country
+	 * @return is a list of countries which are adjacent of the given country
+	 */
+	public List<Country> GetNeighborsByCountryIdSamePlayer(int prm_countryId)
+	{
+		List<Country> neighbors = new ArrayList<Country>();
+	    for(Edge e:edges)
+	    {
+	 	   if(e.DoesContainCountry(prm_countryId))
+	 	   {
+	 		  if(GetPlayerIdByCountryId(prm_countryId)==GetPlayerIdByCountryId(e.GetNeighborId(prm_countryId)))
+	 		   neighbors.add(GetCountryById(e.GetNeighborId(prm_countryId)));
+	 	   }
+	    }
+	    return neighbors;
+		}
 }
