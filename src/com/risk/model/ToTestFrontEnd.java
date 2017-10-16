@@ -1,3 +1,4 @@
+package com.risk.model;
 /*
  * This class is kept as alternative for initializing
  * 

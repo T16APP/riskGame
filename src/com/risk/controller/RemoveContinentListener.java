@@ -1,4 +1,4 @@
-package com.risk.EventHandlers;
+package com.risk.controller;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;

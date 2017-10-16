@@ -16,7 +16,12 @@ import javax.swing.JScrollPane;
 
 //simport org.jgraph.JGraph;
 
-import com.risk.EventHandlers.*;
+
+import com.risk.controller.AddContinentListener;
+import com.risk.controller.AddCountryListener;
+import com.risk.controller.OpenListener;
+import com.risk.controller.RemoveContinentListener;
+import com.risk.controller.RemoveCountryListener;
 import com.risk.utility.staticApplicationVariables;
 
 /**

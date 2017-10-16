@@ -1,5 +1,5 @@
 
-package com.risk.EventHandlers;
+package com.risk.controller;
 
 import java.awt.Component;
 import java.awt.Dimension;

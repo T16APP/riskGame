@@ -1,4 +1,4 @@
-package com.risk.EventHandlers;
+package com.risk.controller;
 
 import com.risk.model.Continent;
 import com.risk.model.Country;
