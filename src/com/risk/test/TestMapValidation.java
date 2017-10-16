@@ -1,5 +1,14 @@
 package com.risk.test;
 
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
 public class TestMapValidation {
+
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
 
 }
