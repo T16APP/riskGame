@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.risk.utility.MapParser;
+import com.risk.utility.TurnPhases;
 
 
 
@@ -167,7 +168,7 @@ public class GameBoard {
 		}
 		return result;
 	}
-	/** this method colculate the number of
+	/** this method calculate the number of
 	 * armies that the player can have
 	 * @param , which its type is playerId, is the id of the player
 	 * 
@@ -251,6 +252,37 @@ public class GameBoard {
 		}
 		else throw new Exception("NotEnoughArmies");
 		return result;
+	}
+	/**this method ends the reinforcement phase
+	 * this set the turnorganizer to fortification phase
+	 */
+	public void EndReinforcementPhase()
+	{
+		turnOrganizer.SetCurrentPhase(TurnPhases.Reinforcement);
+	}
+	/**this method reset the number of armies for all countries of the current player to zero
+	 * and get them ready for reinforcement phase
+	 * @param prm_playerId is the id of the current player
+	 */
+	public void ResetCountriesOrmiesByPlayerId(int prm_playerId)
+	{
+		for(Country c:map.GetCountriesByPlayerId(prm_playerId))
+		{
+			c.SetArmies(0);
+		}
+		
+	}
+	/**this method ends the reinforcement phase
+	 * this set the turnorganizer to reinforcement phase
+	 * also it causes the turn to change
+	 * also it recalculate the armies for the current player
+	 */
+	public void EndFortificationPhase()
+	{
+		turnOrganizer.SetCurrentPhase(TurnPhases.Reinforcement);
+		GetNextPlayerId();
+		ResetCountriesOrmiesByPlayerId(turnOrganizer.GetCurrentPlayerId());
+		CalculateArmies(GetPlayerById(turnOrganizer.GetCurrentPlayerId()));
 	}
 
 }

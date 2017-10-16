@@ -85,12 +85,18 @@ public class TurnOrganizer {
 			return TurnPhases.Fortification;
 		case Fortification:
 			return TurnPhases.Attack;
-		case Attack:
-			return TurnPhases.Reinforcement;
 		default:
 			return TurnPhases.PreGame;
 		}
 	}
+	/**this method returns the current playerId
+	 * @return the id of the current player
+	 */
+	public int GetCurrentPlayerId()
+	{
+		return currentPlayerId;
+	}
+	
 	
 
 }
