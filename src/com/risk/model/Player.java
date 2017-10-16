@@ -113,5 +113,12 @@ public class Player {
 	{
 		return this.armies;
 	}
+	/**this method sets the number of armies
+	 * @param prm_armies is the number of new armies
+	 */
+	public void SetArmies(int prm_armies)
+	{
+		this.armies=prm_armies;
+	}
 
 }

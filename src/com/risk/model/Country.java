@@ -13,7 +13,7 @@ package com.risk.model;
  * @version 1.0.0.0
  */
 public class Country extends Land {
-	private int army;
+	private int armies;
 	private int continentId;
 	private int x;
 	private int y;
@@ -79,7 +79,15 @@ public class Country extends Land {
 	 */
      public int GetArmies()
      {
-    	 return this.army;
+    	 return this.armies;
      }
+     /**this method sets the number of armies
+ 	 * @param prm_armies is the number of new armies
+ 	 */
+ 	public void SetArmies(int prm_armies)
+ 	{
+ 		this.armies=prm_armies;
+ 	}
+
 
 }
