@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -80,7 +81,12 @@ public class RemoveCountryListener implements ActionListener {
             			
             	staticApplicationVariables.gb.map.RemoveCountry(staticApplicationVariables.gb.map.GetCountryByName(name));
             	JOptionPane.showMessageDialog(null, name+ " country was deleted!");
-            	
+            	try {
+            		staticApplicationVariables.gb.SaveMapToFile("output.txt");
+        		} catch (IOException e1) {
+        			// TODO Auto-generated catch block
+        			e1.printStackTrace();
+        		}
             	System.out.println("try to get country which was removed : "+ staticApplicationVariables.gb.map.GetCountryIdByName(name));
             	frame.dispose();
             }

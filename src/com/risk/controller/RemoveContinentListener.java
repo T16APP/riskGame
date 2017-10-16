@@ -3,6 +3,7 @@ package com.risk.controller;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -58,7 +59,15 @@ public class RemoveContinentListener extends JFrame implements ActionListener{
                   System.out.println("Before" + staticApplicationVariables.gb.map.GetContinents().size());
                  // System.out.println("Before once again" + staticApplicationVariables.gb.map.GetContinents().size());     	  
         	   staticApplicationVariables.gb.map.RemoveContinent(staticApplicationVariables.gb.map.GetContinentByName(name));
-                JOptionPane.showMessageDialog(null, cont1.GetName() + " Continent was deleted!"); 
+       
+        	   try {
+           		staticApplicationVariables.gb.SaveMapToFile("output.txt");
+       		} catch (IOException e1) {
+       			// TODO Auto-generated catch block
+       			e1.printStackTrace();
+       		} 
+        	   
+        	   JOptionPane.showMessageDialog(null, cont1.GetName() + " Continent was deleted!"); 
                 System.out.println("After " + staticApplicationVariables.gb.map.GetContinents().size());	        
         
                

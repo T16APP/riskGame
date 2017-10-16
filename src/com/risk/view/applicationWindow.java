@@ -19,9 +19,11 @@ import javax.swing.JScrollPane;
 
 import com.risk.controller.AddContinentListener;
 import com.risk.controller.AddCountryListener;
+import com.risk.controller.Numberofplayers;
 import com.risk.controller.OpenListener;
 import com.risk.controller.RemoveContinentListener;
 import com.risk.controller.RemoveCountryListener;
+import com.risk.controller.SavetofileListener;
 import com.risk.utility.staticApplicationVariables;
 
 /**
@@ -40,15 +42,21 @@ public class applicationWindow extends JFrame {
 
 	private JMenu fileMenu;
 	private JMenu editMenu;
+	private JMenu playMenu;
 
 	private JMenu helpMenu;
 	private JMenuItem open;
 	private JMenuItem save;
+	private JMenuItem numberofarmiesofcountry;
 	private JMenuItem addContinent;
 	private JMenuItem addCountry;
 	private JMenuItem removeContinent;
 	private JMenuItem removeCountry;
 	private JMenuItem addPlayer;
+	private JMenuItem createMap;
+	private JMenuItem adjacentcountries;
+	private JMenuItem numberofplayers;
+	private JMenuItem startgame;
 	private JMenuItem help;
 //	private JGraph graph;
 	private JMenuItem start, pause;
@@ -85,15 +93,20 @@ public class applicationWindow extends JFrame {
 		editMenu = new JMenu("Edit");
 		playerMenu = new JMenu("Player");
 		helpMenu = new JMenu("Help");
+		playMenu = new JMenu("Play");
 
 		open = new JMenuItem("Open");
-		save = new JMenuItem("Save");
+		save = new JMenuItem("Save to file");
 		addContinent = new JMenuItem("Add Continent");
 		addCountry = new JMenuItem("Add  Country");
 		removeContinent = new JMenuItem("Remove Continent");
 		removeCountry = new JMenuItem("Remove Country");
-		//delete = new JMenuItem("Delete");
-		addPlayer = new JMenuItem("Add New Player");
+		startgame = new JMenuItem("Start Game");
+		numberofplayers= new JMenuItem(" Set Number of Players");
+		//addPlayer = new JMenuItem("Add New Player");
+		createMap = new JMenuItem("Create Map");
+		adjacentcountries= new JMenuItem("Show Adjacent Countries");
+		numberofarmiesofcountry= new JMenuItem("Show Armies in a Country");
 		/*
 		 * Create the menu items for the simulation menu.
 		 */
@@ -104,6 +117,7 @@ public class applicationWindow extends JFrame {
 		fileMenu.add(open);
 		fileMenu.addSeparator();
 		fileMenu.add(save);
+		fileMenu.add(createMap);
 		
 		editMenu.add(addContinent);
 		editMenu.add(removeContinent);
@@ -112,12 +126,19 @@ public class applicationWindow extends JFrame {
 		editMenu.add(removeCountry);
 		
 	//	editMenu.add(delete);
-		playerMenu.add(addPlayer);
+		//playerMenu.add(addPlayer);
+		playerMenu.add(numberofplayers);
+		
+		playMenu.add(startgame);
+		playMenu.add(adjacentcountries);
+		playMenu.add(numberofarmiesofcountry);
+		
 		helpMenu.add(help);
 		
 		menuBar.add(fileMenu);
 		menuBar.add(editMenu);
 		menuBar.add(playerMenu);
+		menuBar.add(playMenu);
 		menuBar.add(helpMenu);
 		
 		open.addActionListener(new OpenListener());
@@ -125,6 +146,8 @@ public class applicationWindow extends JFrame {
 		removeContinent.addActionListener(new RemoveContinentListener());
 		addCountry.addActionListener(new AddCountryListener());
 		removeCountry.addActionListener(new RemoveCountryListener());
+		save.addActionListener(new SavetofileListener());
+		numberofplayers.addActionListener(new Numberofplayers());
 		
 		
 		mainFrame.setJMenuBar(menuBar);

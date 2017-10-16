@@ -3,6 +3,7 @@ package com.risk.controller;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Rectangle2D;
+import java.io.IOException;
 import java.lang.Thread.State;
 import java.util.*;
 import java.util.List;
@@ -12,6 +13,8 @@ import javax.swing.border.*;
 
 import com.risk.model.Continent;
 import com.risk.model.Country;
+import com.risk.model.GameBoard;
+import com.risk.utility.MapParser;
 import com.risk.utility.staticApplicationVariables;
 import com.risk.view.applicationWindow;
 
@@ -29,6 +32,7 @@ public class AddCountryListener extends JFrame implements ActionListener {
     JLabel lblContinentName, lblCountryName, banner;
     JTextField  txtCountryName,txtContinentName;
     JButton buttonOK,buttonCancel ;
+    GameBoard gmb;
 
     /**
      * Constructor.
@@ -76,12 +80,11 @@ public class AddCountryListener extends JFrame implements ActionListener {
        buttonOK.addActionListener(new ActionListener(){
            public void actionPerformed(ActionEvent e)
            {
-           	//System.out.println("OK pressed:");
+           	
         	   String name = comboBoxList.getSelectedItem().toString();
         	   int id = staticApplicationVariables.gb.map.GetContinentIdByName(name);
         	   Continent c = new Continent(name,id);
- //  List<Country> countries= staticApplicationVariables.gb.map.GetCountriesByContinentId(staticApplicationVariables.gb.map.GetContinentIdByName(c.GetName()));
-   //System.out.println(staticApplicationVariables.gb.map.DoesExistCountry(staticApplicationVariables.gb.map.GetCountryIdByName(CountryField.getText())));
+ 
     
     if( staticApplicationVariables.gb.map.DoesExistCountry(staticApplicationVariables.gb.map.GetCountryIdByName(CountryField.getText()))== true)
      {JOptionPane.showMessageDialog(null, CountryField.getText() + " Already Exists");
@@ -91,6 +94,14 @@ public class AddCountryListener extends JFrame implements ActionListener {
         {
         staticApplicationVariables.gb.map.AddCountry(CountryField.getText(), staticApplicationVariables.gb.map.GetContinentIdByName(CountryField.getText()), 999, 999) ; 	 
     	JOptionPane.showMessageDialog(null, CountryField.getText()+ " Country Added to " + c.GetName()); 
+    	
+    	
+    	try {
+    		staticApplicationVariables.gb.SaveMapToFile("output.txt");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
     	}
          
            frame.dispose();

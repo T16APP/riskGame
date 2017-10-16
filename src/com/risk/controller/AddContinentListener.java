@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,6 +22,7 @@ import com.risk.model.GameBoard;
 import com.risk.model.Map;
 import com.risk.utility.staticApplicationVariables;
 import com.risk.view.applicationWindow;
+
 /**
  * This class belongs to a listener which performs action based on the 
  * events captured from the front end.
@@ -29,74 +31,80 @@ import com.risk.view.applicationWindow;
  */
 
 /**
- * This class represents adds a new continent as per 
- * user wants to add and returns the new map 
+ * This class represents adds a new continent as per user wants to add and
+ * returns the new map
+ * 
  * @author SSS
  * @version 1.0.0.0
  */
 public class AddContinentListener implements ActionListener {
 	static JFrame frame;
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-	    frame = new JFrame("Add Continent Frame");
-        frame.setSize(350, 200);
-        
-        
-        JLabel continentLabel = new JLabel("Continent Name:");
-        
-        JTextField nameTField = new JTextField(15);
-        
-        JLabel continentcontrolLabel = new JLabel("Control Value:");
-        
-        JTextField continentfield = new JTextField(15);
-        
-        
-        
-        JPanel panel = new JPanel();
-        
-        panel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        panel.setBorder(new EmptyBorder(20, 20, 20, 20));
-        
-        JButton buttonOK = new JButton("OK");
-        
-        buttonOK.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e)
-            {
-            	
-          
-          GameBoard gameBo = staticApplicationVariables.gb;
-         Continent cont1 = new Continent(nameTField.getText(),Integer.parseInt(continentfield.getText()));
-            	
-            	
-            if(staticApplicationVariables.gb.map.DoesExistContinent(cont1)==true){
-            JOptionPane.showMessageDialog(null, "Continent with name "+nameTField.getText()+" Exists!");
-           }else{
-        	   staticApplicationVariables.gb.map.GetContinents().add(cont1);
-            JOptionPane.showMessageDialog(null, "Continent with name "+nameTField.getText()+" is successfulyy added!");
-                }
-            	 	
-            }
-          });
-        
-        JButton buttonCancel = new JButton("Cancel");
-        
-        buttonCancel.addActionListener(new ActionListener(){
-          public void actionPerformed(ActionEvent e)
-          {   
-            frame.dispose();
-          }
-        });
-        
-        panel.add(continentLabel);
-        panel.add(nameTField);
-        panel.add(continentcontrolLabel);
-        panel.add(continentfield);
-        panel.add(buttonOK);
-        panel.add(buttonCancel);
-        frame.add(panel);
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame = new JFrame("Add Continent Frame");
+		frame.setSize(350, 200);
+
+		JLabel continentLabel = new JLabel("Continent Name:");
+
+		JTextField nameTField = new JTextField(15);
+
+		JLabel continentcontrolLabel = new JLabel("Control Value:");
+
+		JTextField continentfield = new JTextField(10);
+
+		JPanel panel = new JPanel();
+
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		panel.setBorder(new EmptyBorder(20, 20, 20, 20));
+
+		JButton buttonOK = new JButton("OK");
+
+		buttonOK.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				System.out.println(staticApplicationVariables.gb.map.GetContinents().size());
+				System.out.println(staticApplicationVariables.gb.map.lands.size()  );
+				Continent cont1 = new Continent(nameTField.getText(), Integer.parseInt(continentfield.getText()));
+
+				if (staticApplicationVariables.gb.map.DoesExistContinent(cont1) == true) {
+					JOptionPane.showMessageDialog(null, "Continent with name " + nameTField.getText() + " Exists!");
+				} else {
+					staticApplicationVariables.gb.map.AddContinent(nameTField.getText(), Integer.parseInt(continentfield.getText()));
+			    	System.out.println(staticApplicationVariables.gb.map.lands.size());
+				    JOptionPane.showMessageDialog(null,
+							"Continent with name " + cont1.GetName() + ",Control value : "+ cont1.GetName() + " is successfully added!");
+
+				 
+				    try {
+			    		staticApplicationVariables.gb.SaveMapToFile("output.txt");
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				   frame.dispose();
+				}
+				
+			}
+		});
+
+		JButton buttonCancel = new JButton("Cancel");
+
+		buttonCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+			}
+		});
+
+		panel.add(continentLabel);
+		panel.add(nameTField);
+		panel.add(continentcontrolLabel);
+		panel.add(continentfield);
+		panel.add(buttonOK);
+		panel.add(buttonCancel);
+		frame.add(panel);
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 }
