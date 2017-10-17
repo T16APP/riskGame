@@ -4,9 +4,11 @@ package com.risk.model;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import com.risk.utility.ECards;
 import com.risk.utility.MapParser;
 import com.risk.utility.TurnPhases;
 
@@ -26,12 +28,14 @@ public class GameBoard {
 	public static GameBoard instance;
 	public List<Integer> roundRobin;
 	public TurnOrganizer turnOrganizer;
+	public List<Card> deck;
 
 	public GameBoard() {
 		if (this.instance == null) {
 			players = new ArrayList<Player>();
 			map = new Map("map");
 			turnOrganizer = new TurnOrganizer();
+			deck = new ArrayList<Card>();
 		}
 
 	}
@@ -65,6 +69,7 @@ public class GameBoard {
 	/** this method start up the game
 	 * it takes the number of players, then creates players
 	 * and then assign countries evenly to players
+	 * then builds the deck
 	 * next it set the current player based on round-robin fashion
 	 * next initializes the phase
 	 */
@@ -72,6 +77,7 @@ public class GameBoard {
 	{
 		SetupPlayers(prm_playerNum);
 		AssignCountriesRandom();
+		BuildDeck(map.GetCountries().size());
 		turnOrganizer.GameStarted();
 		turnOrganizer.SetCurrentPlayerId(GetNextPlayerId());
 		turnOrganizer.GetNextPhase();
@@ -276,13 +282,252 @@ public class GameBoard {
 	 * this set the turnorganizer to reinforcement phase
 	 * also it causes the turn to change
 	 * also it recalculate the armies for the current player
+	 * @throws Exception if there is now card left
 	 */
-	public void EndFortificationPhase()
+	public void EndFortificationPhase() throws Exception
 	{
+		if(turnOrganizer.IsAttackSuccessful())
+		{
+			DrawACard(turnOrganizer.GetCurrentPlayerId());
+		}
 		turnOrganizer.SetCurrentPhase(TurnPhases.Reinforcement);
 		GetNextPlayerId();
 		ResetCountriesOrmiesByPlayerId(turnOrganizer.GetCurrentPlayerId());
 		CalculateArmies(GetPlayerById(turnOrganizer.GetCurrentPlayerId()));
 	}
-
+	public void BuildDeck(int countryNum)
+    {
+   	 int cardsNum = (countryNum/3+1)*3;
+   	 Card card ;
+   	 for(int i=0;i<cardsNum/3;i++)
+   	 {
+   		 deck.add(new Card(ECards.Artillery));
+   	 }
+   	 for(int i=cardsNum/3;i<cardsNum*2/3;i++)
+   	 {
+   		 deck.add(new Card(ECards.Cavalry));
+   	 }
+   	 for(int i=cardsNum*2/3;i<cardsNum;i++)
+   	 {
+   		 deck.add(new Card(ECards.Infantry));
+   	 }
+    }
+    /**this method shuffles the card
+     * 
+     */
+    public void ShuffleDeck()
+    {
+   	 Collections.shuffle(deck);
+    }
+    /**this method returns unassigned cards
+     * 
+     */
+    public List<Card> GetUnassignedCards()
+    {
+   	 List<Card> cards = new ArrayList<Card>();
+   	 for(Card c : deck)
+   	 {
+   		 if(c.playerId==-1) cards.add(c);
+   	 }
+   	 return cards;
+    }
+    /**this method draws a card from deck to the player with specific id
+     * @param prm_playerId
+    * @throws Exception if there is no card to draw
+     */
+    public int DrawACard(int prm_playerId) throws Exception
+    {
+   	 int result =0;
+   	 if(GetUnassignedCards().get(0)!=null)
+   	 {
+   	 GetUnassignedCards().get(0).playerId=prm_playerId;
+   	 return result=1;
+   	 }
+   	 else throw new Exception("DeckHasNoCard");
+    }
+    /**this method returns the cards of a given player in his hand
+     * @param prm_playerId is the id of the player
+     */
+    public List<Card> GetCardsByPlayerId(int prm_playerId)
+    {
+   	 List<Card> cards = new ArrayList<Card>();
+   	 for(Card c : deck)
+   	 {
+   		 if(c.playerId==prm_playerId) cards.add(c);
+   	 }
+   	 return cards;
+    }
+    /**this method checks if the player has three same type card
+     * @param prm_playerId is the id of the player
+     */
+    public boolean HasThreeSameCardsByPlayerId(int prm_playerId)
+    {
+   	 int cardCount=0;
+   	 for(Card c : GetCardsByPlayerId(prm_playerId))
+   	 {
+   		 if(c.type==ECards.Artillery)
+   			 cardCount+=1;
+   	 }
+   	 if(cardCount>=3) return true;
+   	 cardCount=0;
+   	 for(Card c : GetCardsByPlayerId(prm_playerId))
+   	 {
+   		 if(c.type==ECards.Cavalry)
+   			 cardCount+=1;
+   	 }
+   	 if(cardCount>=3) return true;
+   	 cardCount=0;
+   	 for(Card c : GetCardsByPlayerId(prm_playerId))
+   	 {
+   		 if(c.type==ECards.Infantry)
+   			 cardCount+=1;
+   	 }
+   	 if(cardCount>=3) return true;
+   	 return false;
+    }
+    /**this method checks if the player has three different type card
+     * @param prm_playerId is the id of the player
+     */
+    public boolean HasThreeDifferentCardsByPlayerId(int prm_playerId)
+    {
+   	 boolean hasArtillery=false;
+   	 boolean hasCavalry=false;
+   	 boolean hasInfantry=false;
+   	 for(Card c : GetCardsByPlayerId(prm_playerId))
+   	 {
+   		 if(c.type==ECards.Artillery)
+   			 hasArtillery=true;
+   	 }
+   	 for(Card c : GetCardsByPlayerId(prm_playerId))
+   	 {
+   		 if(c.type==ECards.Cavalry)
+   			 hasCavalry=true;
+   	 }
+   	 for(Card c : GetCardsByPlayerId(prm_playerId))
+   	 {
+   		 if(c.type==ECards.Infantry)
+   			 hasInfantry=true;
+   	 }
+   	 if(hasArtillery&&hasCavalry&&hasInfantry) return true;
+   	 else return false;
+    }
+    /**this method returns a card with specific type from hand cards
+     * of a given player
+     * @param prm_playerId which is the id of the player
+     * @param prm_cardType which is the type of the card
+     * @return is a card
+     */
+    public Card GetACardByTypeByPlayerId(int prm_playerId, ECards prm_cardType)
+    {
+   	 for(Card c : GetCardsByPlayerId(prm_playerId))
+   	 {
+   		 if(c.GetType()==prm_cardType) return c;
+   	 }
+   	 return null;
+    }
+    /**this method exchange cards for armies for a given player
+     * if the given player has three same cards 
+     * the method decks those cards and gives the player 5 armies
+     * @param prm_playerId is the id of the player
+     * @return 1 if the exchange is done successfully, otherwise 0
+     */
+    public int ExchangeThreeSameCardsByPlayerId(int prm_playerId)
+    {
+   	 int result =0;
+   	 int cardCount=0;
+   	 for(Card c : GetCardsByPlayerId(prm_playerId))
+   	 {
+   		 if(c.type==ECards.Artillery)
+   			 cardCount+=1;
+   	 }
+   	 if(cardCount>=3)
+   		 {
+   		 for(int i=0;i<3;i++)
+   		 {
+   			 GetACardByTypeByPlayerId(prm_playerId,ECards.Artillery ).SetPlayerId(-1);
+   		 }
+   		 GetPlayerById(prm_playerId).AddArmiesFromCards(5);
+   		 return 1;
+   		 }
+   	 cardCount=0;
+   	 for(Card c : GetCardsByPlayerId(prm_playerId))
+   	 {
+   		 if(c.type==ECards.Cavalry)
+   			 cardCount+=1;
+   	 }
+   	 if(cardCount>=3) 
+   	 {
+   		 for(int i=0;i<3;i++)
+   		 {
+   			 GetACardByTypeByPlayerId(prm_playerId,ECards.Cavalry ).SetPlayerId(-1);
+   		 }
+   		 GetPlayerById(prm_playerId).AddArmiesFromCards(5);
+   		 return 1;
+   		 }
+   	 cardCount=0;
+   	 for(Card c : GetCardsByPlayerId(prm_playerId))
+   	 {
+   		 if(c.type==ECards.Infantry)
+   			 cardCount+=1;
+   	 }
+   	 if(cardCount>=3) 
+   	 {
+   		 for(int i=0;i<3;i++)
+   		 {
+   			 GetACardByTypeByPlayerId(prm_playerId,ECards.Infantry ).SetPlayerId(-1);
+   		 }
+   		 GetPlayerById(prm_playerId).AddArmiesFromCards(5);
+   		 return 1;
+   		 }
+   	 return 0;
+    }
+    /**this method exchange cards for armies for a given player
+     * if the given player has three different cards 
+     * the method decks those cards and gives the player 5 armies
+     * @param prm_playerId is the id of the player
+     * @return 1 if the exchange is done successfully, otherwise 0
+    * @throws Exception  if the player has no three different cards
+     */
+    public int ExchangeThreeDifferentCardsByPlayerId(int prm_playerId) throws Exception
+    {
+   	 try
+   	 {
+   	 GetACardByTypeByPlayerId(prm_playerId,ECards.Artillery ).SetPlayerId(-1);
+   	 GetACardByTypeByPlayerId(prm_playerId,ECards.Cavalry ).SetPlayerId(-1);
+   	 GetACardByTypeByPlayerId(prm_playerId,ECards.Infantry ).SetPlayerId(-1);
+   	 GetPlayerById(prm_playerId).AddArmiesFromCards(5);
+		 return 1;
+   	 }
+   	 catch(Exception ex)
+   	 {
+   		 throw new Exception("HasNoThreeDifferentCards");
+   	 }
+    }
+    
+    /**this method exchange cards for armies for a given player
+     * if the given player has three same cards or three different cards
+     * the method decks those cards and gives the player 5 armies
+     * @param prm_playerId is the id of the player
+    * @throws Exception if there is no three different or same cards
+     */
+    public int ExchangeCards(int prm_playerId) throws Exception 
+    {
+   	 if(turnOrganizer.GetCurrentPhase()==TurnPhases.Reinforcement)
+   	 {
+   	 if(HasThreeSameCardsByPlayerId(prm_playerId))
+   	 {
+   		 ExchangeThreeSameCardsByPlayerId(prm_playerId);
+   		 return 1;
+   	 }
+   	 if(HasThreeDifferentCardsByPlayerId(prm_playerId))
+   	 {
+   		 ExchangeThreeDifferentCardsByPlayerId(prm_playerId);
+   		 return 1;
+   	 }
+   	 }
+   	 else throw new Exception("CurrentPhaseNotReinforcement");
+   	 return 0;
+   	 
+   	 
+    }
 }
