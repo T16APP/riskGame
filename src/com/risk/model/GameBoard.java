@@ -234,7 +234,7 @@ public class GameBoard {
 	/**this method places armies on a country
 	 * @param prm_countryId is the id of the country on which armies are placed
 	 * @param prm_armies the number of armies to be placed
-	 * @return 1 if it is succesful otherwise 0
+	 * @return 1 if it is successful otherwise 0
 	 * @throws Exception 
 	 */
 	public int MoveArmiesToCountryFromCountry(int prm_countryIdS, int prm_countryIdD, int prm_armies) throws Exception
