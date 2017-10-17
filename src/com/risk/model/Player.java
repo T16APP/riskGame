@@ -18,6 +18,7 @@ public class Player {
 	private String name;
 	private List<Land> lands;
 	private int armies;
+	private int armiesFromCards;
 	
 	
 	/**this is the constructor of the class
@@ -31,6 +32,7 @@ public class Player {
 		this.name=prm_name;
         lands = new ArrayList<Land>();
         armies=0;
+        armiesFromCards=0;
 	}
     /**this method returns the id of the player
      * 
@@ -120,5 +122,21 @@ public class Player {
 	{
 		this.armies=prm_armies;
 	}
+	/**this methos adds the armies exchanged with cards
+	 * @param prm_armies which is the number of armies that will be added to the player
+	 */
+	public void AddArmiesFromCards(int prm_armies)
+	{
+		this.armiesFromCards+=prm_armies;
+	}
+	/**this method returns the number of armiesFromCards that the player has
+	 * @param prm_playerId is the id of the player
+	 * @return the number of armies of the player
+	 */
+	public int GetArmiesFromCards()
+	{
+		return this.armiesFromCards;
+	}
+	
 
 }

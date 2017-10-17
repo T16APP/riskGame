@@ -12,6 +12,7 @@ public class TurnOrganizer {
 	private boolean isGameStarted;
 	private int currentPlayerId;
 	private TurnPhases currentPhase;
+	private boolean isAttackSuccessfull;
 	
 /**
  * This the constructor of the class
@@ -23,6 +24,10 @@ public class TurnOrganizer {
 		isGameStarted=false;
 		currentPlayerId = -1;
 		currentPhase= TurnPhases.PreGame;
+		/**missing this should change once attack feature added 
+		 * 
+		 */
+		isAttackSuccessfull=true;
 	}
 	/**
 	 * This method set map-loaded flag
@@ -95,6 +100,13 @@ public class TurnOrganizer {
 	public int GetCurrentPlayerId()
 	{
 		return currentPlayerId;
+	}
+	/**this method verifies if there was a successful attack attack 
+	 * 
+	 */
+	public boolean IsAttackSuccessful()
+	{
+		return this.isAttackSuccessfull;
 	}
 	
 	
