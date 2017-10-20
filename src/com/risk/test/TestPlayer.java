@@ -32,7 +32,7 @@ public class TestPlayer {
 	 */
 
 	@Before
-	public void BeforeTestFactoryLand() {
+	public void BeforeTestPlayer() {
 		System.out.println("@BeforeClass");
 		player1 = new Player(6, "sammy");
 		player2 = new Player(7, "dammy");

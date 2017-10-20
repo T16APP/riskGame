@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.risk.model.Edge;
+import com.risk.model.Map;
 
 /**
  * The class <code>TestEdge</code> contains tests for the class 
@@ -17,6 +18,7 @@ import com.risk.model.Edge;
 public class TestEdge {
 	
 	Edge edge;
+	Map map;
 	
 	/**
 	 * Test case Initialization for TestEdge
@@ -25,6 +27,7 @@ public class TestEdge {
 	@Before
 	public void BeforeTestEdge() {
 		edge = new Edge(0, 0);
+		map = new Map("new_name");
 	}
 	
 	/**
@@ -50,7 +53,28 @@ public class TestEdge {
 			System.out.println(countryid2);
 			assertEquals(0,countryid2);
 		}
+	
+	@Test
+	public void TestGetId() {
+			System.out.println("testGetCountryId2");
+			int id = edge.GetId();
+			System.out.println(id);
+			assertEquals(1,id);
+		}
+	
+	
+	@Test 
+	public void TestDoesExistCountry() {
+		System.out.println("testDoesExistEdge");
 
+		boolean countryresult1 = false;
+		System.out.println(countryresult1);
+
+		String countryresult2 = map.AddCountry("abc",0,34,45);
+		System.out.println(countryresult2);
+
+		assertTrue(true);
+	}
 }
 
 
