@@ -27,7 +27,7 @@ import com.risk.view.applicationWindow;
  * This class belongs to a listener which performs action of adding a continent based on the 
  * events captured from the front end.
  * @author SSS
- *@version 1.0.0.0
+ * @version 1.0.0.0
  */
 
 public class AddContinentListener implements ActionListener {

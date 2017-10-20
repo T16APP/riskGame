@@ -23,7 +23,7 @@ import com.risk.view.applicationWindow;
  * This class belongs to a listener which Adds a country to the map file based on the 
  * events captured from the user interface.
  * @author SSS
- *@version 1.0.0.0
+ * @version 1.0.0.0
  */
 public class AddCountryListener extends JFrame implements ActionListener {
 
