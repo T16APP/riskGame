@@ -33,14 +33,14 @@ public class TestGameBoard {
 	 */
 	
 	@Before
-	public void beforeTestGameBoard() {
+	public void BeforeTestGameBoard() {
 		gameboard = new GameBoard();
 	}
 /**
  * This testGetGameBoard checks the single instance creation (singleton)
  */
 	@Test
-	public void testGetGameBoard() {
+	public void TestGetGameBoard() {
 		
 		assertNotNull(gameboard.GetGameBoard()); 
 	}

@@ -23,7 +23,7 @@ public class TestEdge {
 	 */
 	
 	@Before
-	public void beforeTestEdge() {
+	public void BeforeTestEdge() {
 		edge = new Edge(0, 0);
 	}
 	
@@ -32,7 +32,7 @@ public class TestEdge {
 	 */
 	
 	@Test
-	public void testGetCountryId1() {
+	public void TestGetCountryId1() {
 			System.out.println("testGetCountryId1");
 			int countryid1 = edge.GetCountryId1();
 			System.out.println(countryid1);
@@ -44,7 +44,7 @@ public class TestEdge {
 	 */
 	
 	@Test
-	public void testGetCountryId2() {
+	public void TestGetCountryId2() {
 			System.out.println("testGetCountryId2");
 			int countryid2 = edge.GetCountryId2();
 			System.out.println(countryid2);

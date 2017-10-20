@@ -27,16 +27,9 @@ public class TestFactoryLand {
 	 */
 	
 	@Before
-	public void beforeTestFactoryLand() {
+	public void BeforeTestFactoryLand() {
 		factoryLand = new FactoryLand();
 		country = new Country("new_name",9,8,7);
 	}
 	
-/**
- * 
- */
-	@Test
-	public void testGetLand() {
-		
-	}
 }

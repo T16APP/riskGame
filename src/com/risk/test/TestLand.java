@@ -25,7 +25,7 @@ public class TestLand {
 	 */
 	
 	@Before
-	public void testBefore() {
+	public void TestBefore() {
 		System.out.println("@BeforeClass");
 		land = new Land("new_name");
 		
@@ -36,7 +36,7 @@ public class TestLand {
 	 */
 
 	@Test
-	public void testGetName() {
+	public void TestGetName() {
 		System.out.println("testGetName");
 		String landName = land.GetName();
 		System.out.println(landName);
@@ -47,7 +47,7 @@ public class TestLand {
 	 * 
 	 */
 	@Test
-	public void testGetId() {
+	public void TestGetId() {
 		System.out.println("testGetId");
 		int landId = land.GetId();
 		System.out.println(landId);

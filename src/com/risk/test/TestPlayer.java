@@ -30,7 +30,7 @@ public class TestPlayer {
 		 */
 
 		@Before
-		public void beforeTestFactoryLand() {
+		public void BeforeTestFactoryLand() {
 			System.out.println("@BeforeClass");
 			player1 = new Player(6, "sammy");
 			player2 = new Player(7, "dammy");
@@ -41,7 +41,7 @@ public class TestPlayer {
 		 */
 		
 		@Test
-		public void testGetName(){
+		public void TestGetName(){
 		System.out.println("testGetName");
 		String name = player1.GetName();
 		System.out.println(name);
@@ -54,7 +54,7 @@ public class TestPlayer {
 		 */
 		
 		@Test
-		public void testGetId(){
+		public void TestGetId(){
 			System.out.println("testGetId");
 			int id = player1.GetId();
 			System.out.println(id);
@@ -66,7 +66,7 @@ public class TestPlayer {
 		 */
 		
 		@Test
-		public void testAddLand() {
+		public void TestAddLand() {
 		
 			System.out.println("Test addLand()");
 			//System.out.println(player1.GetName());
@@ -86,26 +86,13 @@ public class TestPlayer {
 		 * testRemoveLand method shows player is able to Remove Land in Player class without any issue
 		 */
 		
-		@Test
-		public void testRemoveLand(){
-		System.out.println("testRemoveLand");
-		Land land1 = new Land("Canada");
-		player1.AddLand(land1);
-		int resultOfRemove = player1.RemoveLand(land1);
-		System.out.println("bbb "+resultOfRemove);
-		assertEquals(1, resultOfRemove);
-		int resultOfRemove2 = player1.RemoveLand(land1);
-		System.out.println("asd "+resultOfRemove2);
-		assertEquals(0, resultOfRemove2);
-		
-		}
 		
 		/**
 		 * testDoesOwnLand method shows player is able to test DoesOwnLand Land in Player class without any issue
 		 */
 		
 		@Test
-		public void testDoesOwnLand(){
+		public void TestDoesOwnLand(){
 			System.out.print("testOwnLand");
 			Land own = new Land("canada");
 			player1.AddLand(own);
@@ -122,7 +109,7 @@ public class TestPlayer {
 	 */
 
 		@After
-		public void testAfter() {
+		public void TestAfter() {
 			System.out.println("@AfterClass");
 			
 			// Add additional tear down code here

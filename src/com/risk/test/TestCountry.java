@@ -28,7 +28,7 @@ public class TestCountry {
 	 */
 	
 	@Before
-	public void riskGameTestCase() {
+	public void RiskGameTestCase() {
 		country = new Country("Canada", 10, 11, 12);
 	}
 
@@ -38,7 +38,7 @@ public class TestCountry {
 	 */
 	
 	@Test
-	public void testGetX() {
+	public void TestGetX() {
 		System.out.println("testGetX");
 		int x = country.GetX();
 		System.out.println(x);
@@ -50,7 +50,7 @@ public class TestCountry {
 	 */
 	
 	@Test
-	public void testGetY() {
+	public void TestGetY() {
 		System.out.println("testGetY");
 		int y = country.GetY();
 		System.out.println(y);
@@ -75,7 +75,7 @@ public class TestCountry {
 	 */
 		
 		@After
-		public void tearDown() throws Exception{
+		public void TearDown() throws Exception{
 			System.out.println("");
 			country = null;
 			assertNull(country);

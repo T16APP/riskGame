@@ -25,7 +25,7 @@ public class TestContinent {
 	 */
 	
 	@BeforeClass
-	public static void beforeClass() {
+	public static void BeforeClass() {
 		System.out.println("Entered TestContinent Class");
 	}
 
@@ -33,7 +33,7 @@ public class TestContinent {
 	 * This method runs after all test cases were ran
 	 */
 	@AfterClass
-	public static void afterClass() {
+	public static void AfterClass() {
 		System.out.println("Left TestContinent Class");
 	}
 	
@@ -42,27 +42,29 @@ public class TestContinent {
 	 */
 	
 	@Before
-	public void beforeTestContinent() {
+	public void BeforeTestContinent() {
 		continent = new Continent("Canada",5);
 	}
 	
 	/**
-	 * 
+	 * This testcase tests the continent Id in continent test class
+	 * and shows that the id is equal to continent id
 	 */
 	@Test
-	public void testGetContinentId() {
+	public void TestGetContinentId() {
 	
 		int id = continent.GetContinentId();
 		System.out.println(id);
 		assertEquals(1,id);
 	}
 	/**
-	 * 
+	 * This testcase tests the continent control value in continent test class 
+	 * and shows that the control value is 
 	 * 
 	 */
 	
 	@Test
-	public void testGetControl() {
+	public void TestGetControl() {
 		int continentcontrol = continent.GetControl();
 		assertEquals(5,continentcontrol);	
 	}
