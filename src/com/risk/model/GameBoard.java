@@ -299,7 +299,7 @@ public class GameBoard {
 		
 	}
 	/**this method ends the reinforcement phase
-	 * this set the turnorganizer to reinforcement phase
+	 * this set the turn-organizer to reinforcement phase
 	 * also it causes the turn to change
 	 * also it recalculate the armies for the current player
 	 * @throws Exception if there is now card left
