@@ -2,36 +2,40 @@ package com.risk.test;
 
 import static org.junit.Assert.*;
 
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
-
 import com.risk.model.Country;
 import com.risk.model.Land;
+import com.risk.model.Player;
+
+/**
+ * The class <code>TestCountry</code> contains tests for the class 
+ * <code> {@link Country}</code>
+ * @author Ranjitha Shetty
+ * @version 1.0
+ */
 
 public class TestCountry {
-	/**
-	 * country object is created to Country class to test --
-	 * land object is created for Land Class to test the land
-	 */
 	
 	Country country;
-//	Land land;
-
+	Player player;
+	
+	/**
+	 * Test case Initialization for TestCountry
+	 */
+	
 	@Before
-	public void testBefore()
-	{
+	public void riskGameTestCase() {
 		country = new Country("Canada", 10, 11, 12);
-		//land = new Land("newName");
 	}
 
-	@Test
-	public void testGetPlayerId() {
-		System.out.println("testGetPlayerId");
-		int playerid = country.GetPlayerId();
-		System.out.println(playerid);
-		assertEquals(1, country.GetPlayerId());
-		fail("Not yet implemented");
-	}
+	
+	/**
+	 * Test case to get Get X
+	 */
 	
 	@Test
 	public void testGetX() {
@@ -39,34 +43,43 @@ public class TestCountry {
 		int x = country.GetX();
 		System.out.println(x);
 		assertEquals(11,x);
-	
 	}
+	
+	/**
+	 * Test case to get Get Y
+	 */
 	
 	@Test
 	public void testGetY() {
 		System.out.println("testGetY");
 		int y = country.GetY();
 		System.out.println(y);
-		assertEquals(11,y);
-	
+		assertEquals(12,y);
 	}
-	
-	@Test
-	public void testGetContinentId() {
-		System.out.println("testGetContinentId");
-		int continentid = country.GetContinentId();
-		System.out.println(continentid);
-		assertEquals(10,continentid);
 		
-		/*@Test
-		public void testGetArmies(){
+		/**
+		 * returning in int
+		 */
+	/*@Test
+	public void testGetArmies(){
 			System.out.println("testGetArmies");
 			int army = country.GetArmies();
 			System.out.println(army);
 			assertEquals(12,army);
-		}
-		*/
+	}*/
+	
+	/**
+	 * /**
+	 * This method deletes and sets variables to null after each test case
+	 * @throws Exception when country is not null
+	 */
 		
+		@After
+		public void tearDown() throws Exception{
+			System.out.println("");
+			country = null;
+			assertNull(country);
+		}	
 }
-}
+
 

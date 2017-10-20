@@ -1,47 +1,69 @@
 package com.risk.test;
 
 import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import com.risk.model.Continent;
 import com.risk.model.Land;
 
 /**
- * 
+ * The class <code>TestContinent</code> contains tests for the class 
+ * <code> {@link Continent}</code>
  * @author Ranjitha Shetty
- * This is the Class to Test Continent
+ * @version 1.0
  */
 
 public class TestContinent {
-	/**
-	 * object continent is created to access Continent Class  
-	 */
 	
 	Continent continent;
 	
-	@Before
-	public void testBefore()
-	{
-		System.out.println("@BeforeClass");
-		continent = new Continent("Canada",5);
+	/**
+	 * Test case Initialization for TestContinent
+	 */
+	
+	@BeforeClass
+	public static void beforeClass() {
+		System.out.println("Entered TestContinent Class");
 	}
 
+	/**
+	 * This method runs after all test cases were ran
+	 */
+	@AfterClass
+	public static void afterClass() {
+		System.out.println("Left TestContinent Class");
+	}
+	
+	/**
+	 * This method initiate the variable before each test case
+	 */
+	
+	@Before
+	public void beforeTestContinent() {
+		continent = new Continent("Canada",5);
+	}
+	
+	/**
+	 * 
+	 */
 	@Test
 	public void testGetContinentId() {
 	
-		//System.out.println(continent.GetContinentId());	
 		int id = continent.GetContinentId();
 		System.out.println(id);
-		assertEquals(continent,id);
-		fail("Not yet implemented");
+		assertEquals(1,id);
 	}
+	/**
+	 * 
+	 * 
+	 */
 	
 	@Test
-	public void testGetControl()
-	{
+	public void testGetControl() {
 		int continentcontrol = continent.GetControl();
-		assertEquals(continent,continentcontrol);
-		fail("Not yet implemented");
+		assertEquals(5,continentcontrol);	
 	}
-
 }

@@ -10,22 +10,33 @@ import com.risk.model.Country;
 import com.risk.model.FactoryLand;
 import com.risk.model.Land;
 
+/**
+ * The class <code>TestFactoryLand</code> contains tests for the class 
+ * <code> {@link FactoryLand}</code>
+ * @author Ranjitha Shetty
+ * @version 1.0
+ */
+
 public class TestFactoryLand {
 	
 	FactoryLand factoryLand;
 	Country country;
 	
+	/**
+	 * Test case Initialization for TestFactoryLand
+	 */
+	
 	@Before
-	public void testBefore()
-	{
+	public void beforeTestFactoryLand() {
 		factoryLand = new FactoryLand();
 		country = new Country("new_name",9,8,7);
 	}
-
-	@Test
-	public void testFactoryLand() {
 	
-		fail("Not yet implemented");
+/**
+ * 
+ */
+	@Test
+	public void testGetLand() {
+		
 	}
-
 }

@@ -10,8 +10,15 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.risk.model.GameBoard;
 import com.risk.model.Land;
 import com.risk.model.Player;
+/**
+ * The class <code>TestPlayer</code> contains tests for the class 
+ * <code> {@link Player}</code>
+ * @author Ranjitha Shetty
+ * @version 1.0
+ */
 
 public class TestPlayer {
 	
@@ -19,11 +26,11 @@ public class TestPlayer {
 		Player player2;
 		
 		/**
-		 * testBefore method runs before each testcase run
+		 * Test case Initialization for TestFactoryLand
 		 */
 
 		@Before
-		public void testBefore() {
+		public void beforeTestFactoryLand() {
 			System.out.println("@BeforeClass");
 			player1 = new Player(6, "sammy");
 			player2 = new Player(7, "dammy");
@@ -34,8 +41,7 @@ public class TestPlayer {
 		 */
 		
 		@Test
-		public void testGetName()
-		{
+		public void testGetName(){
 		System.out.println("testGetName");
 		String name = player1.GetName();
 		System.out.println(name);
@@ -48,8 +54,7 @@ public class TestPlayer {
 		 */
 		
 		@Test
-		public void testGetId()
-		{
+		public void testGetId(){
 			System.out.println("testGetId");
 			int id = player1.GetId();
 			System.out.println(id);
@@ -65,71 +70,66 @@ public class TestPlayer {
 		
 			System.out.println("Test addLand()");
 			//System.out.println(player1.GetName());
-			
 			Land land1 = new Land("Canada");
-			
 			int result1 = player1.AddLand(land1);
 			System.out.println(result1);
-			
+			//trying to add same country to the player again
 			int result2 = player1.AddLand(land1);
 			System.out.println(result2);
 			
-			//0 means failure, player already has this country
-			//1 mean success 
+			//0 for failure, player already has this country, 1 for success
 			assertEquals(1, result1);
 			assertEquals(0, result2);
 		
-	}
+		}
 		/**
 		 * testRemoveLand method shows player is able to Remove Land in Player class without any issue
 		 */
 		
 		@Test
-		public void testRemoveLand() 
-		{
+		public void testRemoveLand(){
 		System.out.println("testRemoveLand");
 		Land land1 = new Land("Canada");
+		player1.AddLand(land1);
 		int resultOfRemove = player1.RemoveLand(land1);
-		System.out.println(resultOfRemove);
+		System.out.println("bbb "+resultOfRemove);
 		assertEquals(1, resultOfRemove);
-		//assertEquals(0, resultOfRemove)
+		int resultOfRemove2 = player1.RemoveLand(land1);
+		System.out.println("asd "+resultOfRemove2);
+		assertEquals(0, resultOfRemove2);
+		
 		}
-		/**public boolean DoesOwnLand(Land new_land) 
-	{
-		boolean result = false;
-		for (Land c : this.lands) 
-		{
-			if (new_land.GetId() == c.GetId()) 
-			{
-				result = true;
-				return result;
-			}
-		}
-		return result;
-	}
-		*/
 		
 		/**
 		 * testDoesOwnLand method shows player is able to test DoesOwnLand Land in Player class without any issue
 		 */
 		
 		@Test
-		public void testDoesOwnLand()
-		{
+		public void testDoesOwnLand(){
 			System.out.print("testOwnLand");
 			Land own = new Land("canada");
+			player1.AddLand(own);
 			boolean resultOfDoesOwnLand = player1.DoesOwnLand(own);
 			System.out.print(resultOfDoesOwnLand);
-			//assertTrue(2, resultOfDoesOwnLand);
-			//assertFalse();
-			
+			assertTrue(resultOfDoesOwnLand); //first
+			Land notown = new Land("india");
+			boolean resultOfDoesOwnLand2 = player1.DoesOwnLand(notown);
+			System.out.print(resultOfDoesOwnLand2);
+			assertFalse(resultOfDoesOwnLand2); //second
 		}
-		/**
-		 * testAfter method runs after each testcase run
-		 */
+	/**
+	 * This method deletes and sets variables to null after each test case
+	 */
+
 		@After
 		public void testAfter() {
 			System.out.println("@AfterClass");
+			
+			// Add additional tear down code here
+			System.out.println("@AfterClass - oneTimeTearDown");
+			player1 = null;
+			player2 = null;
+			assertNull(player1);
+			assertNull(player2);
 		}
-
 }
