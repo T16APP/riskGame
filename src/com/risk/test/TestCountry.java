@@ -34,7 +34,7 @@ public class TestCountry {
 
 	
 	/**
-	 * Test case to get Get X
+	 * Test case to tests x value is correct 
 	 */
 	
 	@Test
@@ -46,7 +46,7 @@ public class TestCountry {
 	}
 	
 	/**
-	 * Test case to get Get Y
+	 * Test case to tests x value is correct
 	 */
 	
 	@Test
@@ -69,9 +69,9 @@ public class TestCountry {
 	}*/
 	
 	/**
-	 * /**
-	 * This method deletes and sets variables to null after each test case
-	 * @throws Exception when country is not null
+	 * Perform post-test clean-up.
+	 * @throws Exception
+	 * if the clean-up fails for some reason
 	 */
 		
 		@After

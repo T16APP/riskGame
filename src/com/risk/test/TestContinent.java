@@ -48,7 +48,7 @@ public class TestContinent {
 	
 	/**
 	 * This testcase tests the continent Id in continent test class
-	 * and shows that the id is equal to continent id
+	 * and shows that the id is correct
 	 */
 	@Test
 	public void TestGetContinentId() {
@@ -59,7 +59,7 @@ public class TestContinent {
 	}
 	/**
 	 * This testcase tests the continent control value in continent test class 
-	 * and shows that the control value is 
+	 * and shows that the control value is correct
 	 * 
 	 */
 	

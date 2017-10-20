@@ -32,4 +32,11 @@ public class TestFactoryLand {
 		country = new Country("new_name",9,8,7);
 	}
 	
+	/**
+	 * 
+	 */
+	@Test
+	public void TestGetLand("landname","parametername", 1,23,45") {
+		
+	}
 }

@@ -2,6 +2,7 @@ package com.risk.test;
 
 import static org.junit.Assert.*;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,7 +33,7 @@ public class TestLand {
 	}
 	
 	/**
-	 * 
+	 * This Test case test the Name of the land is returned correctly
 	 */
 
 	@Test
@@ -44,7 +45,7 @@ public class TestLand {
 	}
 	
 	/**
-	 * 
+	 * This Test case test the Land id is returned correctly
 	 */
 	@Test
 	public void TestGetId() {
@@ -53,5 +54,18 @@ public class TestLand {
 		System.out.println(landId);
 		assertEquals(1,landId);
 
+	}
+
+	/**
+	 * Perform post-test clean-up.
+	 * 
+	 * @throws Exception
+	 *             if the clean-up fails for some reason
+	 */
+	@After
+	public void TearDown() throws Exception {
+		System.out.println("");
+		land = null;
+		assertNull(land);
 	}
 }

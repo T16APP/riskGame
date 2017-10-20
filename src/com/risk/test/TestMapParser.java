@@ -38,54 +38,62 @@ public class TestMapParser {
 	}
 
 	/**
-	 * 
-	 * @throws IOException
+	 * the TestInvalidHeader tests .map file is valid file by validating it contains Header [Map]
+	 * @throws IOException if the assert.fail is successful
 	 */
 
 	@Test
 	public void TestInvalidHeader() {
 		try {
 			assertEquals("Legal Values: Head validator should be [Map]",
-					MapParser.MapValidator("InvalidHeaderValidator.map"));
+					MapParser.MapValidator("TestFile/InvalidHeaderValidator.map"));
 			Assert.fail("Should have thrown an exception");
 		} catch (Exception e) {
 			String expectedMessage = "Header validator failed";
 			Assert.assertEquals("Exception message must be correct", expectedMessage, e.getMessage());
 		}
 	}
+	/**
+	 * The TestLessThan5countries tests .map file is valid file by validating .map file contain more than 5 countries
+	 */
 
 	@Test
 	public void TestLessThan5countries() {
 
 		try {
-			assertEquals("Legal Values: Countries should be more than 5",
-					MapParser.MapValidator("lessthan5countries.map"));
+			assertEquals("Legal Values: Countries should be more than 5",MapParser.MapValidator("TestFile/lessthan5countries.map"));
 			Assert.fail("Should have thrown an exception");
 		} catch (Exception e) {
 			String expectedMessage = "Map contains less than 5 countries!";
 			Assert.assertEquals("Exception message must be correct", expectedMessage, e.getMessage());
 		}
 	}
+	/**
+	 * The TestMapMustContainContinents tests .map file is valid file by checking if the .map file contains continents
+	 */
 
 	@Test
 	public void TestMapMustContainContinents() {
 
 		try {
-			assertEquals("Legal Values: Map must contain continents", MapParser.MapValidator("Nocontinents.map"));
+			assertEquals("Legal Values: Map must contain continents", MapParser.MapValidator("TestFile/Nocontinents.map"));
 			Assert.fail("Should have thrown an exception");
 		} catch (Exception e) {
 			String expectedMessage = "Map contains no continent!";
 			Assert.assertEquals("Exception message must be correct", expectedMessage, e.getMessage());
 		}
 	}
+	/**
+	 * The TestInvalidMapFile tests .pdf file is not accepted
+	 */
 
 	@Test
 	public void TestInvalidMapFile() {
 		try {
-			assertEquals("Legal Values: Map must contain continents", MapParser.MapValidator("invalidFile.pdf"));
+			assertEquals("Legal Values: Map must contain continents", MapParser.MapValidator("TestFile/invalidfile.pdf"));
 			Assert.fail("Should have thrown an exception");
 		} catch (Exception e) {
-			String expectedMessage = "Invalid Filr selected";
+			String expectedMessage = "Header validator failed";
 			Assert.assertEquals("Exception message must be correct", expectedMessage, e.getMessage());
 		}
 	}

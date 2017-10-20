@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -42,7 +43,7 @@ public class TestMap {
 	}
 
 	/**
-	 * 
+	 * This Test case test the Author is returned correctly
 	 */
 
 	@Test
@@ -52,21 +53,8 @@ public class TestMap {
 		System.out.println(author);
 		assertEquals("new_name", author);
 	}
-
 	/**
-	 * 
-	 */
-
-	@Test
-	public void TestGetImage() {
-		String image = map.GetImage();
-		System.out.println(image);
-		assertEquals("new_name", image);
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * 
+	 * This Test case test the Land by its name is returned correctly
 	 */
 
 	/*
@@ -75,6 +63,9 @@ public class TestMap {
 	 * assertEquals("landname1",landname); assertEqual(true);
 	 * 
 	 * }
+	 */
+	/**
+	 * This Test case test the Edge is added
 	 */
 
 	@Test
@@ -91,6 +82,10 @@ public class TestMap {
 		assertEquals(0, edgeresult2);
 	}
 
+	/**
+	 * This Test case test the Edge is exist already
+	 */
+
 	@Test
 	public void TestDoesExistEdge() {
 		System.out.println("testDoesExistEdge");
@@ -103,5 +98,22 @@ public class TestMap {
 
 		assertTrue(true);
 		assertFalse(true);
+	}
+
+	/**
+	 * Perform post-test clean-up.
+	 * 
+	 * @throws Exception
+	 *             if the clean-up fails for some reason
+	 */
+	@After
+	public void TearDown() throws Exception {
+		System.out.println("");
+		map = null;
+		edge = null;
+		country = null;
+		assertNull(map);
+		assertNull(edge);
+		assertNull(country);
 	}
 }

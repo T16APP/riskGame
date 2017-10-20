@@ -28,7 +28,7 @@ public class TestEdge {
 	}
 	
 	/**
-	 * Test case to get Player Id
+	 * This Test case test the country id is returned correctly
 	 */
 	
 	@Test
@@ -40,7 +40,7 @@ public class TestEdge {
 		}
 	
 	/**
-	 * Test case to get Player Id
+	 * This Test case test the player id is returned correctly
 	 */
 	
 	@Test
