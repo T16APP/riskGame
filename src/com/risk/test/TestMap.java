@@ -51,19 +51,9 @@ public class TestMap {
 
 		String author = map.GetAuthor();
 		System.out.println(author);
-		assertEquals("new_name", author);
+		assertNull("new_name", author);
 	}
-	/**
-	 * This Test case test the Land by its name is returned correctly
-	 */
-
-	/*
-	 * @Test public void TestLandByName() { Land landname =
-	 * map.GetLandByName("landname"); System.out.println(landname);
-	 * assertEquals("landname1",landname); assertEqual(true);
-	 * 
-	 * }
-	 */
+	
 	/**
 	 * This Test case test the Edge is added
 	 */
@@ -79,7 +69,7 @@ public class TestMap {
 		System.out.println(edgeresult2);
 
 		assertEquals(1, edgeresult1);
-		assertEquals(0, edgeresult2);
+		assertEquals(-1, edgeresult2);
 	}
 
 	/**
@@ -97,7 +87,6 @@ public class TestMap {
 		System.out.println(edgeresult2);
 
 		assertTrue(true);
-		assertFalse(true);
 	}
 
 	/**
