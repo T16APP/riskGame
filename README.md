@@ -1,71 +1,60 @@
 # Risk Game
-One Paragraph of project description goes here
+A Risk game consists of a connected graph map representing a world map, where each node is a country and each
+edge represents adjacency between countries. Two or more players can play by placing armies on countries they
+own, from which they can attack adjacent countries to conquer them. The objective of the game is to conquer all
+countries on the map.
 
 ##Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Run the application by running --> riskGameApp/src/com/risk/model/Console.java
 
 ##Prerequisites
 
-What things you need to install the software and how to install them
+Install --> Java IDE, Juint4
 
-Give examples
+##Github repository
 
-##Installing
+https://github.com/T16APP/riskGameApp
 
-A step by step series of examples that tell you have to get a development env running
 
-Say what the step will be
+##JavaDoc
 
-Give the example
-And repeat
+https://github.com/T16APP/riskGameApp/tree/master/JavaDoc
 
-until finished
-End with an example of getting some data out of the system or using it for a little demo
+Classes that extend and implement abstract methods inherit their java doc through the use of {@inheritDoc} at the top of the class (class java doc);
 
-##Running the tests
+##Coding Standard
+https://github.com/T16APP/riskGameApp/tree/master/Plan
+Final_Risk Game_Design Document.docx
 
-Explain how to run the automated tests for this system
+Running the tests
 
-Break down into end to end tests
+Go to https://github.com/T16APP/riskGameApp/tree/master/src/com/risk/test
+Run Junit TestSuite.java 
 
-Explain what these tests test and why
 
-Give an example
-And coding style tests
 
-Explain what these tests test and why
-
-Give an example
 
 ##Deployment
 
-Add additional notes about how to deploy this on a live system
+
 
 ##Built With
 
-Dropwizard - The web framework used
-Maven - Dependency Management
-ROME - Used to generate RSS Feeds
-Contributing
+Eclipse - Java IDE
+Junit 4 - Unit test framework
 
-Please read CONTRIBUTING.md for details on our code of conduct, and the process for submitting pull requests to us.
 
 ##Versioning
 
-We use SemVer for versioning. For the versions available, see the tags on this repository.
+We use github for versioning. For the versions available, see the tags on this repository.
 
 ##Authors
 
-Billie Thompson - Initial work - PurpleBooth
-See also the list of contributors who participated in this project.
+Kourosh
+Sandeep Swainch
+Ranjitha Shetty
+Mitra
 
-##License
+##How to Play the Game
 
-This project is licensed under the MIT License - see the LICENSE.md file for details
-
-##Acknowledgments
-
-Hat tip to anyone who's code was used
-Inspiration
-etc
