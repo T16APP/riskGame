@@ -36,6 +36,7 @@ public class GameBoard {
 			map = new Map("map");
 			turnOrganizer = new TurnOrganizer();
 			deck = new ArrayList<Card>();
+			
 		}
 
 	}
@@ -50,10 +51,10 @@ public class GameBoard {
 	{
 		if(instance==null)
 		{
-          return new GameBoard();
+          return instance=new GameBoard();
 		} 
 		else
-			return new GameBoard();
+			return instance;
 	}
 
 	/**this method load the map

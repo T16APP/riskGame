@@ -13,7 +13,6 @@ public class Console {
 		applicationWindow appWindow = new applicationWindow();
 		System.out.println("Game started");
 		appWindow.open();
-		//Demo_addcountry();
 		
 	}
 	public static void Demo_MapValidation() throws Exception
@@ -25,6 +24,25 @@ public class Console {
 		//gameBoard.MapValidator("Earth_NumberOfContinents_NotValid.map");
 		//countries validation
 		gameBoard.MapValidator("Earth_NumberOfCountries_NotValid.map");
+		
+	}
+	public static void Demo_addingCountry() throws Exception
+	{
+		int givenCountryId=-1;
+		GameBoard gameBoard = GameBoard.GetGameBoard();
+		gameBoard.LoadMap("Earth.map");
+		gameBoard.map.AddCountry("testc", 1, 20, 20);
+		
+		
+	}
+	public static void Demo_ShowingAddedCountry() throws Exception
+	{
+		int givenCountryId=-1;
+		GameBoard gameBoard = GameBoard.GetGameBoard();
+		for(int i=0;i<gameBoard.map.GetCountriesByContinentId(1).size();i++)
+		{
+			System.out.println("list of countrt for the continent"+gameBoard.map.GetCountriesByContinentId(1).get(i).name);
+		}
 		
 	}
 	public static void Demo_ChangingTurnAndPhase() throws Exception
