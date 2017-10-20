@@ -62,19 +62,21 @@ public class AddContinentListener implements ActionListener {
 		buttonOK.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				System.out.println(staticApplicationVariables.gb.map.GetContinents().size());
-				System.out.println(staticApplicationVariables.gb.map.lands.size());
-				Continent cont1 = new Continent(nameTField.getText(), Integer.parseInt(continentfield.getText()));
+			//	System.out.println(staticApplicationVariables.gb.map.GetContinents().size());
+			//	System.out.println(staticApplicationVariables.gb.map.lands.size());
+			//	Continent cont1 = new Continent(nameTField.getText(), Integer.parseInt(continentfield.getText()));
 
-				if (staticApplicationVariables.gb.map.DoesExistContinent(cont1) == true) {
+
+
+				if (staticApplicationVariables.gb.map.DoesExistContinent(nameTField.getText()) == true) {
 					JOptionPane.showMessageDialog(null, "Continent with name " + nameTField.getText() + " Exists!");
 				} else {
 					String output = staticApplicationVariables.gb.map.AddContinent(nameTField.getText(),
 							Integer.parseInt(continentfield.getText()));
 					System.out.println(output);
 					System.out.println(staticApplicationVariables.gb.map.lands.size());
-					JOptionPane.showMessageDialog(null, "Continent with name " + cont1.GetName() + ",Control value : "
-							+ cont1.GetControl() + " is successfully added!");
+					JOptionPane.showMessageDialog(null, "Continent with name " + nameTField.getText() + ",Control value : "
+							+ continentfield.getText() + " is successfully added!");
 
 					try {
 						staticApplicationVariables.gb.SaveMapToFile("output.txt");

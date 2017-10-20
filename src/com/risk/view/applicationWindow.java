@@ -21,6 +21,7 @@ import com.risk.controller.AddContinentListener;
 import com.risk.controller.AddCountryListener;
 import com.risk.controller.CreateMapfromGUI;
 import com.risk.controller.EndReinforcementPhaseListener;
+import com.risk.controller.ExchangeCardsforAplayerListener;
 import com.risk.controller.Numberofplayers;
 import com.risk.controller.OpenListener;
 import com.risk.controller.PlaceArmiesonaCountry;
@@ -61,6 +62,7 @@ public class applicationWindow extends JFrame {
 	private JMenuItem removeCountry;
 	private JMenuItem showplayercountries;
 	private JMenuItem addPlayer;
+	private JMenuItem ExchangeCardsforplayer;
 	private JMenuItem createMap;
 	private JMenuItem ShowCurrentPlayer;
 	private JMenuItem numberofplayers;
@@ -115,6 +117,7 @@ public class applicationWindow extends JFrame {
 		ShowCurrentPlayer= new JMenuItem("Show Current Player");
 		placearmiesoncountry= new JMenuItem("Place Armies On Country");
 		placearmiesoncountry= new JMenuItem("Place Armies On Country");
+		ExchangeCardsforplayer = new JMenuItem("Exchange Cards");
 		/*
 		 * Create the menu items for the simulation menu.
 		 */
@@ -139,6 +142,7 @@ public class applicationWindow extends JFrame {
 		GameMenu.add(ShowCurrentPlayer);
 		GameMenu.add(showplayercountries);
 		GameMenu.add(endreinforcementphase);
+		GameMenu.add(ExchangeCardsforplayer);
 		
 		
 		//playMenu.add(startgame);
@@ -165,7 +169,7 @@ public class applicationWindow extends JFrame {
 		showplayercountries.addActionListener(new ShowPlayerCountries());
 		placearmiesoncountry.addActionListener(new PlaceArmiesonaCountry());
 		endreinforcementphase.addActionListener(new EndReinforcementPhaseListener());
-		
+		ExchangeCardsforplayer.addActionListener(new ExchangeCardsforAplayerListener());
 		mainFrame.setJMenuBar(menuBar);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

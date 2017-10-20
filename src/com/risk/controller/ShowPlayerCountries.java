@@ -17,7 +17,8 @@ public class ShowPlayerCountries implements ActionListener {
   System.out.println("The number of countries :" + staticApplicationVariables.gb.map.GetCountries().size());
   System.out.println("The current player Id :" + staticApplicationVariables.gb.turnOrganizer.GetCurrentPlayerId());
   System.out.println("The list of countriesper player is : ");
-  System.out.println(staticApplicationVariables.gb.map.GetCountriesByPlayerId(staticApplicationVariables.gb.players.size()));
+  System.out.println((staticApplicationVariables.gb.map.GetCountriesByPlayerId(staticApplicationVariables.gb.players.size())).size());
+  
   
   
 	}

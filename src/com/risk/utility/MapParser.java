@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import com.risk.model.Edge;
 import com.risk.model.FactoryLand;
 import com.risk.model.Land;
@@ -82,21 +84,24 @@ public class MapParser {
 	        //validate headers: [Map],[Continents],[Territories]
 	        if(existsMap==false || existsContinents==false || existsTerritories==false)
 	        {
+	        	JOptionPane.showMessageDialog(null, "Invalid File Uploaded");
 	        	throw new Exception("Header validator failed");
+	        	 
 	        }
 	        //continents validator: fails if there is no continent
 	        if(arrContinents.size()<1)
-	        {
+	        {   JOptionPane.showMessageDialog(null, "Map contains no continent!");
 	        	throw new Exception("Map contains no continent!");
 	        }
 	      //countries validator: fails if there are less than 5 countries
 	        if(arrCountries.size()<5)
-	        {
+	        {JOptionPane.showMessageDialog(null, "Map contains less than 5 countries!");
 	        	throw new Exception("Map contains less than 5 countries!");
 	        }
 	        
 	        
 		} catch(Exception ex) {
+			
 			throw ex;
 		    
 		}

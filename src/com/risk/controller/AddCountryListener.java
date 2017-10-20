@@ -49,7 +49,7 @@ public class AddCountryListener extends JFrame implements ActionListener {
 	 */
 	public void actionPerformed(ActionEvent actionEvent) {
 		frame = new JFrame("Add Country Frame");
-		frame.setSize(450, 200);
+		frame.setSize(600, 150);
 		Container content = getContentPane();
 		content.removeAll();
 
@@ -116,6 +116,7 @@ public class AddCountryListener extends JFrame implements ActionListener {
 						e2.printStackTrace();
 					}
 					JOptionPane.showMessageDialog(null, CountryField.getText()+ " Country Added to " + name); 
+					frame.dispose();
 
 
 					try {

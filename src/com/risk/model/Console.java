@@ -15,8 +15,8 @@ public class Console {
 		appWindow.open();
 		//Demo_addcountry();
 		
-	}
-	public static void Demo_MapValidation() throws Exception
+	} }
+	/*public static void Demo_MapValidation() throws Exception
 	{
 		GameBoard gameBoard = GameBoard.GetGameBoard();
 		//header validation
@@ -161,16 +161,16 @@ public class Console {
 		}
 		gameBoard.PlaceArmiesOnCountry(1, 1);
 		
-		
 	}
 }
 	
-	/*public static void Demo_addcountry() throws Exception
+	public static void Demo_addcountry() throws Exception
 	{
 		GameBoard gameBoard = GameBoard.GetGameBoard();
 		gameBoard.LoadMap("Earth.map");
 		gameBoard.map.AddCountry("ctest", 1, 20, 20);
 		System.out.println("this the new country: "+gameBoard.map.GetCountryIdByName("ctest"));
 		System.out.println("The list of countries including the new"+gameBoard.map.getCountryListStringForCombobox(1));
-	}*/
+	}
 
+*/

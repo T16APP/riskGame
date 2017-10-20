@@ -1,30 +1,74 @@
 package com.risk.controller;
 
+import java.awt.Container;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import com.risk.model.GameBoard;
 import com.risk.utility.staticApplicationVariables;
 
 public class CreateMapfromGUI implements ActionListener{
-
+	JFrame frame;
+	JPanel panel;
+	
+	JLabel lblFileName, lblCountryName, banner;
+	JTextField  txtCountryName,txtContinentName;
+	JButton buttonOK,buttonCancel ;
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		  
 		
-	       staticApplicationVariables.gb.CreateMap();
-	       
+		frame = new JFrame("Create Map");
+		frame.setSize(200, 200);
+		
+		JPanel panel = new JPanel();
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		panel.setBorder(new EmptyBorder(20, 10, 10, 10));
+		
+		lblFileName = new JLabel("Do You Want to Create Map");  
+		//JTextField Filenamefield = new JTextField(9);
 	
-	   try {
-    		staticApplicationVariables.gb.SaveMapToFile("output.txt");
-	    	} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		   } catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		JButton buttonOK = new JButton("CREATE MAP  ");
+		buttonOK.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{   
+				//Filenamefield.getText();
+	GameBoard.GetGameBoard().CreateMap();
+	JOptionPane.showMessageDialog(null, "Please Add Countries and Continents ,then Save file! ");
+	frame.dispose();
+	//	staticApplicationVariables.gb.map(Filenamefield.getText());
 			}
+		});
+		JButton buttonCancel = new JButton("Cancel");
+
+		buttonCancel.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{   
+				frame.dispose();
+			}
+		});
 		
+		panel.add(lblFileName);
+		//panel.add(Filenamefield);
+		
+
+		
+		panel.add(buttonOK);
+		panel.add(buttonCancel);
+
+		frame.add(panel);
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 }

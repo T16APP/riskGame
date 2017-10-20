@@ -96,9 +96,10 @@ public class OpenListener implements ActionListener {
 						"Open Without Saving Confirmation", JOptionPane.YES_NO_OPTION);
 
 				if (userResponse == JOptionPane.YES_OPTION) {
-					
+					JOptionPane.showMessageDialog(gui.getContentPane(), "File has been Uploaded ", "MESSAGE",
+							JOptionPane.INFORMATION_MESSAGE);				
 				} else {
-					JOptionPane.showMessageDialog(gui.getContentPane(), "Start Working on the current file", "MESSAGE",
+					JOptionPane.showMessageDialog(gui.getContentPane(), "Unable to Upload Map file", "MESSAGE",
 							JOptionPane.INFORMATION_MESSAGE);
 				}
 

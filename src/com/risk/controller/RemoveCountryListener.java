@@ -33,7 +33,8 @@ public class RemoveCountryListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 	    frame = new JFrame("Remove Country Frame");
-        frame.setSize(350, 200);
+        frame.setSize(400, 220);
+        
         
         
         

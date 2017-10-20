@@ -534,6 +534,7 @@ public class GameBoard {
      */
     public int ExchangeCards(int prm_playerId) throws Exception 
     {
+    //	System.out.println("Inside Cards Exchange");
    	 if(turnOrganizer.GetCurrentPhase()==TurnPhases.Reinforcement)
    	 {
    	 if(HasThreeSameCardsByPlayerId(prm_playerId))
