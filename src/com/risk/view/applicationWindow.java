@@ -16,7 +16,6 @@ import javax.swing.JScrollPane;
 
 //simport org.jgraph.JGraph;
 
-
 import com.risk.controller.AddContinentListener;
 import com.risk.controller.AddCountryListener;
 import com.risk.controller.CreateMapfromGUI;
@@ -37,6 +36,8 @@ import com.risk.utility.staticApplicationVariables;
  * This class defines the main window of our program. It defines the main
  * components of the user interface. All event handlers registered to components
  * (menu items) of this class are instantiated with a reference to this class.
+ * author Sandeep Swainch
+ * version 1.0
  */
 public class applicationWindow extends JFrame {
 
@@ -68,7 +69,7 @@ public class applicationWindow extends JFrame {
 	private JMenuItem numberofplayers;
 	private JMenuItem startgame;
 	private JMenuItem help;
-    private JMenuItem start, pause;
+	private JMenuItem start, pause;
 
 	public static applicationWindow getInstance() {
 		if (instance == null) {
@@ -76,10 +77,6 @@ public class applicationWindow extends JFrame {
 		}
 		return instance;
 	}
-
-	//public JGraph getGraph() {
-	//	return graph;
-	//}
 
 	/**
 	 * Returns the singleton instance of GraphicalUserInterface
@@ -111,12 +108,12 @@ public class applicationWindow extends JFrame {
 		removeContinent = new JMenuItem("Remove Continent");
 		removeCountry = new JMenuItem("Remove Country");
 		showplayercountries = new JMenuItem("Show Player Countries");
-		numberofplayers= new JMenuItem(" Start Game");
+		numberofplayers = new JMenuItem(" Start Game");
 		endreinforcementphase = new JMenuItem("End reinforcement phase");
 		createMap = new JMenuItem("Create Map");
-		ShowCurrentPlayer= new JMenuItem("Show Current Player");
-		placearmiesoncountry= new JMenuItem("Place Armies On Country");
-		placearmiesoncountry= new JMenuItem("Place Armies On Country");
+		ShowCurrentPlayer = new JMenuItem("Show Current Player");
+		placearmiesoncountry = new JMenuItem("Place Armies On Country");
+		placearmiesoncountry = new JMenuItem("Place Armies On Country");
 		ExchangeCardsforplayer = new JMenuItem("Exchange Cards");
 		/*
 		 * Create the menu items for the simulation menu.
@@ -129,34 +126,24 @@ public class applicationWindow extends JFrame {
 		fileMenu.addSeparator();
 		fileMenu.add(save);
 		fileMenu.add(createMap);
-		
+
 		editMenu.add(addContinent);
 		editMenu.add(removeContinent);
 		editMenu.addSeparator();
 		editMenu.add(addCountry);
 		editMenu.add(removeCountry);
-		
-	//	editMenu.add(delete);
-		
 		GameMenu.add(numberofplayers);
 		GameMenu.add(ShowCurrentPlayer);
 		GameMenu.add(showplayercountries);
 		GameMenu.add(endreinforcementphase);
 		GameMenu.add(ExchangeCardsforplayer);
-		
-		
-		//playMenu.add(startgame);
-		//playMenu.add(ShowCurrentPlayer);
 		playMenu.add(placearmiesoncountry);
-		
 		helpMenu.add(help);
-		
 		menuBar.add(fileMenu);
 		menuBar.add(editMenu);
 		menuBar.add(GameMenu);
 		menuBar.add(playMenu);
 		menuBar.add(helpMenu);
-		
 		open.addActionListener(new OpenListener());
 		addContinent.addActionListener(new AddContinentListener());
 		removeContinent.addActionListener(new RemoveContinentListener());
@@ -172,9 +159,6 @@ public class applicationWindow extends JFrame {
 		ExchangeCardsforplayer.addActionListener(new ExchangeCardsforAplayerListener());
 		mainFrame.setJMenuBar(menuBar);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 		mainFrame.setVisible(true);
-
 	}
-	
 }

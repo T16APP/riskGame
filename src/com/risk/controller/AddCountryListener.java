@@ -18,34 +18,28 @@ import com.risk.utility.MapParser;
 import com.risk.utility.staticApplicationVariables;
 import com.risk.view.applicationWindow;
 
-
 /**
- * This class belongs to a listener which Adds a country to the map file based on the 
- * events captured from the user interface.
- * @author SSS
- * @version 1.0.0.0
+ * This class belongs to a listener which Adds a country to the map file based
+ * on the events captured from the user interface.
+ * 
+ * @author Sandeep Swainch
+ * @version 1.0
  */
 public class AddCountryListener extends JFrame implements ActionListener {
 
 	JPanel panel;
 	JFrame frame;
 	JLabel lblContinentName, lblCountryName, banner;
-	JTextField  txtCountryName,txtContinentName;
-	JButton buttonOK,buttonCancel ;
-
-
-	/**
-	 * Constructor.
-	 * @param gui The user interface that holds the graph to be altered.
-	 */
-
+	JTextField txtCountryName, txtContinentName;
+	JButton buttonOK, buttonCancel;
 
 	/**
-	 * Causes a new window to Pop-up. This window then asks
-	 * the user to select the name of Continent from a list, the X and Y cordinates, and
-	 * the country name to be added. 
+	 * Causes a new window to Pop-up. This window then asks the user to select the
+	 * name of Continent from a list, the X and Y cordinates, and the country name
+	 * to be added.
 	 * 
-	 * @param actionEvent Not used.
+	 * @param actionEvent
+	 *            Not used.
 	 */
 	public void actionPerformed(ActionEvent actionEvent) {
 		frame = new JFrame("Add Country Frame");
@@ -62,88 +56,77 @@ public class AddCountryListener extends JFrame implements ActionListener {
 
 		lblContinentName = new JLabel("Select Continent: ");
 		String[] continentString = new String[staticApplicationVariables.gb.map.GetContinents().size()];
-		int i=0;
-		for(Object o: staticApplicationVariables.gb.map.GetContinents()){
-			continentString[i] = ((Continent)o).GetName();
+		int i = 0;
+		for (Object o : staticApplicationVariables.gb.map.GetContinents()) {
+			continentString[i] = ((Continent) o).GetName();
 			i++;
 		}
 		JComboBox<String> comboBoxList = new JComboBox<>(continentString);
 
 		JLabel CountryNametobeadded = new JLabel("Country Name:");
 		JTextField CountryField = new JTextField(10);
-		JLabel enterXcordinates= new JLabel("X:");
+		JLabel enterXcordinates = new JLabel("X:");
 		JTextField xField = new JTextField(5);
 
-		JLabel enterYcordinates= new JLabel("Y:");
+		JLabel enterYcordinates = new JLabel("Y:");
 		JTextField yField = new JTextField(5);
-
-
 
 		JButton buttonOK = new JButton("ADD COUNTRY ");
 		/**
-		 * Causes addition of a country to the continent selected by user on press of OK button.
-		 * @param actionEvent Not used.
+		 * Causes addition of a country to the continent selected by user on press of OK
+		 * button.
+		 * 
+		 * @param actionEvent
+		 *            Not used.
 		 */
-		buttonOK.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e)
-			{
+		buttonOK.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 
 				String name = comboBoxList.getSelectedItem().toString();
 				int id = staticApplicationVariables.gb.map.GetContinentIdByName(name);
-				//Continent c = new Continent(name,id);
-				
 
-
-				if( staticApplicationVariables.gb.map.DoesExistCountry(staticApplicationVariables.gb.map.GetCountryIdByName(CountryField.getText()))== true)
-				{JOptionPane.showMessageDialog(null, CountryField.getText() + " Already Exists");
-				}
-
-				else
-				{  
-					
+				if (staticApplicationVariables.gb.map.DoesExistCountry(
+						staticApplicationVariables.gb.map.GetCountryIdByName(CountryField.getText())) == true) {
+					JOptionPane.showMessageDialog(null, CountryField.getText() + " Already Exists");
+				} else {
 					int before = staticApplicationVariables.gb.map.GetCountries().size();
 					System.out.println("Before is :" + before);
-
-					String output =staticApplicationVariables.gb.map.AddCountry(CountryField.getText(), id,Integer.parseInt(xField.getText()),Integer.parseInt(yField.getText())) ; 	 
-					System.out.println("HERE1: "+ output);
+					String output = staticApplicationVariables.gb.map.AddCountry(CountryField.getText(), id,
+							Integer.parseInt(xField.getText()), Integer.parseInt(yField.getText()));
+					System.out.println("HERE1: " + output);
 					int after = staticApplicationVariables.gb.map.GetCountries().size();
 					System.out.println(after + "After");
-					
+
 					try {
 						staticApplicationVariables.gb.SaveMapToFile("output.txt");
 					} catch (Exception e2) {
-						// TODO Auto-generated catch block
 						e2.printStackTrace();
 					}
-					JOptionPane.showMessageDialog(null, CountryField.getText()+ " Country Added to " + name); 
+					JOptionPane.showMessageDialog(null, CountryField.getText() + " Country Added to " + name);
 					frame.dispose();
-
-
 					try {
 						staticApplicationVariables.gb.SaveMapToFile("output.txt");
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} catch (Exception e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
 
-				
 			}
 
 		});
 
 		/**
 		 * Causes frame to be closed on press of cancel button.
-		 * @param actionEvent Not used.
+		 * 
+		 * @param actionEvent
+		 *            Not used.
 		 */
 		JButton buttonCancel = new JButton("Cancel");
 
-		buttonCancel.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e)
-			{   
+		buttonCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
 			}
 		});
@@ -164,14 +147,9 @@ public class AddCountryListener extends JFrame implements ActionListener {
 
 		frame.add(panel);
 
-
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
 	}
-
-	
-
 
 }

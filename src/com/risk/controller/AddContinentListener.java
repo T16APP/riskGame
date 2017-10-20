@@ -24,10 +24,10 @@ import com.risk.utility.staticApplicationVariables;
 import com.risk.view.applicationWindow;
 
 /**
- * This class belongs to a listener which performs action of adding a continent based on the 
- * events captured from the front end.
- * @author SSS
- * @version 1.0.0.0
+ * This class belongs to a listener which performs action of adding a continent
+ * based on the events captured from the front end.
+ * @author Sandeep Swainch
+ * @version 1.0
  */
 
 public class AddContinentListener implements ActionListener {
@@ -35,9 +35,8 @@ public class AddContinentListener implements ActionListener {
 
 	@Override
 	/**
-	 * Causes a new window to Pop-up. This window then asks
-	 * the user to indicate the Continent name, the Control value. 
-	 * The control value must be set as Integer.
+	 * Causes a new window to Pop-up. This window then asks the user to indicate the
+	 * Continent name, the Control value. The control value must be set as Integer.
 	 * @param actionEvent Not used.
 	 */
 	public void actionPerformed(ActionEvent e) {
@@ -62,12 +61,6 @@ public class AddContinentListener implements ActionListener {
 		buttonOK.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-			//	System.out.println(staticApplicationVariables.gb.map.GetContinents().size());
-			//	System.out.println(staticApplicationVariables.gb.map.lands.size());
-			//	Continent cont1 = new Continent(nameTField.getText(), Integer.parseInt(continentfield.getText()));
-
-
-
 				if (staticApplicationVariables.gb.map.DoesExistContinent(nameTField.getText()) == true) {
 					JOptionPane.showMessageDialog(null, "Continent with name " + nameTField.getText() + " Exists!");
 				} else {
@@ -75,16 +68,14 @@ public class AddContinentListener implements ActionListener {
 							Integer.parseInt(continentfield.getText()));
 					System.out.println(output);
 					System.out.println(staticApplicationVariables.gb.map.lands.size());
-					JOptionPane.showMessageDialog(null, "Continent with name " + nameTField.getText() + ",Control value : "
-							+ continentfield.getText() + " is successfully added!");
+					JOptionPane.showMessageDialog(null, "Continent with name " + nameTField.getText()
+							+ ",Control value : " + continentfield.getText() + " is successfully added!");
 
 					try {
 						staticApplicationVariables.gb.SaveMapToFile("output.txt");
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} catch (Exception e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					frame.dispose();
@@ -94,10 +85,12 @@ public class AddContinentListener implements ActionListener {
 		});
 
 		JButton buttonCancel = new JButton("Cancel");
-        
+
 		/**
 		 * Causes frame to be closed on press of cancel button.
-		 * @param actionEvent Not used.
+		 * 
+		 * @param actionEvent
+		 *            Not used.
 		 */
 		buttonCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -28,12 +28,12 @@ import com.risk.view.applicationWindow;
  * An object of this class listens to presses of the "Open" menu item of the
  * "File" menu of the main user interface. It's responsible for requesting the
  * user for a file to open, and then tries to open it and display it in the main
- * user interface.
+ * user interface. author
  */
 public class OpenListener implements ActionListener {
 	/**
-	 * Used to gain access to the globally shared graph, which needs to be
-	 * altered in this class.
+	 * Used to gain access to the globally shared graph, which needs to be altered
+	 * in this class.
 	 */
 	private applicationWindow gui;
 
@@ -45,17 +45,15 @@ public class OpenListener implements ActionListener {
 	}
 
 	/**
-	 * This method is called when the "Open" menu item is selected.
+	 * Causes a new window to Pop-up. This window then asks the user to indicate the
+	 * Continent name, the Control value. The control value must be set as Integer
 	 * 
 	 * @param actionEvent
 	 *            Not used.
 	 */
+
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
-		/*
-		 * if ( !((GraphAdapter) GraphAdapter.getInstance()).isPaused() ) {
-		 * return; }
-		 */
 		JFileChooser chooser = new JFileChooser();
 
 		// Doesn't allow the user to select more than one file.
@@ -74,43 +72,33 @@ public class OpenListener implements ActionListener {
 				System.out.println();
 				staticApplicationVariables.FILENAME = openFromFile.getPath();
 				GameBoard gameboard = GameBoard.GetGameBoard();
-				//MapParser mp = new MapParser();
+				// MapParser mp = new MapParser();
 				gameboard.map = MapParser.MapParser(staticApplicationVariables.FILENAME);
 				staticApplicationVariables.gb = gameboard;
-				
-				
 				MapParser.WriteMapToFile(gameboard.map, "output.txt");
-				
-				
-				//gameboard.SetupPlayers();
-				//gameboard.AssignCountriesRandom();
-			
 
-				// Gives the user a chance to save the work he's presently
-				// working on. If the user chooses to proceed, all of his/her
-				// work is lost forever.
+				/*
+				 * Gives the user a chance to save the work he's presently working on. If the
+				 * user chooses to proceed, all of his/her work is lost forever.
+				 */
 				int userResponse = JOptionPane.showConfirmDialog(gui.getContentPane(),
 						"If you open this file without saving the one you're\n"
 								+ "already working on, all of your work will be lost.\n"
 								+ "Click yes if you don't want to save your work.\n",
 						"Open Without Saving Confirmation", JOptionPane.YES_NO_OPTION);
-
 				if (userResponse == JOptionPane.YES_OPTION) {
 					JOptionPane.showMessageDialog(gui.getContentPane(), "File has been Uploaded ", "MESSAGE",
-							JOptionPane.INFORMATION_MESSAGE);				
+							JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(gui.getContentPane(), "Unable to Upload Map file", "MESSAGE",
 							JOptionPane.INFORMATION_MESSAGE);
 				}
-
 			} catch (FileNotFoundException fnfe) {
 				JOptionPane.showMessageDialog(gui.getContentPane(), fnfe.getMessage(), "ERROR",
 						JOptionPane.ERROR_MESSAGE);
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

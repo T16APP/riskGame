@@ -8,17 +8,24 @@ import javax.swing.JOptionPane;
 
 import com.risk.utility.staticApplicationVariables;
 
-public class ExchangeCardsforAplayerListener extends JFrame implements ActionListener{
+public class ExchangeCardsforAplayerListener extends JFrame implements ActionListener {
+
+	/**
+	 * Causes a new window to Pop-up. This window then asks the user to indicate the
+	 * Continent name, the Control value. The control value must be set as Integer
+	 * 
+	 * @param actionEvent
+	 *            Not used.
+	 */
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		try {
-			int output = staticApplicationVariables.gb.ExchangeCards(staticApplicationVariables.gb.turnOrganizer.GetCurrentPlayerId());
-			if(output==1)
-			JOptionPane.showMessageDialog(null, "Cards Excahnged");
+			int output = staticApplicationVariables.gb
+					.ExchangeCards(staticApplicationVariables.gb.turnOrganizer.GetCurrentPlayerId());
+			if (output == 1)
+				JOptionPane.showMessageDialog(null, "Cards Excahnged");
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
