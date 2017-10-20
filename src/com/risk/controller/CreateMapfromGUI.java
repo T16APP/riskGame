@@ -6,20 +6,25 @@ import java.io.IOException;
 
 import com.risk.utility.staticApplicationVariables;
 
-public class SavetofileListener implements ActionListener {
+public class CreateMapfromGUI implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		try {
+		  
+		
+	       staticApplicationVariables.gb.CreateMap();
+	       
+	
+	   try {
     		staticApplicationVariables.gb.SaveMapToFile("output.txt");
-		} catch (IOException e1) {
+	    	} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		   } catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
 	}
 
 }

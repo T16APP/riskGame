@@ -1,9 +1,4 @@
 package com.risk.model;
-/**
- * This is a class that belongs to map and contains countries
- * @author Kourosh Aziz-Nejad
- *
- */
 
 import java.util.ArrayList;
 import java.util.List;

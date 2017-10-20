@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import com.risk.model.GameBoard;
+import com.risk.utility.staticApplicationVariables;
 
 public class Numberofplayers implements ActionListener{
 	
@@ -27,7 +28,7 @@ public class Numberofplayers implements ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		frame = new JFrame("Set Number Of players ");
-		frame.setSize(200, 200);
+		frame.setSize(400, 150);
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER));
         panel.setBorder(new EmptyBorder(20, 10, 10, 10));
@@ -56,8 +57,16 @@ public class Numberofplayers implements ActionListener{
          }
          else
          { 
+         try {
+			staticApplicationVariables.gb.StartupGame(numberofplayerselected);
+			//staticApplicationVariables.gb.players.size() = numberofplayerselected;
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}	 
          JOptionPane.showMessageDialog(null, "Number of Players Selected  " + numberofplayerselected);
-           frame.dispose();} 
+           
+         } 
          
              }});
          JButton buttonCancel = new JButton("Cancel");

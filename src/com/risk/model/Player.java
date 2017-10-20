@@ -128,6 +128,8 @@ public class Player {
 	public void AddArmiesFromCards(int prm_armies)
 	{
 		this.armiesFromCards+=prm_armies;
+		//tbd
+		this.armies +=prm_armies;
 	}
 	/**this method returns the number of armiesFromCards that the player has
 	 * @param prm_playerId is the id of the player

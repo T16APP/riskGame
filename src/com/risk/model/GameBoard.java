@@ -59,11 +59,12 @@ public class GameBoard {
 	/**this method load the map
 	 * @param prm_input , which its type is string
 	 * is the map file that will be imported into the game
-	 * @throws IOException 
+	 * @throws Exception 
 	 */
-	public void LoadMap(String prm_input) throws IOException
+	public void LoadMap(String prm_input) throws Exception
 	{
-		MapParser.MapParser(prm_input);
+		//tbd
+		this.map=MapParser.MapParser(prm_input);
 		turnOrganizer.MapLoaded();
 	}
 	/** this method start up the game
@@ -72,15 +73,19 @@ public class GameBoard {
 	 * then builds the deck
 	 * next it set the current player based on round-robin fashion
 	 * next initializes the phase
+	 * @throws Exception if the number of player is less than 2 or greater than 5
 	 */
-	public void StartupGame(int prm_playerNum)
+	public void StartupGame(int prm_playerNum) throws Exception
 	{
+		//tbd
+		if(prm_playerNum<2 || prm_playerNum>5) throw new Exception("PlayerNumberNotValid");
 		SetupPlayers(prm_playerNum);
 		AssignCountriesRandom();
 		BuildDeck(map.GetCountries().size());
 		turnOrganizer.GameStarted();
 		turnOrganizer.SetCurrentPlayerId(GetNextPlayerId());
-		turnOrganizer.GetNextPhase();
+		//tbd
+		turnOrganizer.SetCurrentPhase(TurnPhases.Reinforcement);;
 	}
 	/**
 	 * this method creates 6 instance of players
@@ -103,7 +108,7 @@ public class GameBoard {
 	 */
 	public void SetupPlayers(int prm_playerNum)
 	{
-		for(int i=1;i<prm_playerNum;i++)
+		for(int i=1;i<=prm_playerNum;i++)
 		{
 			players.add(new Player(i,"player"+i));
 		}
@@ -136,6 +141,7 @@ public class GameBoard {
 		{
          roundRobin.add(p.GetId());
 		}
+		
 	}
 	/**
 	 * this method returns the next player
@@ -144,13 +150,18 @@ public class GameBoard {
 	 */
 	public int GetNextPlayerId()
 	{
+		int nextPlayerId=-1;
 		if(roundRobin.size()<1)
 		{
          InitRoundRobin();
-		}
-		int indexNextPlayerId = new Random().nextInt(roundRobin.size());
-		int nextPlayerId = roundRobin.get(indexNextPlayerId);
-		roundRobin.remove(indexNextPlayerId);
+		} 
+		//tbd
+		nextPlayerId = roundRobin.get(0);
+		roundRobin.remove(0);
+		//tbd
+		this.turnOrganizer.SetCurrentPlayerId(nextPlayerId);
+		//tbd
+		CalculateArmies(GetPlayerById(turnOrganizer.GetCurrentPlayerId()));
 		return nextPlayerId;
 	}
 	/**
@@ -161,9 +172,9 @@ public class GameBoard {
 	 * otherwise returns invalid
 	 * @throws Exception
 	 */
-	public String MapValidator(String input) throws Exception
+	public boolean MapValidator(String input) throws Exception
 	{
-		String result ="valid";
+		boolean result =false;
 		try
 		{
 		result=MapParser.MapValidator(input);
@@ -190,11 +201,15 @@ public class GameBoard {
 	/**this method will save the current map into a file in the format of Conquest rules
 	 * @param input, which its type is string, is the file in which the map will be saved
 	 * @return , which its type is integer, is 1 if the save is successful and is 0 if it is failed
-	 * @throws IOException 
+	 * @throws Exception if continents are less than 1 or countries are less than 5
+	 * the exception will be thrown
 	 */
-	public int SaveMapToFile(String input) throws IOException
+	public int SaveMapToFile(String input) throws Exception
 	{
 		int result = 0;
+		//tbd
+		if(this.map.GetContinents().size()<1) throw new Exception("MapHasNoContinent");
+		if(this.map.GetCountries().size()<5) throw new Exception("LessThanFiveCountriesValidation");
 		MapParser.WriteMapToFile(map, input);
 		return 1;
 	}
@@ -221,11 +236,13 @@ public class GameBoard {
 	 * @param prm_countryId is the id of the country on which armies are placed
 	 * @param prm_armies the number of armies to be placed
 	 * @return 1 if it is succesful otherwise 0
-	 * @throws Exception 
+	 * @throws Exception if the current phase not Reinforcement
 	 */
 	public int PlaceArmiesOnCountry(int prm_countryId, int prm_armies) throws Exception
 	{
 		int result =0;
+		//tbd
+		if(turnOrganizer.GetCurrentPhase()!=TurnPhases.Reinforcement) throw new Exception("PhaseNotValid");
 		int countryArmies = map.GetCountryById(prm_countryId).GetArmies();
 		int playerArmies = GetPlayerById(map.GetCountryById(prm_countryId).GetPlayerId()).GetArmies();
 		if(playerArmies>=prm_armies)
@@ -240,12 +257,14 @@ public class GameBoard {
 	/**this method places armies on a country
 	 * @param prm_countryId is the id of the country on which armies are placed
 	 * @param prm_armies the number of armies to be placed
-	 * @return 1 if it is successful otherwise 0
-	 * @throws Exception 
+	 * @return 1 if it is succesful otherwise 0
+	 * @throws Exception if the current phase not Fortification
 	 */
 	public int MoveArmiesToCountryFromCountry(int prm_countryIdS, int prm_countryIdD, int prm_armies) throws Exception
 	{
 		int result =0;
+		//tbd
+		if(turnOrganizer.GetCurrentPhase()!=TurnPhases.Fortification) throw new Exception("PhaseNotValid");
 		int countrySArmies = map.GetCountryById(prm_countryIdS).GetArmies();
 		int countryDArmies = map.GetCountryById(prm_countryIdD).GetArmies();
 		if(countrySArmies>=prm_armies && 
@@ -259,12 +278,13 @@ public class GameBoard {
 		else throw new Exception("NotEnoughArmies");
 		return result;
 	}
+	//tbd
 	/**this method ends the reinforcement phase
 	 * this set the turn organizer to fortification phase
 	 */
 	public void EndReinforcementPhase()
 	{
-		turnOrganizer.SetCurrentPhase(TurnPhases.Reinforcement);
+		turnOrganizer.SetCurrentPhase(TurnPhases.Fortification);
 	}
 	/**this method reset the number of armies for all countries of the current player to zero
 	 * and get them ready for reinforcement phase
@@ -286,6 +306,7 @@ public class GameBoard {
 	 */
 	public void EndFortificationPhase() throws Exception
 	{
+		//this is only for build one to show cards flow and it is supposed that a successful attack is done
 		if(turnOrganizer.IsAttackSuccessful())
 		{
 			DrawACard(turnOrganizer.GetCurrentPlayerId());
@@ -293,7 +314,8 @@ public class GameBoard {
 		turnOrganizer.SetCurrentPhase(TurnPhases.Reinforcement);
 		GetNextPlayerId();
 		ResetCountriesOrmiesByPlayerId(turnOrganizer.GetCurrentPlayerId());
-		CalculateArmies(GetPlayerById(turnOrganizer.GetCurrentPlayerId()));
+		//tbd
+		//CalculateArmies(GetPlayerById(turnOrganizer.GetCurrentPlayerId()));
 	}
 	public void BuildDeck(int countryNum)
     {

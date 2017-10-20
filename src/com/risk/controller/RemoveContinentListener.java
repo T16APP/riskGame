@@ -52,7 +52,7 @@ public class RemoveContinentListener extends JFrame implements ActionListener{
             {
             	  System.out.println("OK pressed:");   
             	  String name = comboBoxList.getSelectedItem().toString(); 
-                 // int ID = staticApplicationVariables.gb.map.GetContinentIdByName(name);
+                
                   Continent cont1 = new Continent(name,25);
                   System.out.println(cont1.GetName());
                   
@@ -65,7 +65,10 @@ public class RemoveContinentListener extends JFrame implements ActionListener{
        		} catch (IOException e1) {
        			// TODO Auto-generated catch block
        			e1.printStackTrace();
-       		} 
+       		} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
         	   
         	   JOptionPane.showMessageDialog(null, cont1.GetName() + " Continent was deleted!"); 
                 System.out.println("After " + staticApplicationVariables.gb.map.GetContinents().size());	        

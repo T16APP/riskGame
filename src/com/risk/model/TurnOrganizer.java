@@ -72,6 +72,8 @@ public class TurnOrganizer {
 	{
 		return this.currentPhase;
 	}
+	//tbd
+	//in the build1 we didn't have phase attack, however in the future it should be implementd
 	/**
 	 * This method compute the next phase
 	 * and return it
@@ -82,14 +84,12 @@ public class TurnOrganizer {
 	{
 		switch(this.currentPhase)
 		{
-		case PreGame:
-			return TurnPhases.Startup;
 		case Startup:
 			return TurnPhases.Reinforcement;
 		case Reinforcement:
 			return TurnPhases.Fortification;
 		case Fortification:
-			return TurnPhases.Attack;
+			return TurnPhases.Reinforcement;
 		default:
 			return TurnPhases.PreGame;
 		}
@@ -107,6 +107,21 @@ public class TurnOrganizer {
 	public boolean IsAttackSuccessful()
 	{
 		return this.isAttackSuccessfull;
+	}
+	//tbd
+	/**this method verifies if map is loaded
+	 * 
+	 */
+	public boolean IsMapLoaded()
+	{
+		return this.isMapLoaded;
+	}
+	/**this method verifies if game stated
+	 * 
+	 */
+	public boolean IsGameStarted()
+	{
+		return this.isGameStarted;
 	}
 	
 	

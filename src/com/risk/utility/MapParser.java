@@ -13,23 +13,6 @@ import com.risk.model.FactoryLand;
 import com.risk.model.Land;
 import com.risk.model.Map;
 
-/**
- package utility;
-
-import model.Map;
-import model.Continent;
-import model.Country;
-import model.Edge;
-import model.Land;
-import model.FactoryLand;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 
 /**
  * This class parses the input map files and creates the map
@@ -41,9 +24,8 @@ import java.util.ArrayList;
 public class MapParser {
 	 private static Map map;
 	public MapParser(){}
-	public static String MapValidator(String input) throws Exception
+	public static boolean MapValidator(String input) throws Exception
 	{
-		String Result="" ;
 		BufferedReader br=null;
 		try {
 			  br = new BufferedReader(new FileReader(input));
@@ -118,14 +100,21 @@ public class MapParser {
 			throw ex;
 		    
 		}
-		return Result;
+		return true;
 	}
 
-
-	public static Map MapParser(String input) throws IOException {
+/**this method parse a map file and returns a map object
+ * 
+ * @param input is a file
+ * @return a map object contains continents and countries
+ * @throws Exception 
+ */
+	public static Map MapParser(String input) throws Exception {
 	    map = new Map("map1");
 		BufferedReader br = null;
 		try {
+			//tbd
+			if(!MapValidator(input)) throw new Exception("NotValidMapFile");
 			br = new BufferedReader(new FileReader(input));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -176,7 +165,7 @@ public class MapParser {
 			// building countries without neighbers
 			int countryCount = 1;
 			for (Object o : arrCountries) {
-				map.lands.add(ParseCountries((String) o, countryCount));
+				map.lands.add(ParseCountries((String) o));
 				countryCount++;
 			}
 			// add country to continent
@@ -195,6 +184,11 @@ public class MapParser {
 
 		}
 	}
+/**this method extract continent from a line of map file
+ * 
+ * @param line a line of map file
+ * @return a continent object
+ */
 	public static Land ParseContinents(String line){
 		if(!line.isEmpty())
 		{
@@ -205,7 +199,10 @@ public class MapParser {
 		}
 		return null;
 	}
-
+/**this method parses the Map header
+ * 
+ * @param line is a line of map file
+ */
 	public static void ParseMap(String line) {
 		if (!line.isEmpty()) {
 			String[] lines = line.split("=");
@@ -222,7 +219,13 @@ public class MapParser {
 		}
 
 	}
-	public static Land ParseCountries(String line,int new_id)
+/**this method extract a country from a line of a map
+ * 
+ * @param line is the line of a map
+ * @param prm_id is the id of the country to be created
+ * @return
+ */
+	public static Land ParseCountries(String line)
 	{
 		if(!line.isEmpty())
 		{
@@ -238,7 +241,12 @@ public class MapParser {
 
 	
 	
-
+/**this method convert a map object to a map file
+ * 
+ * @param map is the map to be converted
+ * @param file is the output file
+ * @throws IOException if the output file has issue to be written
+ */
 	public static void WriteMapToFile(Map map, String file) throws IOException {
 		PrintWriter f0 = new PrintWriter(new FileWriter(file));
 		for (String line : map.MapToLines()) {

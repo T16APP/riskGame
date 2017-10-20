@@ -45,7 +45,6 @@ public class RemoveCountryListener implements ActionListener {
         
         JPanel panelComboBox = new JPanel();
         panelComboBox.setLayout(new FlowLayout());
-        
         String[] continentString = new String[staticApplicationVariables.gb.map.GetContinents().size()];
         
         int i=0;
@@ -54,20 +53,28 @@ public class RemoveCountryListener implements ActionListener {
         	i++;
         }
         
-        JComboBox<String> comboBoxList = new JComboBox<>(continentString);
-        JComboBox<String> comboBoxList2 = new JComboBox<>(getCountryListStringForCombobox(staticApplicationVariables.gb.map.GetContinents().get(0).GetId()));
+        JComboBox<String> comboBoxList = new JComboBox(continentString);
+        JComboBox<String> comboBoxList2 = new JComboBox(staticApplicationVariables.gb.map.getCountryListStringForCombobox(staticApplicationVariables.gb.map.GetContinents().get(0).GetContinentId()));
         
         int idCountrySelected = 0;
         
         comboBoxList.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
-            	
+            	//String name =comboBoxList.getSelectedItem().toString();
             	String name = ((JComboBox)e.getSource()).getSelectedItem().toString();
             	int id = staticApplicationVariables.gb.map.GetContinentIdByName(name);
-            	System.out.println("selected: "+ name);
-            	DefaultComboBoxModel model = new DefaultComboBoxModel(getCountryListStringForCombobox(id));
+            	//Continent cont1 = new Continent(name, id );
+            	System.out.println("selected: " + name );
+           
+            	DefaultComboBoxModel<String> model = new DefaultComboBoxModel(staticApplicationVariables.gb.map.GetCountriesByContinentIdInStrings(id));
             	comboBoxList2.setModel(model);
+            	String[] temp = staticApplicationVariables.gb.map.GetCountriesByContinentIdInStrings(id);
+            	String temp2 = "";
+            	for(int i=0; i<temp.length; i++) {
+            		temp2 += temp[i];
+            	}
+            	System.out.println("The list populated is : " + temp2);
             }
           });
         
@@ -86,7 +93,10 @@ public class RemoveCountryListener implements ActionListener {
         		} catch (IOException e1) {
         			// TODO Auto-generated catch block
         			e1.printStackTrace();
-        		}
+        		} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
             	System.out.println("try to get country which was removed : "+ staticApplicationVariables.gb.map.GetCountryIdByName(name));
             	frame.dispose();
             }
@@ -116,14 +126,6 @@ public class RemoveCountryListener implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
-	public String[] getCountryListStringForCombobox(int id){
-		List<Country> countryList = staticApplicationVariables.gb.map.GetCountriesByContinentId(id);
-        String[] countryString = new String[countryList.size()];
-        
-        for(int j=0; j<countryList.size();  j++){
-        	countryString[j] = countryList.get(j).GetName();
-        }
-        return countryString;
-	}
+	
 
 }

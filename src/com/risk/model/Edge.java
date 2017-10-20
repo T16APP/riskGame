@@ -74,6 +74,7 @@ public class Edge implements Comparable{
 		}
 		else return -1;
 	}		
+	//this is a duplicate method should be removed
 	/**
 	 * This method verifies if a given country exists in the current edge
 	 * @param prm_countryId , which is integer, is the id of the given country

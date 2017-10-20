@@ -1,7 +1,7 @@
 package com.risk.model;
 import com.risk.utility.*;
 /**this class represent a card
- * it hase properties such as id, name, playerId
+ * it has properties such as id, name, playerId
  * @author Kourosh
  * @version 1.0.0.0
  */

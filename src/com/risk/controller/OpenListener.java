@@ -74,49 +74,17 @@ public class OpenListener implements ActionListener {
 				System.out.println();
 				staticApplicationVariables.FILENAME = openFromFile.getPath();
 				GameBoard gameboard = GameBoard.GetGameBoard();
-				MapParser mp = new MapParser();
-				gameboard.map = mp.MapParser(staticApplicationVariables.FILENAME);
+				//MapParser mp = new MapParser();
+				gameboard.map = MapParser.MapParser(staticApplicationVariables.FILENAME);
 				staticApplicationVariables.gb = gameboard;
 				
-				/*for (String l : gameboard.map.MapToLines()) {
-					System.out.println(l);
-				}*/
-				mp.WriteMapToFile(gameboard.map, "output.txt");
-				/*for (Object land : gameboard.map.lands) {
-					if (land instanceof Continent) {
-						System.out.println(((Continent) land).GetName());
-					} else if (land instanceof Country) {
-						//System.out.println(((Country) land).GetName());
-						//System.out.println("_________List Of Neighbors______________");
-					}
-				}*/
-				//System.out.println("_________List Of Edges______________");
-				/*for (Edge e : gameboard.map.edges) {
-					//System.out.println(e.GetId() + "   " + gameboard.map.GetCountryNameById(e.GetCountryId1()) + "   "
-							//+ gameboard.map.GetCountryNameById(e.GetCountryId2()));
-				}*/
-				gameboard.SetupPlayers();
-				gameboard.AssignCountriesRandom();
-				/*
-				 * for(Land l : gameboard.map.lands) { if(l instanceof Country) {
-				 * System.out.println(((Country)l).GetPlayerId()); }
-				 * 
-				 * }
-				 */
-				/*for (int i = 1; i < 20; i++) {
-					//System.out.println(gameboard.GetNextPlayerId());
-				}*/
+				
+				MapParser.WriteMapToFile(gameboard.map, "output.txt");
 				
 				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+				//gameboard.SetupPlayers();
+				//gameboard.AssignCountriesRandom();
+			
 
 				// Gives the user a chance to save the work he's presently
 				// working on. If the user chooses to proceed, all of his/her
@@ -128,18 +96,7 @@ public class OpenListener implements ActionListener {
 						"Open Without Saving Confirmation", JOptionPane.YES_NO_OPTION);
 
 				if (userResponse == JOptionPane.YES_OPTION) {
-					// Retrieve the file, and update the graph in the user
-					// interface.
-
-					//XMLDecoder decoder = new XMLDecoder(new FileInputStream(openFromFile));
-
-					// GraphLayoutCache view =
-					// (GraphLayoutCache)decoder.readObject();
-
-					//System.out.println("HERE");
-
-					//decoder.close();
-					// gui.getGraph().setGraphLayoutCache(view);
+					
 				} else {
 					JOptionPane.showMessageDialog(gui.getContentPane(), "Start Working on the current file", "MESSAGE",
 							JOptionPane.INFORMATION_MESSAGE);
@@ -151,6 +108,9 @@ public class OpenListener implements ActionListener {
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}

@@ -19,11 +19,17 @@ import javax.swing.JScrollPane;
 
 import com.risk.controller.AddContinentListener;
 import com.risk.controller.AddCountryListener;
+import com.risk.controller.CreateMapfromGUI;
+import com.risk.controller.EndReinforcementPhaseListener;
 import com.risk.controller.Numberofplayers;
 import com.risk.controller.OpenListener;
+import com.risk.controller.PlaceArmiesonaCountry;
+
 import com.risk.controller.RemoveContinentListener;
 import com.risk.controller.RemoveCountryListener;
 import com.risk.controller.SavetofileListener;
+import com.risk.controller.ShowCurrentPlayer;
+import com.risk.controller.ShowPlayerCountries;
 import com.risk.utility.staticApplicationVariables;
 
 /**
@@ -38,7 +44,7 @@ public class applicationWindow extends JFrame {
 
 	private JMenuBar menuBar;
 	private static applicationWindow instance = null;
-	private JMenu playerMenu;
+	private JMenu GameMenu;
 
 	private JMenu fileMenu;
 	private JMenu editMenu;
@@ -47,19 +53,20 @@ public class applicationWindow extends JFrame {
 	private JMenu helpMenu;
 	private JMenuItem open;
 	private JMenuItem save;
-	private JMenuItem numberofarmiesofcountry;
+	private JMenuItem placearmiesoncountry;
 	private JMenuItem addContinent;
 	private JMenuItem addCountry;
 	private JMenuItem removeContinent;
+	private JMenuItem endreinforcementphase;
 	private JMenuItem removeCountry;
+	private JMenuItem showplayercountries;
 	private JMenuItem addPlayer;
 	private JMenuItem createMap;
-	private JMenuItem adjacentcountries;
+	private JMenuItem ShowCurrentPlayer;
 	private JMenuItem numberofplayers;
 	private JMenuItem startgame;
 	private JMenuItem help;
-//	private JGraph graph;
-	private JMenuItem start, pause;
+    private JMenuItem start, pause;
 
 	public static applicationWindow getInstance() {
 		if (instance == null) {
@@ -91,7 +98,7 @@ public class applicationWindow extends JFrame {
 		menuBar = new JMenuBar();
 		fileMenu = new JMenu("File");
 		editMenu = new JMenu("Edit");
-		playerMenu = new JMenu("Player");
+		GameMenu = new JMenu("Game");
 		helpMenu = new JMenu("Help");
 		playMenu = new JMenu("Play");
 
@@ -101,12 +108,13 @@ public class applicationWindow extends JFrame {
 		addCountry = new JMenuItem("Add  Country");
 		removeContinent = new JMenuItem("Remove Continent");
 		removeCountry = new JMenuItem("Remove Country");
-		startgame = new JMenuItem("Start Game");
-		numberofplayers= new JMenuItem(" Set Number of Players");
-		//addPlayer = new JMenuItem("Add New Player");
+		showplayercountries = new JMenuItem("Show Player Countries");
+		numberofplayers= new JMenuItem(" Start Game");
+		endreinforcementphase = new JMenuItem("End reinforcement phase");
 		createMap = new JMenuItem("Create Map");
-		adjacentcountries= new JMenuItem("Show Adjacent Countries");
-		numberofarmiesofcountry= new JMenuItem("Show Armies in a Country");
+		ShowCurrentPlayer= new JMenuItem("Show Current Player");
+		placearmiesoncountry= new JMenuItem("Place Armies On Country");
+		placearmiesoncountry= new JMenuItem("Place Armies On Country");
 		/*
 		 * Create the menu items for the simulation menu.
 		 */
@@ -126,18 +134,22 @@ public class applicationWindow extends JFrame {
 		editMenu.add(removeCountry);
 		
 	//	editMenu.add(delete);
-		//playerMenu.add(addPlayer);
-		playerMenu.add(numberofplayers);
 		
-		playMenu.add(startgame);
-		playMenu.add(adjacentcountries);
-		playMenu.add(numberofarmiesofcountry);
+		GameMenu.add(numberofplayers);
+		GameMenu.add(ShowCurrentPlayer);
+		GameMenu.add(showplayercountries);
+		GameMenu.add(endreinforcementphase);
+		
+		
+		//playMenu.add(startgame);
+		//playMenu.add(ShowCurrentPlayer);
+		playMenu.add(placearmiesoncountry);
 		
 		helpMenu.add(help);
 		
 		menuBar.add(fileMenu);
 		menuBar.add(editMenu);
-		menuBar.add(playerMenu);
+		menuBar.add(GameMenu);
 		menuBar.add(playMenu);
 		menuBar.add(helpMenu);
 		
@@ -147,8 +159,12 @@ public class applicationWindow extends JFrame {
 		addCountry.addActionListener(new AddCountryListener());
 		removeCountry.addActionListener(new RemoveCountryListener());
 		save.addActionListener(new SavetofileListener());
+		ShowCurrentPlayer.addActionListener(new ShowCurrentPlayer());
 		numberofplayers.addActionListener(new Numberofplayers());
-		
+		createMap.addActionListener(new CreateMapfromGUI());
+		showplayercountries.addActionListener(new ShowPlayerCountries());
+		placearmiesoncountry.addActionListener(new PlaceArmiesonaCountry());
+		endreinforcementphase.addActionListener(new EndReinforcementPhaseListener());
 		
 		mainFrame.setJMenuBar(menuBar);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

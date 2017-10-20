@@ -1,9 +1,5 @@
 package com.risk.model;
-/**
- * This is a class that belongs to a continent
- * @author Kourosh Aziz-Nejad
- *
- */
+
 
 /**
  * This class represents a country
@@ -20,8 +16,8 @@ public class Country extends Land {
 	
 	/**
 	 * This constructor initialize the object
-	 * @param new_name which is string will be the name of the country
-	 * @param new_continentId ,which is integer, is the id of the continent to which the country belongs
+	 * @param prm_name which is string will be the name of the country
+	 * @param prm_continentId ,which is integer, is the id of the continent to which the country belongs
 	 * @param prm_x , which is integer, is the x coordinate of the country
 	 * @param prm_y , which is integer, is the y coordinate of the country
 	 */
@@ -43,7 +39,7 @@ public class Country extends Land {
 
 	/**
 	 * this method sets the id of the player who will own the country
-	 * @param new_playerId, which is integer, The id of the player who will own the country
+	 * @param prm_playerId, which is integer, The id of the player who will own the country
 	 */
 	public void SetPlayerId(int prm_playerId)
 	{
