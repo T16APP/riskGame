@@ -60,10 +60,21 @@ public class GameBoard {
 	 *            into the game
 	 * @throws Exception
 	 */
-	public void LoadMap(String prm_input) throws Exception {
+	public String LoadMap(String prm_input) throws Exception {
 		// tbd
+		String result="Failed";
+		if(!MapParser.MapValidator_Header(prm_input)){
+			return result="FailedHeaderValidation";
+		}
+		if(!MapParser.MapValidator_MinContinents(prm_input)){
+			return result="FailedMinContinentsValidation";
+		}
+		if(!MapParser.MapValidator_MinCountries(prm_input)){
+			return result="FailedMinCountriesValidation";
+		}
 		this.map = MapParser.MapParser(prm_input);
 		turnOrganizer.MapLoaded();
+		return result="SuccessfullyMapLoaded";
 	}
 
 	/**
@@ -188,9 +199,11 @@ public class GameBoard {
 	 * 
 	 */
 	public void CalculateArmies(Player prm_player) {
-		int armiesNum = map.GetCountriesByPlayerId(prm_player.GetId()).size();
-		armiesNum /= 3;
-		prm_player.SetArmiesToplayer(armiesNum <= 3 ? 3 : armiesNum);
+		int armiesFromCountries = map.GetCountriesByPlayerId(prm_player.GetId()).size();
+		armiesFromCountries /= 3;
+		int armiesFromContinents=Calculate_ArmiesFromContinentControl(prm_player.GetId());
+		int totArmies=armiesFromCountries+armiesFromContinents+prm_player.GetArmiesFromCards();
+		prm_player.SetArmiesToplayer(totArmies <= 3 ? 3 : totArmies);
 
 	}
 
@@ -582,4 +595,24 @@ public class GameBoard {
 		return 0;
 
 	}
+	/**this method calculates the number of armies from
+	 * the continent control if the player has the whol continent
+	 * @param prm_playerId is the id of the player under questio
+	 * @return is the number of calulated srmies from continent controls
+	 */
+	public int Calculate_ArmiesFromContinentControl(int prm_playerId){
+		boolean doesBelong = true;;
+		int totArmies=0;
+		for(Continent c: this.map.GetContinents()){
+			doesBelong=true;
+			for(Country cy : this.map.GetCountriesByContinentId(c.GetContinentId())){
+				if(cy.GetPlayerId()!=prm_playerId)
+					doesBelong=false;
+			}
+			if(doesBelong)
+				totArmies+=c.GetControl();
+		}
+		return totArmies;		
+	}
+	
 }
