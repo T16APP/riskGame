@@ -125,33 +125,60 @@ public class Player {
 	 */
 	public String DeclareAttack(int prm_attackerCountId, int prm_defenderCountId, Player defenderPlayer) throws IOException{
 		//tbd check connectivity of two countries
-		if(attack!=null){
-			return "Attack declaration already done!";
+		if(!this.map.IsAttackPossibleByPlayerId(this.id)){
+			LoggingWindow.Log("Attack is impossible, the attack phase is ended");
+			EndAttackPhase();
+			return "Attack is impossible, the attack phase is ended";
 		}
-		else{
-			Country attackerCountry = this.map.GetCountryById(prm_attackerCountId);
-			LoggingWindow.Log("check if the attacker country belongs to the attacker player");
-			if(attackerCountry==null) return "The attacker country does not belong to the attacker player!";
-			Country defenderCountry = this.map.GetNeighborOpponentById(prm_attackerCountId,prm_defenderCountId);
-			//verify the defender country is neighbor of attacker one
-			if(defenderCountry==null) return "the defender country is not neighbor!";
-			//apply rules on the number of dices before rolling dices
-			if(attackerCountry.GetArmies()<2) return "The attacker country does not have equal or more than two armies";
-			attack=new Attack( attackerCountry,defenderCountry,  defenderPlayer);
-		     return "Attack Declaration successfully done!";
+		if(this.map.GetCountryById(prm_attackerCountId).GetArmies()<2){
+			LoggingWindow.Log("The attacker country does not has equal or more than 2 armies");
+			return "The attacker country does not have equal or more than two armies";
 		}
-		
+		LoggingWindow.Log("The attacker country has equal or more than 2 armies");
+		Country attackerCountry = this.map.GetCountryById(prm_attackerCountId);
+		LoggingWindow.Log("check if the attacker country belongs to the attacker player");
+		if(attackerCountry==null){
+			LoggingWindow.Log("The attacker country does not belong to the attacker player!");
+			return "The attacker country does not belong to the attacker player";
+		}
+		Country defenderCountry = this.map.GetNeighborOpponentById(prm_attackerCountId,prm_defenderCountId);
+		//verify the defender country is neighbor of attacker one
+		if(defenderCountry==null){
+			LoggingWindow.Log("The defender country is not neighbor");
+			return "the defender country is not neighbor";
+		}
+		//apply rules on the number of dices before rolling dices
+		attack=new Attack( attackerCountry,defenderCountry,  defenderPlayer);
+		LoggingWindow.Log("Attack Declaration successfully done");
+		return "Attack Declaration successfully done";
 	}
 	/**this method takes the number of dices for attacker and defender
 	 * @param prm_attackerDices is the number of dices for attacker
 	 * @param prm_defenderDices is the number of dices for defender
+	 * @throws IOException 
 	 */
-	public String Attack(int prm_attackerDices,int prm_defenderDices){
+	public String Attack(int prm_attackerDices,int prm_defenderDices) throws IOException{
 		//apply rules on the number of dices before rolling dices
-		if(prm_attackerDices>3 || prm_attackerDices<1 ) return "The number of dices requested by attacker is more than 3 or less than 1!";
-		if(prm_defenderDices>2 || prm_attackerDices<1 ) return "The number of dices requested by defender is more than 2 or less than 1!";
-		if(prm_attackerDices>=this.attack.attackerCountry.GetArmies()) return "The number of dices requested by attacker is more than or equal to its armies!";
-		if(prm_defenderDices>this.attack.attackerCountry.GetArmies()) return "The number of dices requested by defender is more than its armies!";
+		if(prm_attackerDices>3 || prm_attackerDices<1 ){
+			LoggingWindow.Log("The number of dices requested by attacker is more than 3 or less than 1");
+			return "The number of dices requested by attacker is more than 3 or less than 1";
+		}
+		LoggingWindow.Log("The number of dices requested by attacker is in the range of 1 and 3");
+		if(prm_defenderDices>2 || prm_attackerDices<1 ){
+			LoggingWindow.Log("The number of dices requested by defender is more than 2 or less than 1");
+			return "The number of dices requested by defender is more than 2 or less than 1";
+		}
+		LoggingWindow.Log("The number of dices requested by defender is in the range 1 and 2");
+		if(prm_attackerDices>=this.attack.attackerCountry.GetArmies()){
+			LoggingWindow.Log("The number of dices requested by attacker is more than or equal to its armies");
+			return "The number of dices requested by attacker is more than or equal to its armies";
+		}
+		LoggingWindow.Log("The number of dices requested by attacker is less than  its armies");
+		if(prm_defenderDices>this.attack.attackerCountry.GetArmies()){
+			LoggingWindow.Log("The number of dices requested by defender is more than its armies");
+			return "The number of dices requested by defender is more than its armies";
+		}
+		LoggingWindow.Log("The number of dices requested by defender is less or equal than its armies");
 		//create dices for the attacker and the defender
 		this.attack.attackerDices = new ArrayList<Dice>(prm_attackerDices);
 		this.attack.defenderDices = new ArrayList<Dice>(prm_defenderDices);
@@ -164,15 +191,28 @@ public class Player {
 		Collections.sort(this.attack.defenderDices);
 		Collections.reverse(this.attack.defenderDices);
 		String attackResult = DeductionArmiesFromAttck();
+		if(attackResult.contains("AttackWon")){
+			LoggingWindow.Log("Propper number of armies deducted from defender and that added to the attacker country");
+		}
+		else{
+			LoggingWindow.Log("Propper number of armies deducted from attacker and that added to the defender country");
+		}
 		if(this.attack.defenderCountry.GetArmies()==0){
 			this.map.ConquerCountry(this.attack.defenderCountry.GetId(),this.id);
 			this.turnOrganizer.SetAttackSuccessful(true);
+			LoggingWindow.Log("The defender country captured");
 			if(this.map.IsContinentCaptured(this.id, this.attack.defenderCountry.GetContinentId())){
-				
+				LoggingWindow.Log("The continent "+this.attack.defenderCountry.GetContinentId()+" is captured");
 			}
 			if(this.map.IsWorldCaptured(this.id)){
 				//end of the game
+				EndGame();
+				LoggingWindow.Log("The game is over and the player: "+this.id+" is winner");
 			}
+		}
+		if(!this.map.IsAttackPossibleByPlayerId(this.id)){
+			EndAttackPhase();
+			LoggingWindow.Log("Attack is not possible and attack phase is ended");
 		}
 		return "Attack is done";
 	}
@@ -208,42 +248,23 @@ public class Player {
 		}
 		return result;
 	}
-	
-	
-	
-	/**this method performs conquest of the continent
-	 * 
-	 * @param map
-	 * @return
-	 */
-	public String ConquerContinent(){
-		Continent conqContinent = this.map.GetContinentById(this.attack.defenderCountry.GetContinentId());
-		boolean isContinentCaptured = true;
-		for(Country c : this.map.GetCountriesByContinentId(conqContinent.GetId())){
-			if(c.GetPlayerId()!=this.id) isContinentCaptured=false;
-		}
-		if(isContinentCaptured){
-			this.map.TakeControlOfContinent(conqContinent.GetId(),this.id);
-			return "The continent" +conqContinent.GetName()+" captured by"+this.name+CaptureWorld();
-		}
-		return "";
+	public String EndAttackPhase(){
+		this.attack = null;
+		this.turnOrganizer.SetCurrentPhase(TurnPhases.Fortification);
+		return "Attach is ended";
 	}
+	
+	
+	
 	/**this method performs conquest the world by the player
 	 * 
 	 * @param prm_map is the map containing all countries and continents
 	 * @return the domination message
 	 */
-	public String CaptureWorld(){
-		boolean isWorldCaptured = true;
-		for(Continent c : this.map.GetContinents()){
-			if(c.GetPlayerId()!=this.id) isWorldCaptured=false;
-		}
-		if(isWorldCaptured){
-			turnOrganizer.SetCurrentPhase(TurnPhases.GameOver);
-			turnOrganizer.SetCurrentPlayerId(this.id);
-			return "World is dominated by player: "+this.name;
-		}
-		return "GameIsOver";
+	public String EndGame(){
+		turnOrganizer.SetCurrentPhase(TurnPhases.GameOver);
+		turnOrganizer.SetCurrentPlayerId(this.id);
+		return "World is dominated by player: "+this.name;
 	}
 	/**this method performs card exchange
 	 * during this action if the player has proper cards he can excange them with armies according the RISK rules

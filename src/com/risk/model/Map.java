@@ -911,5 +911,31 @@ public class Map extends Observable{
 		notifyObservers(this);
 		return "SuccessfullyTookControl";
 	}
+	/**this method verifies if the attack is possible
+	 * 
+	 * @param prm_playerId the id of the player under the question
+	 * @return true if is possible otherwise flase
+	 */
+	public boolean IsAttackPossibleByPlayerId(int prm_playerId){
+		for(Country c : GetCountriesByPlayerId(prm_playerId)){
+			if(c.GetArmies()>=2){
+				for(Country neighber : GetNeighborsByCountryIdOpponentPlayer(c.GetId())){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	/**this method returns the country by its id
+	 * 
+	 * @param prm_countryId the id of the country
+	 * @return the country
+	 */
+	public Country GetCountryByCountryId(int prm_countryId){
+		for(Country c : GetCountries()){
+			if(c.GetId()==prm_countryId) return c;
+		}
+		return null;
+	}
 	
 }
