@@ -304,33 +304,7 @@ public class GameBoard {
 		return result;
 	}
 
-	/**
-	 * this method places armies on a country
-	 * 
-	 * @param prm_countryId
-	 *            is the id of the country on which armies are placed
-	 * @param prm_armies
-	 *            the number of armies to be placed
-	 * @return 1 if it is succesful otherwise 0
-	 * @throws Exception
-	 *             if the current phase not Fortification
-	 */
-	public int MoveArmiesToCountryFromCountry(int prm_countryIdS, int prm_countryIdD, int prm_armies) throws Exception {
-		int result = 0;
-		// tbd
-		if (turnOrganizer.GetCurrentPhase() != TurnPhases.Fortification)
-			throw new Exception("PhaseNotValid");
-		int countrySArmies = map.GetCountryById(prm_countryIdS).GetArmies();
-		int countryDArmies = map.GetCountryById(prm_countryIdD).GetArmies();
-		if (countrySArmies >= prm_armies
-				&& map.GetCountryById(prm_countryIdS).playerId == map.GetCountryById(prm_countryIdD).playerId) {
-			map.GetCountryById(prm_countryIdS).SetArmies(countrySArmies - prm_armies);
-			map.GetCountryById(prm_countryIdS).SetArmies(countryDArmies + prm_armies);
-			result = 1;
-		} else
-			throw new Exception("NotEnoughArmies");
-		return result;
-	}
+	
 
 	// tbd
 	/**

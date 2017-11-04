@@ -136,7 +136,7 @@ public class Player {
 			//verify the defender country is neighbor of attacker one
 			if(defenderCountry==null) return "the defender country is not neighbor!";
 			//apply rules on the number of dices before rolling dices
-			if(attackerCountry.GetArmies()<2) return "The attacker country does not have more than two armies";
+			if(attackerCountry.GetArmies()<2) return "The attacker country does not have equal or more than two armies";
 			attack=new Attack( attackerCountry,defenderCountry,  defenderPlayer);
 		     return "Attack Declaration successfully done!";
 		}
@@ -163,9 +163,10 @@ public class Player {
 		Collections.reverse(this.attack.attackerDices);
 		Collections.sort(this.attack.defenderDices);
 		Collections.reverse(this.attack.defenderDices);
-		DeductionArmiesFromAttck();
+		String attackResult = DeductionArmiesFromAttck();
 		if(this.attack.defenderCountry.GetArmies()==0){
 			this.map.ConquerCountry(this.attack.defenderCountry.GetId(),this.id);
+			this.turnOrganizer.SetAttackSuccessful(true);
 			if(this.map.IsContinentCaptured(this.id, this.attack.defenderCountry.GetContinentId())){
 				
 			}
@@ -181,26 +182,31 @@ public class Player {
 	 */
 	public String DeductionArmiesFromAttck(){
 		//decision the attack for the first roll
+		String result="";
 		if(this.attack.attackerDices.get(0).GetDice()>this.attack.defenderDices.get(0).GetDice()){
-			this.attack.attackerCountry.AddArmies(1);
-			this.attack.defenderCountry.AddArmies(-1);
+			this.map.AddArmiesToCountry(this.attack.attackerCountry.GetId(), 1);
+			this.map.AddArmiesToCountry(this.attack.defenderCountry.GetId(), -1);
+			result="AttackWon";
 		}
 		else{
-			this.attack.attackerCountry.AddArmies(-1);
-			this.attack.defenderCountry.AddArmies(1);
+			this.map.AddArmiesToCountry(this.attack.attackerCountry.GetId(), -1);
+			this.map.AddArmiesToCountry(this.attack.defenderCountry.GetId(), 1);
+			result="AttackLost";
 		}
 		//the second decision if each has two dices
 		if(this.attack.attackerDices.size()>=2 && this.attack.defenderDices.size()>=2){
 			if(this.attack.attackerDices.get(1).GetDice()>this.attack.defenderDices.get(1).GetDice()){
-				this.attack.attackerCountry.AddArmies(1);
-			    this.attack.defenderCountry.AddArmies(-1);
+				this.map.AddArmiesToCountry(this.attack.attackerCountry.GetId(), 1);
+				this.map.AddArmiesToCountry(this.attack.defenderCountry.GetId(), -1);
+				result="AttackWon";
 			}
 		    else{
-                this.attack.attackerCountry.AddArmies(-1);
-			    this.attack.defenderCountry.AddArmies(1);
+		    	this.map.AddArmiesToCountry(this.attack.attackerCountry.GetId(), -1);
+				this.map.AddArmiesToCountry(this.attack.defenderCountry.GetId(), 1);
+				result="AttackLost";
 		    }
 		}
-		return "The attack successfully is done!";
+		return result;
 	}
 	
 	
@@ -384,7 +390,6 @@ public class Player {
 		if (turnOrganizer.IsAttackSuccessful()) {
 			DrawACard(turnOrganizer.GetCurrentPlayerId());
 		}
-		turnOrganizer.SetCurrentPhase(TurnPhases.Reinforcement);
 		turnOrganizer.GetNextPlayerId();
 		// tbd
 		// CalculateArmies(GetPlayerById(turnOrganizer.GetCurrentPlayerId()));
@@ -440,6 +445,32 @@ public class Player {
 		} else
 			return "FailedNotEnoughArmies";
 		return result;
+	}
+	/**
+	 * this method places armies on a country
+	 * 
+	 * @param prm_countryId
+	 *            is the id of the country on which armies are placed
+	 * @param prm_armies
+	 *            the number of armies to be placed
+	 * @return 1 if it is succesful otherwise 0
+	 * @throws Exception
+	 *             if the current phase not Fortification
+	 */
+	public String MoveArmiesToCountryFromCountry(int prm_countryIdS, int prm_countryIdD, int prm_armies) throws Exception {
+		// tbd
+		if (turnOrganizer.GetCurrentPhase() != TurnPhases.Fortification)
+			return "PhaseNotValid";
+		int countrySArmies = map.GetCountryById(prm_countryIdS).GetArmies();
+		int countryDArmies = map.GetCountryById(prm_countryIdD).GetArmies();
+		if (countrySArmies >= prm_armies
+				&& map.GetCountryById(prm_countryIdS).playerId == map.GetCountryById(prm_countryIdD).playerId) {
+			map.GetCountryById(prm_countryIdS).SetArmies(countrySArmies - prm_armies);
+			map.GetCountryById(prm_countryIdS).SetArmies(countryDArmies + prm_armies);
+			EndFortificationPhase();
+			return "SuccessfullReinforcement";
+		} else
+			return "NotEnoughArmies";
 	}
 
 	

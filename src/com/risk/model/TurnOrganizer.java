@@ -100,7 +100,9 @@ public class TurnOrganizer extends Observable{
 	public boolean IsAttackSuccessful() {
 		return this.isAttackSuccessfull;
 	}
-
+    public void SetAttackSuccessful(boolean prm_result){
+    	this.isAttackSuccessfull=prm_result;
+    }
 	// tbd
 	/**
 	 * this method verifies if map is loaded
@@ -155,6 +157,7 @@ public class TurnOrganizer extends Observable{
 		// tbd
 		this.SetCurrentPlayerId(nextPlayerId);
 		this.SetCurrentPhase(TurnPhases.Reinforcement);
+		this.SetAttackSuccessful(false);
 		// tbd
 		GetCurrentPlayer().CalculateReinforcementArmies();
 		return nextPlayerId;
