@@ -763,17 +763,6 @@ public class Map extends Observable{
 		}
 		return null;
 	}
-	/**this method performs country conquest the winner player owns the looser country
-	 * 
-	 * @param prm_winnerCountry
-	 * @param prm_loserCountry
-	 * @return successful message
-	 */
-	public String ConquerCountry(Country prm_winnerCountry, Country prm_loserCountry){
-		//trigger change
-		prm_loserCountry.SetPlayerId(prm_winnerCountry.GetPlayerId());
-		return "Lppser country is conquered!";
-	}
 	/**this method verifies if the continent is captured by winner player
 	 * 
 	 * @param prm_winnerPlayerId
@@ -862,6 +851,10 @@ public class Map extends Observable{
 		}
 		return mapIsConnected;
 	}
+	/**this method verifies if all continents are connected
+	 * 
+	 * @return true if all of them are connected otherwise false
+	 */
 	public boolean ValidateContinentsConnectivity(){
 		boolean continentIsValid=true;
 		Country startCountry;
@@ -879,9 +872,44 @@ public class Map extends Observable{
 		}
 		return true;
 	}
+	/**this method adds armies to the country
+	 * it also notifies observers the changes
+	 * @param prm_countryId the id of the country
+	 * @param prm_armies the number of armies to be added
+	 * @return
+	 */
 	public String AddArmiesToCountry(int prm_countryId,int prm_armies){
 		this.GetCountryById(prm_countryId).AddArmies(prm_armies);
+		//trigger change
+		setChanged();
+		notifyObservers(this);
 		return "SuccessfullyAddedArmies";
+	}
+	/**this method performs country conquest the winner player owns the looser country
+	 * 
+	 * @param prm_winnerCountry
+	 * @param prm_loserCountry
+	 * @return successful message
+	 */
+	public String ConquerCountry(int prm_loserCountryId, int prm_playerId){
+		GetCountryById(prm_loserCountryId).SetPlayerId(prm_playerId);
+		//trigger change
+		setChanged();
+		notifyObservers(this);
+		return "Lppser country is conquered!";
+	}
+	/**this method performs taking control of the continent
+	 * it notifies the observers
+	 * @param prm_continentId the id of the continent to be taken control
+	 * @param prm_playerId the id of the player
+	 * @return successfully message
+	 */
+	public String TakeControlOfContinent(int prm_continentId, int prm_playerId){
+		GetContinentById(prm_continentId).SetPlayerId(prm_playerId);
+		//trigger change
+		setChanged();
+		notifyObservers(this);
+		return "SuccessfullyTookControl";
 	}
 	
 }

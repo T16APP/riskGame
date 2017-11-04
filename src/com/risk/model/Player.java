@@ -165,7 +165,7 @@ public class Player {
 		Collections.reverse(this.attack.defenderDices);
 		DeductionArmiesFromAttck();
 		if(this.attack.defenderCountry.GetArmies()==0){
-			this.map.ConquerCountry(this.attack.attackerCountry, this.attack.defenderCountry);
+			this.map.ConquerCountry(this.attack.defenderCountry.GetId(),this.id);
 			if(this.map.IsContinentCaptured(this.id, this.attack.defenderCountry.GetContinentId())){
 				
 			}
@@ -217,7 +217,7 @@ public class Player {
 			if(c.GetPlayerId()!=this.id) isContinentCaptured=false;
 		}
 		if(isContinentCaptured){
-			conqContinent.SetPlayerId(this.id);
+			this.map.TakeControlOfContinent(conqContinent.GetId(),this.id);
 			return "The continent" +conqContinent.GetName()+" captured by"+this.name+CaptureWorld();
 		}
 		return "";
@@ -413,6 +413,31 @@ public class Player {
 				cards.add(c);
 		}
 		return cards;
+	}
+	/**
+	 * this method places armies on a country
+	 * 
+	 * @param prm_countryId
+	 *            is the id of the country on which armies are placed
+	 * @param prm_armies
+	 *            the number of armies to be placed
+	 * @return 1 if it is succesful otherwise 0
+	 * @throws Exception
+	 *             if the current phase not Reinforcement
+	 */
+	public String PlaceReinforcedArmiesOnCountry(int prm_countryId, int prm_armies) {
+		String result = "";
+		// tbd
+		if (turnOrganizer.GetCurrentPhase() != TurnPhases.Reinforcement)
+			return "PhaseNotValid";
+		int countryArmies = map.GetCountryById(prm_countryId).GetArmies();
+		if (this.armies >= prm_armies) {
+			map.GetCountryById(prm_countryId).SetArmies(countryArmies + prm_armies);
+			this.AddArmies(-1*prm_armies);
+			result = "SuccessfullReinforcement";
+		} else
+			return "FailedNotEnoughArmies";
+		return result;
 	}
 
 	
