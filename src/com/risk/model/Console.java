@@ -10,11 +10,23 @@ public class Console {
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 
-		applicationWindow appWindow = new applicationWindow();
-		System.out.println("Game started");
-		appWindow.open();
-
+		//applicationWindow appWindow = new applicationWindow();
+		//System.out.println("Game started");
+		//appWindow.open();
+		LoggingWindow.Log("this is test");
+		LoggingWindow.Log("this is test2");
+		Demo_MapConnectivityValidation();
 	}
+
+ public static void Demo_MapConnectivityValidation() throws Exception { 
+	  GameBoard gameBoard = GameBoard.GetGameBoard(); //header validation
+	  //gameBoard.LoadMap("Earth_Validation_MapConnectivity.map"); 
+	  //gameBoard.LoadMap("Earth_Validation_ContinentConnectivity.map"); 
+	  gameBoard.LoadMap("Earth.map"); 
+	  //boolean isConnectivityValid = gameBoard.map.ValidationMapConnectivity();
+	  boolean isConnectivityValid = gameBoard.map.ValidateContinentsConnectivity();
+	  System.out.println(isConnectivityValid);
+	  } 
 }
 /*
  * public static void Demo_MapValidation() throws Exception { GameBoard

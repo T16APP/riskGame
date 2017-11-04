@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.risk.utility.ECards;
+import com.risk.utility.LoggingWindow;
 import com.risk.utility.MapParser;
 import com.risk.utility.TurnPhases;
 
@@ -64,15 +65,27 @@ public class GameBoard {
 		// tbd
 		String result="Failed";
 		if(!MapParser.MapValidator_Header(prm_input)){
+			LoggingWindow.Log("Load Map: Validation headers failed");
 			return result="FailedHeaderValidation";
 		}
 		if(!MapParser.MapValidator_MinContinents(prm_input)){
+			LoggingWindow.Log("Load Map: Validation min continents failed");
 			return result="FailedMinContinentsValidation";
 		}
 		if(!MapParser.MapValidator_MinCountries(prm_input)){
+			LoggingWindow.Log("Load Map: Validation min countries failed");
 			return result="FailedMinCountriesValidation";
 		}
 		this.map = MapParser.MapParser(prm_input);
+		if(!this.map.ValidationMapConnectivity()){
+			LoggingWindow.Log("Load Map: Validation map connectivity failed");
+			return "FailedMapConnectivityValidation";
+		}
+		if(!this.map.ValidateContinentsConnectivity()){
+			LoggingWindow.Log("Load Map: Validation continents connectivity failed");
+			return "FailedCoonectivityValidation";
+		}
+		LoggingWindow.Log("Load Map: Map loaded as a connected graph successfully");
 		turnOrganizer.MapLoaded();
 		return result="SuccessfullyMapLoaded";
 	}
@@ -86,31 +99,73 @@ public class GameBoard {
 	 * @throws Exception
 	 *             if the number of player is less than 2 or greater than 5
 	 */
-	public void StartupGame(int prm_playerNum) throws Exception {
-		// tbd
-		if (prm_playerNum < 2 || prm_playerNum > 5)
-			throw new Exception("PlayerNumberNotValid");
+	public String StartupGame(int prm_playerNum) throws Exception {
+		if (prm_playerNum < 2 || prm_playerNum > 5){
+			LoggingWindow.Log("Startup Phase: number of players is out of range (between 2 and 5)");
+			return "PlayerNumberNotValid";
+		}
+		if(turnOrganizer.IsGameStarted()){
+			return "Game already started";
+		}
+		turnOrganizer.SetPhase(TurnPhases.Startup, -1);;
+		BuildDeck(map.GetCountries().size());
 		SetupPlayers(prm_playerNum);
 		AssignCountriesRandom();
-		BuildDeck(map.GetCountries().size());
+		LoggingWindow.Log("Startup Phase: countries were allocated to the players randomly and evenly");
+		AllocateInitialArmies();
 		turnOrganizer.GameStarted();
-		turnOrganizer.SetCurrentPlayerId(GetNextPlayerId());
-		// tbd
-		turnOrganizer.SetCurrentPhase(TurnPhases.Reinforcement);
-		;
+		turnOrganizer.SetPhase(TurnPhases.Reinforcement, GetNextPlayerId());
+		return "Game started successfully";
 	}
-
-	/**
-	 * this method creates 6 instance of players
+	/**this method allocate initial armies to the players
+	 * according to the risk game rules in round-robin fashion
 	 */
-	public void SetupPlayers() {
-		for (int i = 1; i < 7; i++) {
-			players.add(new Player(i, "player" + i));
+	public void AllocateInitialArmies(){
+		int initialArmies=0;
+		switch(this.players.size()){
+		case 2:
+			initialArmies=40;
+			break;
+		case 3:
+			initialArmies=35;
+			break;
+		case 4:
+			initialArmies=30;
+			break;
+		case 5:
+			initialArmies=25;
+			break;
 		}
-		roundRobin = new ArrayList<Integer>(players.size());
-		InitRoundRobin();
+		for(Player p : this.players){
+			p.SetArmies(initialArmies);
+		}
+	}
+	/**this method places armies on countries one by one in round-robin fashion
+	 * @throws Exception 
+	 * 
+	 */
+	public void PlaceOneByOneArmies() throws Exception{
+		int playerId=-2;
+		int stopTurn = 0;
+		while(stopTurn>players.size()){
+			playerId=GetNextPlayerId();
+			PlaceArmiesOnCountry(GetCountryToPlaceInitialArmies( playerId).GetId(), 1);
+			if(GetPlayerById(playerId).GetArmies()==0){
+				stopTurn+=1;
+			}
+		}
+	}
+	public Country GetCountryToPlaceInitialArmies(int prm_playerId){
+		Country countryToBePlacedArmies= this.map.GetCountriesByPlayerId(prm_playerId).get(prm_playerId);
+		for(Country c : this.map.GetCountriesByPlayerId(prm_playerId)){
+			if(c.GetArmies()<countryToBePlacedArmies.GetArmies()){
+				countryToBePlacedArmies=c;
+			}
+		}
+		return countryToBePlacedArmies;
 	}
 
+	
 	/**
 	 * this method creates instance of players as many as the playerNum
 	 * 
@@ -120,7 +175,7 @@ public class GameBoard {
 	 */
 	public void SetupPlayers(int prm_playerNum) {
 		for (int i = 1; i <= prm_playerNum; i++) {
-			players.add(new Player(i, "player" + i));
+			players.add(new Player(i, "player" + i,this.map,this.deck,this.turnOrganizer));
 		}
 		roundRobin = new ArrayList<Integer>(players.size());
 		InitRoundRobin();
@@ -134,7 +189,8 @@ public class GameBoard {
 		while (map.GetCountriesNotAssigned().size() > 0) {
 			for (Player p : players) {
 				if (map.GetCountriesNotAssigned().size() > 0) {
-					map.GetNotAssignedCountryRandom().SetPlayerId(p.GetId());
+					countryRandom = map.GetNotAssignedCountryRandom();
+					countryRandom.SetPlayerId(p.GetId());
 				} else
 					break;
 			}
@@ -191,21 +247,7 @@ public class GameBoard {
 		return result;
 	}
 
-	/**
-	 * this method calculate the number of armies that the player can have
-	 * 
-	 * @param ,
-	 *            which its type is playerId, is the id of the player
-	 * 
-	 */
-	public void CalculateArmies(Player prm_player) {
-		int armiesFromCountries = map.GetCountriesByPlayerId(prm_player.GetId()).size();
-		armiesFromCountries /= 3;
-		int armiesFromContinents=Calculate_ArmiesFromContinentControl(prm_player.GetId());
-		int totArmies=armiesFromCountries+armiesFromContinents+prm_player.GetArmiesFromCards();
-		prm_player.SetArmiesToplayer(totArmies <= 3 ? 3 : totArmies);
-
-	}
+	
 
 	/**
 	 * this method will save the current map into a file in the format of Conquest
@@ -265,19 +307,19 @@ public class GameBoard {
 	 * @throws Exception
 	 *             if the current phase not Reinforcement
 	 */
-	public int PlaceArmiesOnCountry(int prm_countryId, int prm_armies) throws Exception {
-		int result = 0;
+	public String PlaceArmiesOnCountry(int prm_countryId, int prm_armies) {
+		String result = "";
 		// tbd
 		if (turnOrganizer.GetCurrentPhase() != TurnPhases.Reinforcement)
-			throw new Exception("PhaseNotValid");
+			return "PhaseNotValid";
 		int countryArmies = map.GetCountryById(prm_countryId).GetArmies();
 		int playerArmies = GetPlayerById(map.GetCountryById(prm_countryId).GetPlayerId()).GetArmies();
 		if (playerArmies >= prm_armies) {
 			map.GetCountryById(prm_countryId).SetArmies(countryArmies + prm_armies);
 			GetPlayerById(map.GetCountryById(prm_countryId).GetPlayerId()).SetArmies(playerArmies - prm_armies);
-			result = 1;
+			result = "SuccessfullReinforcement";
 		} else
-			throw new Exception("NotEnoughArmies");
+			return "FailedNotEnoughArmies";
 		return result;
 	}
 

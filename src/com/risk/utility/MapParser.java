@@ -7,9 +7,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import com.risk.model.Country;
 import com.risk.model.Edge;
 import com.risk.model.FactoryLand;
 import com.risk.model.Land;
@@ -287,7 +289,7 @@ public class MapParser {
 		map = new Map("map1");
 		BufferedReader br = null;
 		try {
-			// tbd
+			// validates the map before creating
 			if (!MapValidator(input))
 				throw new Exception("NotValidMapFile");
 			br = new BufferedReader(new FileReader(input));
@@ -302,6 +304,7 @@ public class MapParser {
 			ArrayList arrMap = new ArrayList();
 			ArrayList arrContinents = new ArrayList();
 			ArrayList arrCountries = new ArrayList();
+			//reading the map file line by line
 			while (line != null) {
 				sb.append(line);
 				sb.append(System.lineSeparator());
@@ -343,13 +346,14 @@ public class MapParser {
 				map.lands.add(ParseCountries((String) o));
 				countryCount++;
 			}
-			// add country to continent
+			// add edges and set neighbors
 			String[] strLines;
 			for (Object o : arrCountries) {
 				strLines = ((String) o).split(",");
 				if (strLines.length > 4) {
 					for (int i = 4; i < strLines.length; i++) {
 						map.AddEdge(new Edge(map.GetCountryIdByName(strLines[0]), map.GetCountryIdByName(strLines[i])));
+						map.GetCountryById(map.GetCountryIdByName(strLines[0])).AddNeighbor(map.GetCountryById(map.GetCountryIdByName(strLines[i])));
 					}
 				}
 

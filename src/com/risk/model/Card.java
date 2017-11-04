@@ -43,4 +43,11 @@ public class Card {
 	public void SetPlayerId(int prm_playerId) {
 		this.playerId = prm_playerId;
 	}
+	/**this method returns the id of the object
+	 * 
+	 * @return is the id of the card
+	 */
+	public int GetId(){
+		return this.id;
+	}
 }

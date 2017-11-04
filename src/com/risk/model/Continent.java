@@ -49,5 +49,19 @@ public class Continent extends Land {
 	public int GetControl() {
 		return control;
 	}
+    /**this method sets the playerId of the continent
+     * @param playerId is the id of the player who owns the continent
+     */
+	public void SetPlayerId(int prm_playerId) {
+		// TODO Auto-generated method stub
+		this.playerId=prm_playerId;
+	}
+	/**this method returns the id of the player
+	 * 
+	 * @return the id of the player who owns the continent
+	 */
+	public int GetPlayerId(){
+		return this.playerId;
+	}
 
 }

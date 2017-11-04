@@ -721,4 +721,166 @@ public class Map {
 		}
 		return neighbors;
 	}
+   /**this method returns continent by its id
+    * 
+    * @param prm_continentId
+    * @return the continent
+    */
+	public Continent GetContinentById(int prm_continentId) {
+		// TODO Auto-generated method stub
+		for(Continent c : this.GetContinents()){
+			if(c instanceof Continent && c.GetId()==prm_continentId) return c;
+		}
+		return null;
+	}
+	/**
+	 * this method returns the adjacent country of a given country which belong to
+	 * the opponent player
+	 * 
+	 * @param prm_countryId,
+	 *            which is the id of the given country
+	 * @return is a list of countries which are adjacent of the given country
+	 */
+	public List<Country> GetNeighborsByCountryIdOpponentPlayer(int prm_countryId) {
+		List<Country> neighbors = new ArrayList<Country>();
+		for (Edge e : edges) {
+			if (e.DoesContainCountry(prm_countryId)) {
+				if (GetPlayerIdByCountryId(prm_countryId) != GetPlayerIdByCountryId(e.GetNeighborId(prm_countryId)))
+					neighbors.add(GetCountryById(e.GetNeighborId(prm_countryId)));
+			}
+		}
+		return neighbors;
+	}
+	/**this method returns the neighbor opponent country by id
+	 * 
+	 * @param prm_neighborId is the id of the neighbor country
+	 * @return the neighbor country
+	 */
+	public Country GetNeighborOpponentById(int prm_countryId,int prm_neighborId){
+		for(Country c : this.GetNeighborsByCountryIdOpponentPlayer( prm_countryId)){
+			if(c.GetId()==prm_neighborId) return c;
+		}
+		return null;
+	}
+	/**this method performs country conquest the winner player owns the looser country
+	 * 
+	 * @param prm_winnerCountry
+	 * @param prm_loserCountry
+	 * @return successful message
+	 */
+	public String ConquerCountry(Country prm_winnerCountry, Country prm_loserCountry){
+		//trigger change
+		prm_loserCountry.SetPlayerId(prm_winnerCountry.GetPlayerId());
+		return "Lppser country is conquered!";
+	}
+	/**this method verifies if the continent is captured by winner player
+	 * 
+	 * @param prm_winnerPlayerId
+	 * @param prm_continentId
+	 * @return true if continent captured otherwise false
+	 */
+	public boolean IsContinentCaptured(int prm_winnerPlayerId,int prm_continentId ){
+		boolean isContinentCaptured = true;
+		for(Country c : this.GetCountriesByContinentId(prm_continentId)){
+			if(c.GetPlayerId()!=prm_winnerPlayerId) isContinentCaptured=false;
+		}
+		if(isContinentCaptured){
+			GetContinentById(prm_continentId).SetPlayerId(prm_winnerPlayerId);
+			//trigger change
+			return true;
+		}
+		return false;
+	}
+	/**this method verifies if the world is captured by winner player
+	 * 
+	 * @param prm_winnerPlayerId
+	 * @return true if world captured otherwise false
+	 */
+	public boolean IsWorldCaptured(int prm_winnerPlayerId ){
+		boolean isWorldCaptured = true;
+		for(Country c : this.GetCountries()){
+			if(c.GetPlayerId()!=prm_winnerPlayerId) isWorldCaptured=false;
+		}
+		if(isWorldCaptured){
+			//trigger change
+			return true;
+		}
+		return false;
+	}
+	/**this method reset the visited property of all countries
+	 * and get the map prepared to validate connectivity
+	 */
+	public void ResetVisitedWholeMap(){
+		for(Country c : GetCountries()){
+			c.visited=false;
+		}
+	}
+	/**this mthod travers the map from starting point 
+	 * and checks the connectivity of the map
+	 * @param prm_startCountry
+	 */
+	public  void DFS(Country prm_startCountry){
+		List<Country> neighbors = prm_startCountry.GetNeighbors();
+		for(Country c : neighbors){
+			if(c!=null && !c.visited){
+				c.visited=true;
+				DFS(c);
+				
+			}
+		}
+	}
+	/**this mthod travers the map from starting point 
+	 * and checks the connectivity of the map
+	 * @param prm_startCountry
+	 */
+	public  void DFS_continents(Country prm_startCountry){
+		List<Country> neighborsInContinent = prm_startCountry.GetNeighborsInContinent();
+		for(Country c : neighborsInContinent){
+			if(c!=null && !c.visited){
+				c.visited=true;
+				DFS_continents(c);
+				
+			}
+		}
+	}
+	
+	/**this method validates the connectivity of the map
+	 * 
+	 * @return true if it is connected
+	 */
+	public boolean ValidationMapConnectivity(){
+		this.ResetVisitedWholeMap();
+		Country startCountry = this.GetCountries().get(0);
+		DFS(startCountry);
+		boolean mapIsConnected=true;
+		for(Country c : this.GetCountries()){
+			if(!c.visited){
+				mapIsConnected=false;
+				return false;
+			}
+		}
+		return mapIsConnected;
+	}
+	public boolean ValidateContinentsConnectivity(){
+		boolean continentIsValid=true;
+		Country startCountry;
+		for(Continent countinent : GetContinents()){
+			this.ResetVisitedWholeMap();
+		    continentIsValid=true;
+			startCountry=GetCountriesByContinentId(countinent.GetId()).get(0);
+			DFS_continents(startCountry);
+			for(Country c : GetCountriesByContinentId(countinent.GetId())){
+				if(!c.visited){
+					continentIsValid=false;
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	public String AddArmiesToCountry(int prm_countryId,int prm_armies){
+		this.GetCountryById(prm_countryId).AddArmies(prm_armies);
+		return "SuccessfullyAddedArmies";
+	}
+	
 }

@@ -1,5 +1,7 @@
 package com.risk.model;
 
+import java.util.Observable;
+
 import com.risk.utility.TurnPhases;
 
 /**
@@ -8,13 +10,13 @@ import com.risk.utility.TurnPhases;
  * @author Kourosh Aziz-Nejad
  * @version 1.0.0.0
  */
-public class TurnOrganizer {
+public class TurnOrganizer extends Observable{
 	private boolean isMapLoaded;
 	private boolean isGameStarted;
 	private int currentPlayerId;
 	private TurnPhases currentPhase;
 	private boolean isAttackSuccessfull;
-
+    private String currentAction;
 	/**
 	 * This the constructor of the class it initialize properties of the object
 	 */
@@ -45,7 +47,10 @@ public class TurnOrganizer {
 	public void GameStarted() {
 		this.isGameStarted = true;
 	}
-
+    public void SetPhase(TurnPhases prm_currentPhase,int prm_playerId){
+    	SetCurrentPlayerId(prm_playerId);
+    	SetCurrentPlayerId( prm_playerId);
+    }
 	/**
 	 * This method set the current playerId
 	 * 
@@ -54,6 +59,7 @@ public class TurnOrganizer {
 	 */
 	public void SetCurrentPlayerId(int prm_playerId) {
 		this.currentPlayerId = prm_playerId;
+		UpdatePhase();
 	}
 
 	/**
@@ -64,6 +70,7 @@ public class TurnOrganizer {
 	 */
 	public void SetCurrentPhase(TurnPhases prm_currentPhase) {
 		this.currentPhase = prm_currentPhase;
+		UpdatePhase();
 	}
 
 	/**
@@ -130,6 +137,28 @@ public class TurnOrganizer {
 	 */
 	public boolean IsGameStarted() {
 		return this.isGameStarted;
+	}
+	/**this method sets the current action which is internal steps of phases
+	 * 
+	 * @param prm_currentAction is the current action
+	 */
+	public void SetCurrentAction(String prm_currentAction){
+		this.currentAction = prm_currentAction;
+		UpdatePhase();
+	}
+	/**this method declares any change in the object as observable
+	 * 
+	 */
+	public void UpdatePhase(){
+		setChanged();
+		notifyObservers(this);
+	}
+	/**this method returns the current action which is internal steps of phases
+	 * 
+	 * @return the current action
+	 */
+	public String GetCurrentAction(){
+		return this.currentAction;
 	}
 
 }

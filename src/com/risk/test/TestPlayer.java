@@ -34,8 +34,8 @@ public class TestPlayer {
 	@Before
 	public void BeforeTestPlayer() {
 		System.out.println("@BeforeClass");
-		player1 = new Player(6, "sammy");
-		player2 = new Player(7, "dammy");
+		player1 = new Player(6, "sammy",null, null, null);
+		player2 = new Player(7, "dammy",null, null, null);
 	}
 
 	/**
@@ -61,49 +61,6 @@ public class TestPlayer {
 		int id = player1.GetId();
 		System.out.println(id);
 		assertEquals(6, id);
-	}
-
-	/**
-	 * testAddLand method shows player is able to add Land in Player class without
-	 * any issue
-	 */
-
-	@Test
-	public void TestAddLand() {
-
-		System.out.println("Test addLand()");
-		// System.out.println(player1.GetName());
-		Land land1 = new Land("Canada");
-		int result1 = player1.AddLand(land1);
-		System.out.println(result1);
-		// trying to add same country to the player again
-		int result2 = player1.AddLand(land1);
-		System.out.println(result2);
-
-		// 0 for failure, player already has this country, 1 for success
-		assertEquals(1, result1);
-		assertEquals(0, result2);
-
-	}
-
-
-	/**
-	 * testDoesOwnLand method shows player is able to test DoesOwnLand Land in
-	 * Player class without any issue
-	 */
-
-	@Test
-	public void TestDoesOwnLand() {
-		System.out.print("testOwnLand");
-		Land own = new Land("canada");
-		player1.AddLand(own);
-		boolean resultOfDoesOwnLand = player1.DoesOwnLand(own);
-		System.out.print(resultOfDoesOwnLand);
-		assertTrue(resultOfDoesOwnLand); // first
-		Land notown = new Land("india");
-		boolean resultOfDoesOwnLand2 = player1.DoesOwnLand(notown);
-		System.out.print(resultOfDoesOwnLand2);
-		assertFalse(resultOfDoesOwnLand2); // second
 	}
 
 	/**

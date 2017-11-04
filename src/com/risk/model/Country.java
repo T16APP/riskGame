@@ -1,5 +1,8 @@
 package com.risk.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * This class represents a country it maintains name, id,army, and coordinates
  * of the country it has different methods to change the state and returns the
@@ -13,6 +16,8 @@ public class Country extends Land {
 	private int continentId;
 	private int x;
 	private int y;
+	private List<Country> neighbors;
+	public boolean visited;
 
 	/**
 	 * This constructor initialize the object
@@ -32,6 +37,8 @@ public class Country extends Land {
 		this.continentId = prm_continentId;
 		this.x = prm_x;
 		this.y = prm_y;
+		neighbors = new ArrayList<Country>();
+		visited = false;
 	}
 
 	/**
@@ -101,6 +108,51 @@ public class Country extends Land {
 	 */
 	public void SetArmies(int prm_armies) {
 		this.armies = prm_armies;
+	}
+	/**this method adds a country to the list of neighbors
+	 * 
+	 * @param prm_country is the neighbor country
+	 */
+	public void AddNeighbor(Country prm_country){
+		this.neighbors.add(prm_country);
+	}
+	/**this method returns the neighbor country by id
+	 * 
+	 * @param prm_neighborId is the id of the neighbor country
+	 * @return the neighbor country
+	 */
+	public Country GetNeighborById(int prm_neighborId){
+		for(Country c : this.neighbors){
+			if(c.GetId()==prm_neighborId) return c;
+		}
+		return null;
+	}
+	/**this method adds or subtract from the armies that the country has
+	 * 
+	 * @param prm_addedArmies the number of armies that is added or subtracted from the country's armies
+	 */
+	public void AddArmies(int prm_addedArmies){
+		this.armies+=prm_addedArmies;
+	}
+	/**this method returns neighbors of a country
+	 * 
+	 * @return list of neighbor countries
+	 */
+	public List<Country> GetNeighbors(){
+		return this.neighbors;
+	}
+	/**this method returns the list of neighbors that exist in the same continent
+	 * 
+	 * @return
+	 */
+	public List<Country> GetNeighborsInContinent(){
+		List<Country> neighborsInContinent = new ArrayList<Country>();
+		for(Country neighbor : neighbors){
+			if(this.GetContinentId()==neighbor.GetContinentId()){
+				neighborsInContinent.add(neighbor);
+			}
+		}
+		return neighborsInContinent;
 	}
 
 }

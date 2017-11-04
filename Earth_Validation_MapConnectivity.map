@@ -1,0 +1,21 @@
+[Map]
+author=Iceworm72
+image=001_I72_Ghtroc 720.bmp
+wrap=no
+scroll=vertical
+warn=no
+
+[Continents]
+Cockpit=5
+Left Cargo=10
+
+
+[Territories]
+1,658,355,Cockpit,2,6
+2,658,375,Cockpit,1,7,3
+3,658,395,Cockpit,2
+4,205,170,Left Cargo,5
+5,332,136,Left Cargo,4
+6,413,226,Left Cargo,1
+7,416,272,Left Cargo,2
+
