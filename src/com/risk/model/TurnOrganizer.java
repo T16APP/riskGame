@@ -51,32 +51,7 @@ public class TurnOrganizer extends Observable{
 	public void GameStarted() {
 		this.isGameStarted = true;
 	}
-    public void SetPhase(TurnPhases prm_currentPhase,int prm_playerId){
-    	SetCurrentPlayerId(prm_playerId);
-    	SetCurrentPlayerId( prm_playerId);
-    }
-	/**
-	 * This method set the current playerId
-	 * 
-	 * @param prm_playerId,
-	 *            which its type is integer, will replace the current player ID
-	 */
-	public void SetCurrentPlayerId(int prm_playerId) {
-		this.currentPlayerId = prm_playerId;
-		UpdatePhase();
-	}
-
-	/**
-	 * This method set the current phase
-	 * 
-	 * @param prm_currentPhase,
-	 *            which its type is enum, will replace the current phase
-	 */
-	public void SetCurrentPhase(TurnPhases prm_currentPhase) {
-		this.currentPhase = prm_currentPhase;
-		UpdatePhase();
-	}
-
+    
 	/**
 	 * This method returns the current phase
 	 * 
@@ -179,6 +154,7 @@ public class TurnOrganizer extends Observable{
 		roundRobin.remove(0);
 		// tbd
 		this.SetCurrentPlayerId(nextPlayerId);
+		this.SetCurrentPhase(TurnPhases.Reinforcement);
 		// tbd
 		GetCurrentPlayer().CalculateReinforcementArmies();
 		return nextPlayerId;
@@ -203,5 +179,27 @@ public class TurnOrganizer extends Observable{
 		}
 		return null;
 	}
+	/**
+	 * This method set the current playerId
+	 * 
+	 * @param prm_playerId,
+	 *            which its type is integer, will replace the current player ID
+	 */
+	public void SetCurrentPlayerId(int prm_playerId) {
+		this.currentPlayerId = prm_playerId;
+		UpdatePhase();
+	}
+
+	/**
+	 * This method set the current phase
+	 * 
+	 * @param prm_currentPhase,
+	 *            which its type is enum, will replace the current phase
+	 */
+	public void SetCurrentPhase(TurnPhases prm_currentPhase) {
+		this.currentPhase = prm_currentPhase;
+		UpdatePhase();
+	}
+
 
 }

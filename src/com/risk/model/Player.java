@@ -233,9 +233,11 @@ public class Player {
 			if(c.GetPlayerId()!=this.id) isWorldCaptured=false;
 		}
 		if(isWorldCaptured){
+			turnOrganizer.SetCurrentPhase(TurnPhases.GameOver);
+			turnOrganizer.SetCurrentPlayerId(this.id);
 			return "World is dominated by player: "+this.name;
 		}
-		return "";
+		return "GameIsOver";
 	}
 	/**this method performs card exchange
 	 * during this action if the player has proper cards he can excange them with armies according the RISK rules

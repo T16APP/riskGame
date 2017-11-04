@@ -107,7 +107,7 @@ public class GameBoard {
 		if(turnOrganizer.IsGameStarted()){
 			return "Game already started";
 		}
-		turnOrganizer.SetPhase(TurnPhases.Startup, -1);;
+		turnOrganizer.SetCurrentPhase(TurnPhases.Startup);;
 		BuildDeck(map.GetCountries().size());
 		SetupPlayers(prm_playerNum);
 		turnOrganizer.players=this.players;
@@ -115,7 +115,7 @@ public class GameBoard {
 		LoggingWindow.Log("Startup Phase: countries were allocated to the players randomly and evenly");
 		AllocateInitialArmies();
 		turnOrganizer.GameStarted();
-		turnOrganizer.SetPhase(TurnPhases.Reinforcement, turnOrganizer.GetNextPlayerId());
+		turnOrganizer.GetNextPlayerId();
 		return "Game started successfully";
 	}
 	/**this method allocate initial armies to the players
