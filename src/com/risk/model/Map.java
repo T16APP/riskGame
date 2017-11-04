@@ -2,6 +2,7 @@ package com.risk.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -17,7 +18,7 @@ import com.risk.utility.staticApplicationVariables;
  *
  */
 
-public class Map {
+public class Map extends Observable{
 	private String name;
 	private String author;
 	private String image;

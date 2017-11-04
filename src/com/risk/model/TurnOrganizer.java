@@ -1,5 +1,6 @@
 package com.risk.model;
 
+import java.util.List;
 import java.util.Observable;
 
 import com.risk.utility.TurnPhases;
@@ -17,6 +18,9 @@ public class TurnOrganizer extends Observable{
 	private TurnPhases currentPhase;
 	private boolean isAttackSuccessfull;
     private String currentAction;
+    public List<Player> players;
+    public List<Integer> roundRobin;
+	
 	/**
 	 * This the constructor of the class it initialize properties of the object
 	 */
@@ -159,6 +163,45 @@ public class TurnOrganizer extends Observable{
 	 */
 	public String GetCurrentAction(){
 		return this.currentAction;
+	}
+	/**
+	 * this method returns the next player to play
+	 * 
+	 * @return the id of the next player who should play
+	 */
+	public int GetNextPlayerId() {
+		int nextPlayerId = -1;
+		if (roundRobin.size() < 1) {
+			InitRoundRobin();
+		}
+		// tbd
+		nextPlayerId = roundRobin.get(0);
+		roundRobin.remove(0);
+		// tbd
+		this.SetCurrentPlayerId(nextPlayerId);
+		// tbd
+		GetCurrentPlayer().CalculateReinforcementArmies();
+		return nextPlayerId;
+	}
+	/**
+	 * this method initialaizes the roundrobin objects it adds all players to the
+	 * instance of roundrobin
+	 */
+	public void InitRoundRobin() {
+		for (Player p : this.players) {
+			roundRobin.add(p.GetId());
+		}
+
+	}
+	/**this method returns the current player
+	 * 
+	 * @return current player
+	 */
+	public Player GetCurrentPlayer(){
+		for(Player p : players){
+			if(p.GetId()==this.GetCurrentPlayerId()) return p;
+		}
+		return null;
 	}
 
 }

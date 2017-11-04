@@ -110,11 +110,12 @@ public class GameBoard {
 		turnOrganizer.SetPhase(TurnPhases.Startup, -1);;
 		BuildDeck(map.GetCountries().size());
 		SetupPlayers(prm_playerNum);
+		turnOrganizer.players=this.players;
 		AssignCountriesRandom();
 		LoggingWindow.Log("Startup Phase: countries were allocated to the players randomly and evenly");
 		AllocateInitialArmies();
 		turnOrganizer.GameStarted();
-		turnOrganizer.SetPhase(TurnPhases.Reinforcement, GetNextPlayerId());
+		turnOrganizer.SetPhase(TurnPhases.Reinforcement, turnOrganizer.GetNextPlayerId());
 		return "Game started successfully";
 	}
 	/**this method allocate initial armies to the players
@@ -148,7 +149,7 @@ public class GameBoard {
 		int playerId=-2;
 		int stopTurn = 0;
 		while(stopTurn>players.size()){
-			playerId=GetNextPlayerId();
+			playerId=turnOrganizer.GetNextPlayerId();
 			PlaceArmiesOnCountry(GetCountryToPlaceInitialArmies( playerId).GetId(), 1);
 			if(GetPlayerById(playerId).GetArmies()==0){
 				stopTurn+=1;
@@ -206,26 +207,6 @@ public class GameBoard {
 			roundRobin.add(p.GetId());
 		}
 
-	}
-
-	/**
-	 * this method returns the next player to play
-	 * 
-	 * @return the id of the next player who should play
-	 */
-	public int GetNextPlayerId() {
-		int nextPlayerId = -1;
-		if (roundRobin.size() < 1) {
-			InitRoundRobin();
-		}
-		// tbd
-		nextPlayerId = roundRobin.get(0);
-		roundRobin.remove(0);
-		// tbd
-		this.turnOrganizer.SetCurrentPlayerId(nextPlayerId);
-		// tbd
-		CalculateArmies(GetPlayerById(turnOrganizer.GetCurrentPlayerId()));
-		return nextPlayerId;
 	}
 
 	/**
@@ -360,41 +341,7 @@ public class GameBoard {
 		turnOrganizer.SetCurrentPhase(TurnPhases.Fortification);
 	}
 
-	/**
-	 * this method reset the number of armies for all countries of the current
-	 * player to zero and get them ready for reinforcement phase
-	 * 
-	 * @param prm_playerId
-	 *            is the id of the current player
-	 */
-	public void ResetCountriesOrmiesByPlayerId(int prm_playerId) {
-		for (Country c : map.GetCountriesByPlayerId(prm_playerId)) {
-			c.SetArmies(0);
-		}
-
-	}
-
-	/**
-	 * this method ends the reinforcement phase this set the turn-organizer to
-	 * reinforcement phase also it causes the turn to change also it recalculate the
-	 * armies for the current player
-	 * 
-	 * @throws Exception
-	 *             if there is now card left
-	 */
-	public void EndFortificationPhase() throws Exception {
-		// this is only for build one to show cards flow and it is supposed that a
-		// successful attack is done
-		if (turnOrganizer.IsAttackSuccessful()) {
-			DrawACard(turnOrganizer.GetCurrentPlayerId());
-		}
-		turnOrganizer.SetCurrentPhase(TurnPhases.Reinforcement);
-		GetNextPlayerId();
-		ResetCountriesOrmiesByPlayerId(turnOrganizer.GetCurrentPlayerId());
-		// tbd
-		// CalculateArmies(GetPlayerById(turnOrganizer.GetCurrentPlayerId()));
-	}
-
+	
 	public void BuildDeck(int countryNum) {
 		int cardsNum = (countryNum / 3 + 1) * 3;
 		Card card;
@@ -417,35 +364,9 @@ public class GameBoard {
 		Collections.shuffle(deck);
 	}
 
-	/**
-	 * this method returns unassigned cards
-	 * 
-	 */
-	public List<Card> GetUnassignedCards() {
-		List<Card> cards = new ArrayList<Card>();
-		for (Card c : deck) {
-			if (c.playerId == -1)
-				cards.add(c);
-		}
-		return cards;
-	}
+	
 
-	/**
-	 * this method draws a card from deck to the player with specific id
-	 * 
-	 * @param prm_playerId
-	 * @throws Exception
-	 *             if there is no card to draw
-	 */
-	public int DrawACard(int prm_playerId) throws Exception {
-		int result = 0;
-		if (GetUnassignedCards().get(0) != null) {
-			GetUnassignedCards().get(0).playerId = prm_playerId;
-			return result = 1;
-		} else
-			throw new Exception("DeckHasNoCard");
-	}
-
+	
 	/**
 	 * this method returns the cards of a given player in his hand
 	 * 

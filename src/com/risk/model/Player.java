@@ -337,12 +337,12 @@ public class Player {
 	 *            which its type is playerId, is the id of the player
 	 * 
 	 */
-	public void CalculateArmies(Player prm_player) {
-		int armiesFromCountries = map.GetCountriesByPlayerId(prm_player.GetId()).size();
+	public void CalculateReinforcementArmies() {
+		int armiesFromCountries = map.GetCountriesByPlayerId(this.id).size();
 		armiesFromCountries /= 3;
-		int armiesFromContinents=Calculate_ArmiesFromContinentControl(prm_player.GetId());
-		int totArmies=armiesFromCountries+armiesFromContinents+prm_player.GetArmiesFromCards();
-		prm_player.SetArmiesToplayer(totArmies <= 3 ? 3 : totArmies);
+		int armiesFromContinents=Calculate_ArmiesFromContinentControl(this.id);
+		int totArmies=armiesFromCountries+armiesFromContinents+this.GetArmiesFromCards();
+		this.SetArmiesToplayer(totArmies <= 3 ? 3 : totArmies);
 
 	}
 	/**this method calculates the number of armies from
@@ -368,6 +368,52 @@ public class Player {
 		this.armies += prm_armies;
 		return "ArmiesSuccessfullyAdded";
 	}
-	
+	/**
+	 * this method ends the reinforcement phase this set the turn-organizer to
+	 * reinforcement phase also it causes the turn to change also it recalculate the
+	 * armies for the current player
+	 * 
+	 * @throws Exception
+	 *             if there is now card left
+	 */
+	public void EndFortificationPhase() throws Exception {
+		// this is only for build one to show cards flow and it is supposed that a
+		// successful attack is done
+		if (turnOrganizer.IsAttackSuccessful()) {
+			DrawACard(turnOrganizer.GetCurrentPlayerId());
+		}
+		turnOrganizer.SetCurrentPhase(TurnPhases.Reinforcement);
+		turnOrganizer.GetNextPlayerId();
+		// tbd
+		// CalculateArmies(GetPlayerById(turnOrganizer.GetCurrentPlayerId()));
+	}
+	/**
+	 * this method draws a card from deck to the player with specific id
+	 * 
+	 * @param prm_playerId
+	 * @throws Exception
+	 *             if there is no card to draw
+	 */
+	public int DrawACard(int prm_playerId) throws Exception {
+		int result = 0;
+		if (GetUnassignedCards().get(0) != null) {
+			GetUnassignedCards().get(0).playerId = prm_playerId;
+			return result = 1;
+		} else
+			throw new Exception("DeckHasNoCard");
+	}
+	/**
+	 * this method returns unassigned cards
+	 * 
+	 */
+	public List<Card> GetUnassignedCards() {
+		List<Card> cards = new ArrayList<Card>();
+		for (Card c : deck) {
+			if (c.playerId == -1)
+				cards.add(c);
+		}
+		return cards;
+	}
+
 	
 }
