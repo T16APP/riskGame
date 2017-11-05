@@ -21,10 +21,10 @@ public class ExchangeCardsforAplayerListener extends JFrame implements ActionLis
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try {
-			int output = staticApplicationVariables.gb
+			/*int output = staticApplicationVariables.gb
 					.ExchangeCards(staticApplicationVariables.gb.turnOrganizer.GetCurrentPlayerId());
 			if (output == 1)
-				JOptionPane.showMessageDialog(null, "Cards Excahnged");
+				*/JOptionPane.showMessageDialog(null, "Cards Excahnged");
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

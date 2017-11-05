@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Observer;
 
 import com.risk.utility.LoggingWindow;
 import com.risk.utility.TurnPhases;
@@ -25,6 +26,7 @@ public class Player {
     private Map map;
     private List<Card> deck;
     public TurnOrganizer turnOrganizer;
+    public CardExchange cardExchange;
 	/**
 	 * this is the constructor of the class it takes id and name and will asign them
 	 * to the player
@@ -266,19 +268,50 @@ public class Player {
 		turnOrganizer.SetCurrentPlayerId(this.id);
 		return "World is dominated by player: "+this.name;
 	}
+	/**this method prepare the cardexchange observable for view
+	 * 
+	 * @param prm_o is the view observer
+	 */
+	public void PrepareExchangeCards(Object prm_o){
+		this.cardExchange = new CardExchange(GetCardsByPlayerId(this.id));
+		this.cardExchange.addObserver((Observer) prm_o);
+	}
+	/**this method destries the observable for card exchange view
+	 * 
+	 */
+	public void EndExchangeCards(){
+		this.cardExchange = null;
+	}
+	/**
+	 * this method returns the cards of a given player in his hand
+	 * 
+	 * @param prm_playerId
+	 *            is the id of the player
+	 */
+	public List<Card> GetCardsByPlayerId(int prm_playerId) {
+		List<Card> cards = new ArrayList<Card>();
+		for (Card c : deck) {
+			if (c.playerId == prm_playerId)
+				cards.add(c);
+		}
+		return cards;
+	}
+
 	/**this method performs card exchange
 	 * during this action if the player has proper cards he can excange them with armies according the RISK rules
 	 * @param prm_card1 the first card
 	 * @param prm_card2 the second card
 	 * @param prm_card3 the third card
 	 * @return succesful message
+	 * @throws IOException 
 	 */
-	public String ExchangeCards(Card prm_card1, Card prm_card2, Card prm_card3){
+	public String ExchangeCards(Card prm_card1, Card prm_card2, Card prm_card3) throws IOException{
 		if(IsThreeSameCards( prm_card1,  prm_card2,  prm_card3)){
 			DeckCard(prm_card1);
 			DeckCard(prm_card2);
 			DeckCard(prm_card3);
 			this.AddArmiesFromCards(5);
+			LoggingWindow.Log("Three same cards were exchanged successfully and 5 armies added to the player's armies" );
 			return "Successfully three same cards exchanged!";
 		}
 		else if(IsThreeDifferentCards( prm_card1,  prm_card2,  prm_card3)){
@@ -286,10 +319,12 @@ public class Player {
 			DeckCard(prm_card2);
 			DeckCard(prm_card3);
 			this.AddArmiesFromCards(5);
+			LoggingWindow.Log("Three different cards were exchanged successfully and 5 armies added to the player's armies" );
 			return "Successfully three different cards exchanged!";
 		}
 		else{
 			
+			LoggingWindow.Log("Three cards are not the same or different types so can not exchanged" );
 			return "Failed exchange!";
 		}
 	}
@@ -450,21 +485,26 @@ public class Player {
 	 * @param prm_armies
 	 *            the number of armies to be placed
 	 * @return 1 if it is succesful otherwise 0
+	 * @throws IOException 
 	 * @throws Exception
 	 *             if the current phase not Reinforcement
 	 */
-	public String PlaceReinforcedArmiesOnCountry(int prm_countryId, int prm_armies) {
+	public String PlaceReinforcedArmiesOnCountry(int prm_countryId, int prm_armies) throws IOException {
 		String result = "";
 		// tbd
 		if (turnOrganizer.GetCurrentPhase() != TurnPhases.Reinforcement)
 			return "PhaseNotValid";
 		int countryArmies = map.GetCountryById(prm_countryId).GetArmies();
 		if (this.armies >= prm_armies) {
-			map.GetCountryById(prm_countryId).SetArmies(countryArmies + prm_armies);
+			map.GetCountryById(prm_countryId).AddArmies(prm_armies);
 			this.AddArmies(-1*prm_armies);
+			LoggingWindow.Log("The reinforcement armies: "+prm_armies+" were placed on country "+map.GetCountryById(prm_countryId).GetName());
 			result = "SuccessfullReinforcement";
-		} else
+		} 
+		else{
+			LoggingWindow.Log("Reinforcement armies: "+prm_armies+" is more than the armies the player has which is: "+this.armies);
 			return "FailedNotEnoughArmies";
+		}
 		return result;
 	}
 	/**
