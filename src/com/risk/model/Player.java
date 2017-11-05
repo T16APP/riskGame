@@ -200,6 +200,7 @@ public class Player {
 			LoggingWindow.Log("Propper number of armies deducted from attacker and that added to the defender country");
 		}
 		if(this.attack.defenderCountry.GetArmies()==0){
+			this.attack.isCaptured = true;
 			this.map.ConquerCountry(this.attack.defenderCountry.GetId(),this.id);
 			this.turnOrganizer.SetAttackSuccessful(true);
 			LoggingWindow.Log("The defender country captured");
@@ -210,13 +211,43 @@ public class Player {
 				//end of the game
 				EndGame();
 				LoggingWindow.Log("The game is over and the player: "+this.id+" is winner");
+				return "the game is over you won";
+			}
+			else{
+				return "you captured the defender country now you should occupy it";
 			}
 		}
 		if(!this.map.IsAttackPossibleByPlayerId(this.id)){
 			EndAttackPhase();
-			LoggingWindow.Log("Attack is not possible and attack phase is ended");
+			LoggingWindow.Log("More attack is not possible and attack phase is ended");
+			return "More ttack is not possible";
 		}
 		return "Attack is done";
+	}
+	public String OccupyCountry(int prm_armies) throws IOException{
+		if(this.turnOrganizer.GetCurrentPhase()!=TurnPhases.Attack){
+			return "the current phase is not attack";
+		}
+		if(this.attack==null){
+			return "Occupation is not valid";
+		}
+		if(prm_armies<1){
+			return "The armies for occupation should be equal or more than 1";
+		}
+		if(prm_armies>=this.attack.attackerCountry.GetArmies()){
+			LoggingWindow.Log("At least one army should be left in attacker country after occupation");
+			return "the number of occupied armies should be less than attacker country armies ";
+		}
+		this.map.GetCountryByCountryId(attack.attackerCountry.GetId()).AddArmies(-1*prm_armies);
+		this.map.GetCountryByCountryId(attack.defenderCountry.GetId()).AddArmies(prm_armies);
+		this.attack = null;
+		LoggingWindow.Log("The captured country was occupied");
+		if(!this.map.IsAttackPossibleByPlayerId(this.id)){
+			EndAttackPhase();
+			LoggingWindow.Log("More attack is not possible and attack phase is ended");
+			return "More ttack is not possible";
+		}
+		return "Occupation is done";
 	}
 	/** this method performs the attack action
 	 * 
