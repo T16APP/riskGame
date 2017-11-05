@@ -440,15 +440,14 @@ public class Player {
 	 * @throws Exception
 	 *             if there is now card left
 	 */
-	public void EndFortificationPhase() throws Exception {
-		// this is only for build one to show cards flow and it is supposed that a
-		// successful attack is done
+	public String EndFortificationPhase() throws Exception {
+		String result = "NotSuccessfulAttack";
 		if (turnOrganizer.IsAttackSuccessful()) {
 			DrawACard(turnOrganizer.GetCurrentPlayerId());
+			result="SuccessfulAttack";
 		}
 		turnOrganizer.GetNextPlayerId();
-		// tbd
-		// CalculateArmies(GetPlayerById(turnOrganizer.GetCurrentPlayerId()));
+		return result;
 	}
 	/**
 	 * this method draws a card from deck to the player with specific id
@@ -524,14 +523,28 @@ public class Player {
 			return "PhaseNotValid";
 		int countrySArmies = map.GetCountryById(prm_countryIdS).GetArmies();
 		int countryDArmies = map.GetCountryById(prm_countryIdD).GetArmies();
-		if (countrySArmies >= prm_armies
-				&& map.GetCountryById(prm_countryIdS).playerId == map.GetCountryById(prm_countryIdD).playerId) {
-			map.GetCountryById(prm_countryIdS).SetArmies(countrySArmies - prm_armies);
-			map.GetCountryById(prm_countryIdS).SetArmies(countryDArmies + prm_armies);
-			EndFortificationPhase();
-			return "SuccessfullReinforcement";
-		} else
-			return "NotEnoughArmies";
+		if(this.map.IsNeighborByCountryId(prm_countryIdS, prm_countryIdD)){
+			LoggingWindow.Log("The two countries are not connected to move armies between them");
+			return "Countries are not connected";
+		}
+		LoggingWindow.Log("The two countries are connected to move armies between them");
+		if(countrySArmies < prm_armies){
+			LoggingWindow.Log("The source country does not have at least one country after fortification");
+			return "The source country should keep one country after fortification";
+		}
+		LoggingWindow.Log("The source country has at least one country after fortification");
+		if(map.GetCountryById(prm_countryIdS).playerId == map.GetCountryById(prm_countryIdD).playerId){
+			LoggingWindow.Log("The two country for fortification do not belong the same player");
+			return "The two country for fortification do not belong the same player";
+		}
+		map.GetCountryById(prm_countryIdS).AddArmies(-1*prm_armies);
+		map.GetCountryById(prm_countryIdS).AddArmies(prm_armies);
+		String attackSuccessful = EndFortificationPhase();
+		if(attackSuccessful.contains("SuccessfulAttack")){
+			LoggingWindow.Log("The fortification is done, one card was drawn because a country was captured from attack and turn is ended");
+		}
+		LoggingWindow.Log("The fortification is done, no card was drawn because no country captured and turn is ended ");
+		return "Fortification is done successfully";
 	}
 
 	

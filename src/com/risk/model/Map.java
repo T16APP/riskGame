@@ -937,5 +937,14 @@ public class Map extends Observable{
 		}
 		return null;
 	}
+	public boolean IsNeighborByCountryId(int prm_sCountryId, int prm_dCountryId){
+		for(Edge e : edges){
+			if((e.GetCountryId1()==prm_sCountryId && e.GetCountryId2()==prm_dCountryId) ||
+			   (e.GetCountryId1()==prm_dCountryId && e.GetCountryId2()==prm_sCountryId)){
+				return true;
+			}
+		}
+		return false;
+	}
 	
 }
