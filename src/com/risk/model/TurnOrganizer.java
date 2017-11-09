@@ -11,16 +11,16 @@ import com.risk.utility.TurnPhases;
  * @author Kourosh Aziz-Nejad
  * @version 1.0.0.0
  */
-public class TurnOrganizer extends Observable{
+public class TurnOrganizer extends Observable {
 	private boolean isMapLoaded;
 	private boolean isGameStarted;
 	private int currentPlayerId;
 	private TurnPhases currentPhase;
 	private boolean isAttackSuccessfull;
-    private String currentAction;
-    public List<Player> players;
-    public List<Integer> roundRobin;
-	
+	private String currentAction;
+	public List<Player> players;
+	public List<Integer> roundRobin;
+
 	/**
 	 * This the constructor of the class it initialize properties of the object
 	 */
@@ -51,7 +51,7 @@ public class TurnOrganizer extends Observable{
 	public void GameStarted() {
 		this.isGameStarted = true;
 	}
-    
+
 	/**
 	 * This method returns the current phase
 	 * 
@@ -63,7 +63,8 @@ public class TurnOrganizer extends Observable{
 	}
 
 	// tbd
-	// in the build1 we didn't have phase attack, however in the future it should be
+	// in the build1 we didn't have phase attack, however in the future it
+	// should be
 	// implementd
 	/**
 	 * This method compute the next phase and return it
@@ -96,17 +97,21 @@ public class TurnOrganizer extends Observable{
 	/**
 	 * this method verifies if there was a successful attack attack
 	 * 
+	 * @return true if a country is captured
 	 */
 	public boolean IsAttackSuccessful() {
 		return this.isAttackSuccessfull;
 	}
-    public void SetAttackSuccessful(boolean prm_result){
-    	this.isAttackSuccessfull=prm_result;
-    }
+
+	public void SetAttackSuccessful(boolean prm_result) {
+		this.isAttackSuccessfull = prm_result;
+	}
+
 	// tbd
 	/**
 	 * this method verifies if map is loaded
 	 * 
+	 * @return is true if the map is loaded
 	 */
 	public boolean IsMapLoaded() {
 		return this.isMapLoaded;
@@ -115,32 +120,41 @@ public class TurnOrganizer extends Observable{
 	/**
 	 * this method verifies if game stated
 	 * 
+	 * @return is true if the game is started
 	 */
 	public boolean IsGameStarted() {
 		return this.isGameStarted;
 	}
-	/**this method sets the current action which is internal steps of phases
+
+	/**
+	 * this method sets the current action which is internal steps of phases
 	 * 
-	 * @param prm_currentAction is the current action
+	 * @param prm_currentAction
+	 *            is the current action
 	 */
-	public void SetCurrentAction(String prm_currentAction){
+	public void SetCurrentAction(String prm_currentAction) {
 		this.currentAction = prm_currentAction;
 		UpdatePhase();
 	}
-	/**this method declares any change in the object as observable
+
+	/**
+	 * this method declares any change in the object as observable
 	 * 
 	 */
-	public void UpdatePhase(){
+	public void UpdatePhase() {
 		setChanged();
 		notifyObservers(this);
 	}
-	/**this method returns the current action which is internal steps of phases
+
+	/**
+	 * this method returns the current action which is internal steps of phases
 	 * 
 	 * @return the current action
 	 */
-	public String GetCurrentAction(){
+	public String GetCurrentAction() {
 		return this.currentAction;
 	}
+
 	/**
 	 * this method returns the next player to play
 	 * 
@@ -162,9 +176,30 @@ public class TurnOrganizer extends Observable{
 		GetCurrentPlayer().CalculateReinforcementArmies();
 		return nextPlayerId;
 	}
+
 	/**
-	 * this method initialaizes the roundrobin objects it adds all players to the
-	 * instance of roundrobin
+	 * this method returns the next player to play
+	 * 
+	 * @return the id of the next player who should play
+	 */
+	public int GetNextPlayerIdForStartUp() {
+		int nextPlayerId = -1;
+		if (roundRobin.size() < 1) {
+			InitRoundRobin();
+		}
+		// tbd
+		nextPlayerId = roundRobin.get(0);
+		roundRobin.remove(0);
+		// tbd
+		this.SetCurrentPlayerId(nextPlayerId);
+		this.SetAttackSuccessful(false);
+		// tbd
+		return nextPlayerId;
+	}
+
+	/**
+	 * this method initialaizes the roundrobin objects it adds all players to
+	 * the instance of roundrobin
 	 */
 	public void InitRoundRobin() {
 		for (Player p : this.players) {
@@ -172,16 +207,20 @@ public class TurnOrganizer extends Observable{
 		}
 
 	}
-	/**this method returns the current player
+
+	/**
+	 * this method returns the current player
 	 * 
 	 * @return current player
 	 */
-	public Player GetCurrentPlayer(){
-		for(Player p : players){
-			if(p.GetId()==this.GetCurrentPlayerId()) return p;
+	public Player GetCurrentPlayer() {
+		for (Player p : players) {
+			if (p.GetId() == this.GetCurrentPlayerId())
+				return p;
 		}
 		return null;
 	}
+
 	/**
 	 * This method set the current playerId
 	 * 
@@ -203,6 +242,5 @@ public class TurnOrganizer extends Observable{
 		this.currentPhase = prm_currentPhase;
 		UpdatePhase();
 	}
-
 
 }

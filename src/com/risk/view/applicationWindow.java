@@ -36,8 +36,7 @@ import com.risk.utility.staticApplicationVariables;
  * This class defines the main window of our program. It defines the main
  * components of the user interface. All event handlers registered to components
  * (menu items) of this class are instantiated with a reference to this class.
- * author Sandeep Swainch
- * version 1.0
+ * author Sandeep Swainch version 1.0
  */
 public class applicationWindow extends JFrame {
 
@@ -81,7 +80,6 @@ public class applicationWindow extends JFrame {
 	/**
 	 * Returns the singleton instance of GraphicalUserInterface
 	 * 
-	 * @return
 	 */
 	public void open() {
 		// CREATING FRAME and Setting

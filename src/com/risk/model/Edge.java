@@ -18,8 +18,8 @@ public class Edge implements Comparable {
 	private int countryId2;
 
 	/**
-	 * This the constructor of the edge which set the object id and id of the two
-	 * neighbor countries
+	 * This the constructor of the edge which set the object id and id of the
+	 * two neighbor countries
 	 * 
 	 * @param prm_countryId1,
 	 *            which is integer, is the id of the first country
@@ -52,8 +52,10 @@ public class Edge implements Comparable {
 	}
 
 	/**
-	 * This method returns the id of the object @return, which is integer, is the id
-	 * of the object
+	 * This method returns the id of the object @return, which is integer, is
+	 * the id of the object
+	 * 
+	 * @return is the id of the edge
 	 */
 	public int GetId() {
 		return this.id;
@@ -64,10 +66,10 @@ public class Edge implements Comparable {
 	 * This method implements the compareTo method from comparable interface
 	 * 
 	 * @param o,
-	 *            which is an edge, is an edge which will be compared to the object
-	 *            in terms of the id of the neighbor countries
-	 * @return an integer which could be 0 or -1, 0 means that two edges are equal
-	 *         and -1 means the two edges are not equal
+	 *            which is an edge, is an edge which will be compared to the
+	 *            object in terms of the id of the neighbor countries
+	 * @return an integer which could be 0 or -1, 0 means that two edges are
+	 *         equal and -1 means the two edges are not equal
 	 */
 	public int compareTo(Object o) {
 		// TODO Auto-generated method stub

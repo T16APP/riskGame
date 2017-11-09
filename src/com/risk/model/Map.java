@@ -18,7 +18,7 @@ import com.risk.utility.staticApplicationVariables;
  *
  */
 
-public class Map extends Observable{
+public class Map extends Observable {
 	private String name;
 	private String author;
 	private String image;
@@ -41,8 +41,8 @@ public class Map extends Observable{
 	 * this method set author of the object
 	 * 
 	 * @param prm_author,
-	 *            which its type is string, will be the name of the author of the
-	 *            map
+	 *            which its type is string, will be the name of the author of
+	 *            the map
 	 */
 	public void SetAuthor(String prm_author) {
 		this.author = prm_author;
@@ -52,8 +52,8 @@ public class Map extends Observable{
 	 * this method set an image to the object
 	 * 
 	 * @param prm_image,
-	 *            which its type is string, will be the name of the image related to
-	 *            the object
+	 *            which its type is string, will be the name of the image
+	 *            related to the object
 	 */
 	public void SetImage(String prm_image) {
 		this.image = prm_image;
@@ -155,7 +155,7 @@ public class Map extends Observable{
 	/**
 	 * this method verifies if a given continent exists
 	 * 
-	 * @param prm_name
+	 * @param prm_continentId
 	 *            is the name of the continent under question
 	 * @return a boolean which is true if exists otherwise false
 	 */
@@ -196,7 +196,7 @@ public class Map extends Observable{
 	 *            is x coordinate of the country
 	 * @param prm_y
 	 *            is y coordinate of the country
-	 * @return
+	 * @return a successfull message
 	 */
 	public String AddCountry(String prm_name, int prm_continentId, int prm_x, int prm_y) {
 		if (!DoesExistCountry(prm_name)) {
@@ -231,7 +231,8 @@ public class Map extends Observable{
 	 * this method verifies if the edge exists by the id of the countries
 	 * 
 	 * @param prm_countryId1
-	 *            which is the id of the first country of the edge under question
+	 *            which is the id of the first country of the edge under
+	 *            question
 	 * @param prm_countryId2
 	 *            which is the id of the second country
 	 * @return true if the edge exists otherwise false
@@ -296,14 +297,14 @@ public class Map extends Observable{
 	}
 
 	/**
-	 * this method adds a continent before adding it verifies if the continent does
-	 * exist before
+	 * this method adds a continent before adding it verifies if the continent
+	 * does exist before
 	 * 
 	 * @param prm_name
 	 *            is the name of the continent
 	 * @param prm_control
 	 *            ,which its type is integer, is the control of the continent
-	 * @return
+	 * @return a successful message
 	 */
 	public String AddContinent(String prm_name, int prm_control) {
 		if (!DoesExistCountry(prm_name)) {
@@ -316,7 +317,8 @@ public class Map extends Observable{
 	}
 
 	/**
-	 * this method returns a list of countries which are not assigned to a player
+	 * this method returns a list of countries which are not assigned to a
+	 * player
 	 * 
 	 * @return a list of countries
 	 */
@@ -489,7 +491,8 @@ public class Map extends Observable{
 	 * 
 	 * @param prm_country
 	 *            is the country to be removed
-	 * @return is successful if the country was removed otherwise returns duplicate
+	 * @return is successful if the country was removed otherwise returns
+	 *         duplicate
 	 */
 	public String RemoveCountry(Country prm_country) {
 		if (DoesExistCountry(prm_country.GetId())) {
@@ -589,7 +592,8 @@ public class Map extends Observable{
 	 * this method concatenates the name of all neighbor countries names
 	 * 
 	 * @param prm_country
-	 * @return
+	 *            is the country under question
+	 * @return list of neighbor countries
 	 */
 	public List<String> GetNeighhboursName(Country prm_country) {
 		List<String> neighborsName = new ArrayList<String>();
@@ -624,7 +628,7 @@ public class Map extends Observable{
 	/**
 	 * this method converts the whole map into a lines of string in map format
 	 * 
-	 * @return
+	 * @return countries converted into lines of maps
 	 */
 	public List<String> MapToLines() {
 		List<String> lines = new ArrayList<String>();
@@ -664,7 +668,12 @@ public class Map extends Observable{
 	}
 
 	/**
-	 * this method returns the list of the name of countries of a given continent
+	 * this method returns the list of the name of countries of a given
+	 * continent
+	 * 
+	 * @param prm_continentId
+	 *            is the id of continent
+	 * @return list of countries in string
 	 */
 	public String[] GetCountriesByContinentIdInStrings(int prm_continentId) {
 		List<String> countries = new ArrayList<String>();
@@ -705,8 +714,8 @@ public class Map extends Observable{
 	}
 
 	/**
-	 * this method returns the adjacent country of a given country which belong to
-	 * the same player
+	 * this method returns the adjacent country of a given country which belong
+	 * to the same player
 	 * 
 	 * @param prm_countryId,
 	 *            which is the id of the given country
@@ -722,21 +731,26 @@ public class Map extends Observable{
 		}
 		return neighbors;
 	}
-   /**this method returns continent by its id
-    * 
-    * @param prm_continentId
-    * @return the continent
-    */
+
+	/**
+	 * this method returns continent by its id
+	 * 
+	 * @param prm_continentId
+	 *            the id of the continent
+	 * @return the continent
+	 */
 	public Continent GetContinentById(int prm_continentId) {
 		// TODO Auto-generated method stub
-		for(Continent c : this.GetContinents()){
-			if(c instanceof Continent && c.GetId()==prm_continentId) return c;
+		for (Continent c : this.GetContinents()) {
+			if (c instanceof Continent && c.GetId() == prm_continentId)
+				return c;
 		}
 		return null;
 	}
+
 	/**
-	 * this method returns the adjacent country of a given country which belong to
-	 * the opponent player
+	 * this method returns the adjacent country of a given country which belong
+	 * to the opponent player
 	 * 
 	 * @param prm_countryId,
 	 *            which is the id of the given country
@@ -752,199 +766,317 @@ public class Map extends Observable{
 		}
 		return neighbors;
 	}
-	/**this method returns the neighbor opponent country by id
+
+	/**
+	 * this method returns the neighbor opponent country by id
 	 * 
-	 * @param prm_neighborId is the id of the neighbor country
+	 * @param prm_countryId
+	 *            is the id of the country
+	 * @param prm_neighborId
+	 *            the id of the neighbor
 	 * @return the neighbor country
 	 */
-	public Country GetNeighborOpponentById(int prm_countryId,int prm_neighborId){
-		for(Country c : this.GetNeighborsByCountryIdOpponentPlayer( prm_countryId)){
-			if(c.GetId()==prm_neighborId) return c;
+	public Country GetNeighborOpponentById(int prm_countryId, int prm_neighborId) {
+		for (Country c : this.GetNeighborsByCountryIdOpponentPlayer(prm_countryId)) {
+			if (c.GetId() == prm_neighborId)
+				return c;
 		}
 		return null;
 	}
-	/**this method verifies if the continent is captured by winner player
+
+	/**
+	 * this method verifies if the continent is captured by winner player
 	 * 
 	 * @param prm_winnerPlayerId
+	 *            the id of the winner player
 	 * @param prm_continentId
+	 *            the id of the continent
 	 * @return true if continent captured otherwise false
 	 */
-	public boolean IsContinentCaptured(int prm_winnerPlayerId,int prm_continentId ){
+	public boolean IsContinentCaptured(int prm_winnerPlayerId, int prm_continentId) {
 		boolean isContinentCaptured = true;
-		for(Country c : this.GetCountriesByContinentId(prm_continentId)){
-			if(c.GetPlayerId()!=prm_winnerPlayerId) isContinentCaptured=false;
+		for (Country c : this.GetCountriesByContinentId(prm_continentId)) {
+			if (c.GetPlayerId() != prm_winnerPlayerId)
+				isContinentCaptured = false;
 		}
-		if(isContinentCaptured){
+		if (isContinentCaptured) {
 			GetContinentById(prm_continentId).SetPlayerId(prm_winnerPlayerId);
-			//trigger change
+			// trigger change
+			setChanged();
+			notifyObservers(this);
 			return true;
 		}
 		return false;
 	}
-	/**this method verifies if the world is captured by winner player
+
+	/**
+	 * this method verifies if the world is captured by winner player
 	 * 
 	 * @param prm_winnerPlayerId
+	 *            the id of the winner player
 	 * @return true if world captured otherwise false
 	 */
-	public boolean IsWorldCaptured(int prm_winnerPlayerId ){
+	public boolean IsWorldCaptured(int prm_winnerPlayerId) {
 		boolean isWorldCaptured = true;
-		for(Country c : this.GetCountries()){
-			if(c.GetPlayerId()!=prm_winnerPlayerId) isWorldCaptured=false;
+		for (Country c : this.GetCountries()) {
+			if (c.GetPlayerId() != prm_winnerPlayerId)
+				isWorldCaptured = false;
 		}
-		if(isWorldCaptured){
-			//trigger change
+		if (isWorldCaptured) {
+			// trigger change
 			return true;
 		}
 		return false;
 	}
-	/**this method reset the visited property of all countries
-	 * and get the map prepared to validate connectivity
+
+	/**
+	 * this method reset the visited property of all countries and get the map
+	 * prepared to validate connectivity
 	 */
-	public void ResetVisitedWholeMap(){
-		for(Country c : GetCountries()){
-			c.visited=false;
+	public void ResetVisitedWholeMap() {
+		for (Country c : GetCountries()) {
+			c.visited = false;
 		}
 	}
-	/**this mthod travers the map from starting point 
-	 * and checks the connectivity of the map
+
+	/**
+	 * this mthod travers the map from starting point and checks the
+	 * connectivity of the map
+	 * 
 	 * @param prm_startCountry
+	 *            is the starting country to traverse the map
 	 */
-	public  void DFS(Country prm_startCountry){
+	public void DFS(Country prm_startCountry) {
 		List<Country> neighbors = prm_startCountry.GetNeighbors();
-		for(Country c : neighbors){
-			if(c!=null && !c.visited){
-				c.visited=true;
+		for (Country c : neighbors) {
+			if (c != null && !c.visited) {
+				c.visited = true;
 				DFS(c);
-				
+
 			}
 		}
 	}
-	/**this mthod travers the map from starting point 
-	 * and checks the connectivity of the map
+
+	/**
+	 * this mthod travers the map from starting point and checks the
+	 * connectivity of the map
+	 * 
 	 * @param prm_startCountry
+	 *            is the starting country to traverse the map
 	 */
-	public  void DFS_continents(Country prm_startCountry){
+	public void DFS_continents(Country prm_startCountry) {
 		List<Country> neighborsInContinent = prm_startCountry.GetNeighborsInContinent();
-		for(Country c : neighborsInContinent){
-			if(c!=null && !c.visited){
-				c.visited=true;
+		for (Country c : neighborsInContinent) {
+			if (c != null && !c.visited) {
+				c.visited = true;
 				DFS_continents(c);
-				
+
 			}
 		}
 	}
-	
-	/**this method validates the connectivity of the map
+
+	/**
+	 * this method validates the connectivity of the map
 	 * 
 	 * @return true if it is connected
 	 */
-	public boolean ValidationMapConnectivity(){
+	public boolean ValidationMapConnectivity() {
 		this.ResetVisitedWholeMap();
 		Country startCountry = this.GetCountries().get(0);
 		DFS(startCountry);
-		boolean mapIsConnected=true;
-		for(Country c : this.GetCountries()){
-			if(!c.visited){
-				mapIsConnected=false;
+		boolean mapIsConnected = true;
+		for (Country c : this.GetCountries()) {
+			if (!c.visited) {
+				mapIsConnected = false;
 				return false;
 			}
 		}
 		return mapIsConnected;
 	}
-	/**this method verifies if all continents are connected
+
+	/**
+	 * this method verifies if all continents are connected
 	 * 
 	 * @return true if all of them are connected otherwise false
 	 */
-	public boolean ValidateContinentsConnectivity(){
-		boolean continentIsValid=true;
+	public boolean ValidateContinentsConnectivity() {
+		boolean continentIsValid = true;
 		Country startCountry;
-		for(Continent countinent : GetContinents()){
+		for (Continent countinent : GetContinents()) {
 			this.ResetVisitedWholeMap();
-		    continentIsValid=true;
-			startCountry=GetCountriesByContinentId(countinent.GetId()).get(0);
+			continentIsValid = true;
+			startCountry = GetCountriesByContinentId(countinent.GetId()).get(0);
 			DFS_continents(startCountry);
-			for(Country c : GetCountriesByContinentId(countinent.GetId())){
-				if(!c.visited){
-					continentIsValid=false;
+			for (Country c : GetCountriesByContinentId(countinent.GetId())) {
+				if (!c.visited) {
+					continentIsValid = false;
 					return false;
 				}
 			}
 		}
 		return true;
 	}
-	/**this method adds armies to the country
-	 * it also notifies observers the changes
-	 * @param prm_countryId the id of the country
-	 * @param prm_armies the number of armies to be added
-	 * @return
+
+	/**
+	 * this method adds armies to the country it also notifies observers the
+	 * changes
+	 * 
+	 * @param prm_countryId
+	 *            the id of the country
+	 * @param prm_armies
+	 *            the number of armies to be added
+	 * @return a successful message
 	 */
-	public String AddArmiesToCountry(int prm_countryId,int prm_armies){
+	public String AddArmiesToCountry(int prm_countryId, int prm_armies) {
 		this.GetCountryById(prm_countryId).AddArmies(prm_armies);
-		//trigger change
+		// trigger change
 		setChanged();
 		notifyObservers(this);
 		return "SuccessfullyAddedArmies";
 	}
-	/**this method performs country conquest the winner player owns the looser country
+
+	/**
+	 * this method performs country conquest the winner player owns the looser
+	 * country
 	 * 
-	 * @param prm_winnerCountry
-	 * @param prm_loserCountry
+	 * @param prm_loserCountryId
+	 *            is the id of the loser country
+	 * @param prm_playerId
+	 *            is the id of the player
 	 * @return successful message
 	 */
-	public String ConquerCountry(int prm_loserCountryId, int prm_playerId){
+	public String ConquerCountry(int prm_loserCountryId, int prm_playerId) {
 		GetCountryById(prm_loserCountryId).SetPlayerId(prm_playerId);
-		//trigger change
+		// trigger change
 		setChanged();
 		notifyObservers(this);
 		return "Lppser country is conquered!";
 	}
-	/**this method performs taking control of the continent
-	 * it notifies the observers
-	 * @param prm_continentId the id of the continent to be taken control
-	 * @param prm_playerId the id of the player
+
+	/**
+	 * this method performs taking control of the continent it notifies the
+	 * observers
+	 * 
+	 * @param prm_continentId
+	 *            the id of the continent to be taken control
+	 * @param prm_playerId
+	 *            the id of the player
 	 * @return successfully message
 	 */
-	public String TakeControlOfContinent(int prm_continentId, int prm_playerId){
+	public String TakeControlOfContinent(int prm_continentId, int prm_playerId) {
 		GetContinentById(prm_continentId).SetPlayerId(prm_playerId);
-		//trigger change
+		// trigger change
 		setChanged();
 		notifyObservers(this);
 		return "SuccessfullyTookControl";
 	}
-	/**this method verifies if the attack is possible
+
+	/**
+	 * this method verifies if the attack is possible
 	 * 
-	 * @param prm_playerId the id of the player under the question
+	 * @param prm_playerId
+	 *            the id of the player under the question
 	 * @return true if is possible otherwise flase
 	 */
-	public boolean IsAttackPossibleByPlayerId(int prm_playerId){
-		for(Country c : GetCountriesByPlayerId(prm_playerId)){
-			if(c.GetArmies()>=2){
-				for(Country neighber : GetNeighborsByCountryIdOpponentPlayer(c.GetId())){
+	public boolean IsAttackPossibleByPlayerId(int prm_playerId) {
+		for (Country c : GetCountriesByPlayerId(prm_playerId)) {
+			if (c.GetArmies() >= 2) {
+				for (Country neighber : GetNeighborsByCountryIdOpponentPlayer(c.GetId())) {
 					return true;
 				}
 			}
 		}
 		return false;
 	}
-	/**this method returns the country by its id
+
+	/**
+	 * this method returns the country by its id
 	 * 
-	 * @param prm_countryId the id of the country
+	 * @param prm_countryId
+	 *            the id of the country
 	 * @return the country
 	 */
-	public Country GetCountryByCountryId(int prm_countryId){
-		for(Country c : GetCountries()){
-			if(c.GetId()==prm_countryId) return c;
+	public Country GetCountryByCountryId(int prm_countryId) {
+		for (Country c : GetCountries()) {
+			if (c.GetId() == prm_countryId)
+				return c;
 		}
 		return null;
 	}
-	public boolean IsNeighborByCountryId(int prm_sCountryId, int prm_dCountryId){
-		for(Edge e : edges){
-			if((e.GetCountryId1()==prm_sCountryId && e.GetCountryId2()==prm_dCountryId) ||
-			   (e.GetCountryId1()==prm_dCountryId && e.GetCountryId2()==prm_sCountryId)){
+
+	/**
+	 * this method checks if a country is the neighbor of the country under
+	 * question
+	 * 
+	 * @param prm_sCountryId
+	 *            the id of the country under question
+	 * @param prm_dCountryId
+	 *            the id of the neighbor country
+	 * @return is true if it is neighbor
+	 */
+	public boolean IsNeighborByCountryId(int prm_sCountryId, int prm_dCountryId) {
+		for (Edge e : edges) {
+			if ((e.GetCountryId1() == prm_sCountryId && e.GetCountryId2() == prm_dCountryId)
+					|| (e.GetCountryId1() == prm_dCountryId && e.GetCountryId2() == prm_sCountryId)) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
+	/**
+	 * this method calculates worls domination percentage per player it provied
+	 * information for world domination view
+	 * 
+	 * @return is the information about world domination in percentage of number
+	 *         of countries per player
+	 */
+	public String GetWorldDomination() {
+		int player1 = 0, player2 = 0, player3 = 0, player4 = 0, player5 = 0;
+		for (Country c : GetCountries()) {
+			switch (c.GetPlayerId()) {
+			case 1:
+				player1 += 1;
+				break;
+			case 2:
+				player2 += 1;
+				break;
+			case 3:
+				player3 += 1;
+				break;
+			case 4:
+				player4 += 1;
+				break;
+			case 5:
+				player5 += 1;
+				break;
+			}
+		}
+		if ((player1 + player2 + player3 + player4 + player5) != 0) {
+			return "player1 %: " + player1 * 100 / (player1 + player2 + player3 + player4 + player5) + "player2 %: "
+					+ player2 * 100 / (player1 + player2 + player3 + player4 + player5) + " player3 %: "
+					+ player3 * 100 / (player1 + player2 + player3 + player4 + player5) + " player4 %: "
+					+ player4 * 100 / (player1 + player2 + player3 + player4 + player5) + " player5 %: "
+					+ player5 * 100 / (player1 + player2 + player3 + player4 + player5);
+		} else {
+			return "data is not ready";
+		}
+
+	}
+
+	/**
+	 * this method sets the player id for a country it also triggers the
+	 * observer
+	 * 
+	 * @param prm_country
+	 *            is the country to change its player id
+	 * @param prm_playerId
+	 *            is the id of the player
+	 */
+	public void SetCountryPlayerId(Country prm_country, int prm_playerId) {
+		prm_country.SetPlayerId(prm_playerId);
+		setChanged();
+		notifyObservers(this);
+	}
+
 }

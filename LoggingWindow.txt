@@ -1,2 +1,708 @@
 this is test
 this is test2
+Load Map: Validation map connectivity failed
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Validation continents connectivity failed
+Load Map: Validation map connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 2 were placed on country Territory05
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 2 were placed on country Cockpit02
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 2 were placed on country Cockpit02
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 2 were placed on country Cockpit01
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 2 were placed on country Territory04
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 2 were placed on country Territory04
+Load Map: Map loaded as a connected graph successfully
+Load Map: Validation continents connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Validation continents connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Validation continents connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 2 were placed on country Cockpit01
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 11 were placed on country Territory05
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 11 were placed on country Cockpit01
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 11 were placed on country Cockpit03
+The attacker country has equal or more than 2 armies
+check if the attacker country belongs to the attacker player
+Attack Declaration successfully done
+The number of dices requested by attacker is in the range of 1 and 3
+The number of dices requested by defender is in the range 1 and 2
+The number of dices requested by attacker is less than  its armies
+The number of dices requested by defender is less or equal than its armies
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 11 were placed on country Cockpit01
+The attacker country has equal or more than 2 armies
+check if the attacker country belongs to the attacker player
+Attack Declaration successfully done
+The number of dices requested by attacker is in the range of 1 and 3
+The number of dices requested by defender is in the range 1 and 2
+The number of dices requested by attacker is less than  its armies
+The number of dices requested by defender is less or equal than its armies
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 11 were placed on country Cockpit01
+The attacker country has equal or more than 2 armies
+check if the attacker country belongs to the attacker player
+Attack Declaration successfully done
+The number of dices requested by attacker is in the range of 1 and 3
+The number of dices requested by defender is in the range 1 and 2
+The number of dices requested by attacker is less than  its armies
+The number of dices requested by defender is less or equal than its armies
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 11 were placed on country Cockpit03
+The attacker country has equal or more than 2 armies
+check if the attacker country belongs to the attacker player
+Attack Declaration successfully done
+The number of dices requested by attacker is in the range of 1 and 3
+The number of dices requested by defender is in the range 1 and 2
+The number of dices requested by attacker is less than  its armies
+The number of dices requested by defender is less or equal than its armies
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 11 were placed on country Cockpit02
+The attacker country has equal or more than 2 armies
+check if the attacker country belongs to the attacker player
+Attack Declaration successfully done
+The number of dices requested by attacker is in the range of 1 and 3
+The number of dices requested by defender is in the range 1 and 2
+The number of dices requested by attacker is less than  its armies
+The number of dices requested by defender is less or equal than its armies
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 11 were placed on country Cockpit02
+The attacker country has equal or more than 2 armies
+check if the attacker country belongs to the attacker player
+Attack Declaration successfully done
+The number of dices requested by attacker is in the range of 1 and 3
+The number of dices requested by defender is in the range 1 and 2
+The number of dices requested by attacker is less than  its armies
+The number of dices requested by defender is less or equal than its armies
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 11 were placed on country Cockpit01
+The attacker country has equal or more than 2 armies
+check if the attacker country belongs to the attacker player
+Attack Declaration successfully done
+The number of dices requested by attacker is in the range of 1 and 3
+The number of dices requested by defender is in the range 1 and 2
+The number of dices requested by attacker is less than  its armies
+The number of dices requested by defender is less or equal than its armies
+Propper number of armies deducted from defender and that added to the attacker country
+The defender country captured
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 11 were placed on country Cockpit03
+The attacker country has equal or more than 2 armies
+check if the attacker country belongs to the attacker player
+Attack Declaration successfully done
+The number of dices requested by attacker is in the range of 1 and 3
+The number of dices requested by defender is in the range 1 and 2
+The number of dices requested by attacker is less than  its armies
+The number of dices requested by defender is less or equal than its armies
+Propper number of armies deducted from attacker and that added to the defender country
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 11 were placed on country Cockpit01
+The attacker country has equal or more than 2 armies
+check if the attacker country belongs to the attacker player
+Attack Declaration successfully done
+The number of dices requested by attacker is in the range of 1 and 3
+The number of dices requested by defender is in the range 1 and 2
+The number of dices requested by attacker is less than  its armies
+The number of dices requested by defender is less or equal than its armies
+Propper number of armies deducted from attacker and that added to the defender country
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 11 were placed on country Territory04
+The attacker country has equal or more than 2 armies
+check if the attacker country belongs to the attacker player
+Attack Declaration successfully done
+The number of dices requested by attacker is in the range of 1 and 3
+The number of dices requested by defender is in the range 1 and 2
+The number of dices requested by attacker is less than  its armies
+The number of dices requested by defender is less or equal than its armies
+Propper number of armies deducted from defender and that added to the attacker country
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 11 were placed on country Territory07
+The attacker country has equal or more than 2 armies
+check if the attacker country belongs to the attacker player
+Attack Declaration successfully done
+The number of dices requested by attacker is in the range of 1 and 3
+The number of dices requested by defender is in the range 1 and 2
+The number of dices requested by attacker is less than  its armies
+The number of dices requested by defender is less or equal than its armies
+Propper number of armies deducted from defender and that added to the attacker country
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 11 were placed on country Cockpit03
+The attacker country has equal or more than 2 armies
+check if the attacker country belongs to the attacker player
+Attack Declaration successfully done
+The number of dices requested by attacker is in the range of 1 and 3
+The number of dices requested by defender is in the range 1 and 2
+The number of dices requested by attacker is less than  its armies
+The number of dices requested by defender is less or equal than its armies
+Propper number of armies deducted from attacker and that added to the defender country
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 11 were placed on country Cockpit02
+The attacker country has equal or more than 2 armies
+check if the attacker country belongs to the attacker player
+Attack Declaration successfully done
+The number of dices requested by attacker is in the range of 1 and 3
+The number of dices requested by defender is in the range 1 and 2
+The number of dices requested by attacker is less than  its armies
+The number of dices requested by defender is less or equal than its armies
+Propper number of armies deducted from defender and that added to the attacker country
+The defender country captured
+The number of armies to occupy captured country is according the rules(equal or more than attacker dices) and at least one army left at the attacker country
+The captured country was occupied
+Load Map: Map loaded as a connected graph successfully
+Load Map: Validation continents connectivity failed
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 11 were placed on country Cockpit02
+The attacker country has equal or more than 2 armies
+check if the attacker country belongs to the attacker player
+Attack Declaration successfully done
+The number of dices requested by attacker is in the range of 1 and 3
+The number of dices requested by defender is in the range 1 and 2
+The number of dices requested by attacker is less than  its armies
+The number of dices requested by defender is less or equal than its armies
+Propper number of armies deducted from attacker and that added to the defender country
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 11 were placed on country Territory06
+The attacker country has equal or more than 2 armies
+check if the attacker country belongs to the attacker player
+Attack Declaration successfully done
+The number of dices requested by attacker is in the range of 1 and 3
+The number of dices requested by defender is in the range 1 and 2
+The number of dices requested by attacker is less than  its armies
+The number of dices requested by defender is less or equal than its armies
+Propper number of armies deducted from attacker and that added to the defender country
+The two countries are not connected to move armies between them
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 11 were placed on country Territory04
+The attacker country has equal or more than 2 armies
+check if the attacker country belongs to the attacker player
+Attack Declaration successfully done
+The number of dices requested by attacker is in the range of 1 and 3
+The number of dices requested by defender is in the range 1 and 2
+The number of dices requested by attacker is less than  its armies
+The number of dices requested by defender is less or equal than its armies
+Propper number of armies deducted from defender and that added to the attacker country
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 11 were placed on country Cockpit01
+The attacker country has equal or more than 2 armies
+check if the attacker country belongs to the attacker player
+Attack Declaration successfully done
+The number of dices requested by attacker is in the range of 1 and 3
+The number of dices requested by defender is in the range 1 and 2
+The number of dices requested by attacker is less than  its armies
+The number of dices requested by defender is less or equal than its armies
+Propper number of armies deducted from defender and that added to the attacker country
+The defender country captured
+The number of armies to occupy captured country is according the rules(equal or more than attacker dices) and at least one army left at the attacker country
+The captured country was occupied
+The two countries are connected to move armies between them
+The source country has at least one country after fortification
+The two country for fortification do not belong the same player
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 11 were placed on country Territory04
+The attacker country has equal or more than 2 armies
+check if the attacker country belongs to the attacker player
+Attack Declaration successfully done
+The number of dices requested by attacker is in the range of 1 and 3
+The number of dices requested by defender is in the range 1 and 2
+The number of dices requested by attacker is less than  its armies
+The number of dices requested by defender is less or equal than its armies
+Propper number of armies deducted from attacker and that added to the defender country
+The two countries are connected to move armies between them
+The source country has at least one country after fortification
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+The reinforcement armies: 11 were placed on country Cockpit02
+The attacker country has equal or more than 2 armies
+check if the attacker country belongs to the attacker player
+Attack Declaration successfully done
+The number of dices requested by attacker is in the range of 1 and 3
+The number of dices requested by defender is in the range 1 and 2
+The number of dices requested by attacker is less than  its armies
+The number of dices requested by defender is less or equal than its armies
+Propper number of armies deducted from attacker and that added to the defender country
+The two countries are connected to move armies between them
+The source country has at least one country after fortification
+The fortification is done, one card was drawn because a country was captured from attack and turn is ended
+The fortification is done, no card was drawn because no country captured and turn is ended 
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Startup Phase: countries were allocated to the players randomly and evenly
+Startup Phase: armies were allocated to players based on risk rules
+Startup Phase: all armies placed one by one on countries in round-robin fashion
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully
+Load Map: Map loaded as a connected graph successfully

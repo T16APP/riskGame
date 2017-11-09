@@ -18,6 +18,7 @@ public class Card {
 	 * this is the constructor it takes the name and creates the card object
 	 * 
 	 * @param prm_name
+	 *            is the type of the card
 	 */
 	public Card(ECards prm_name) {
 		counter++;
@@ -39,15 +40,19 @@ public class Card {
 	/**
 	 * this method sets playerId
 	 * 
+	 * @param prm_playerId
+	 *            is the id of the player
 	 */
 	public void SetPlayerId(int prm_playerId) {
 		this.playerId = prm_playerId;
 	}
-	/**this method returns the id of the object
+
+	/**
+	 * this method returns the id of the object
 	 * 
 	 * @return is the id of the card
 	 */
-	public int GetId(){
+	public int GetId() {
 		return this.id;
 	}
 }

@@ -23,11 +23,12 @@ public class EndReinforcementPhaseListener implements ActionListener {
 	static JFrame frame;
 
 	/**
-	 * Causes a new window to Pop-up. This window then asks the user to indicate the
-	 * Continent name, the Control value. The control value must be set as Integer.
+	 * Causes a new window to Pop-up. This window then asks the user to indicate
+	 * the Continent name, the Control value. The control value must be set as
+	 * Integer.
 	 * 
-	 * @param actionEvent
-	 *            Not used.
+	 * @param e
+	 *            is the event
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -41,15 +42,16 @@ public class EndReinforcementPhaseListener implements ActionListener {
 		buttonOK.addActionListener(new ActionListener() {
 
 			/**
-			 * Causes a new window to Pop-up. This window then asks the user to indicate the
-			 * Continent name, the Control value. The control value must be set as Integer.
+			 * Causes a new window to Pop-up. This window then asks the user to
+			 * indicate the Continent name, the Control value. The control value
+			 * must be set as Integer.
 			 * 
 			 * @param actionEvent
 			 *            Not used.
 			 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				staticApplicationVariables.gb.EndReinforcementPhase();
+				staticApplicationVariables.gb.turnOrganizer.GetCurrentPlayer().EndReinforcementPhase();
 				System.out.println(staticApplicationVariables.gb.turnOrganizer.GetCurrentPhase());
 				JOptionPane.showMessageDialog(null, " Reinforcement Phase Ended  Successfully");
 				frame.dispose();

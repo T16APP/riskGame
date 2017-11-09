@@ -15,9 +15,9 @@ public class Land implements ILand {
 	protected int playerId;
 
 	/**
-	 * this constructor generates the land object it takes the name of the object
-	 * and generates the id of the object as a unique incremental integer this
-	 * constructor will be used to construct continents and countries
+	 * this constructor generates the land object it takes the name of the
+	 * object and generates the id of the object as a unique incremental integer
+	 * this constructor will be used to construct continents and countries
 	 * 
 	 * @param prm_name
 	 *            , which is string, is the name of the new object
@@ -30,8 +30,8 @@ public class Land implements ILand {
 	}
 
 	/**
-	 * this method returns the name of the object which is used in the continent and
-	 * country instances
+	 * this method returns the name of the object which is used in the continent
+	 * and country instances
 	 * 
 	 * @return , which is string, the name of the object
 	 */
@@ -40,14 +40,23 @@ public class Land implements ILand {
 	}
 
 	/**
-	 * this function returns the id of the object which is used in the continent and
-	 * country instances
+	 * this function returns the id of the object which is used in the continent
+	 * and country instances
 	 * 
 	 * @return ,which is integer, is the id of the object, which could be a
 	 *         continent or a country
 	 */
 	public int GetId() {
 		return this.id;
+	}
+
+	/**
+	 * this method returns the playerId
+	 * 
+	 * @return is the id of the player
+	 */
+	public int GetPlayerId() {
+		return playerId;
 	}
 
 }

@@ -11,9 +11,8 @@ import org.junit.runners.Suite.SuiteClasses;
  * @version 1.0
  */
 @RunWith(Suite.class)
-@SuiteClasses({ TestContinent.class, TestCountry.class, TestEdge.class, TestGameBoard.class,
-		TestLand.class, TestMap.class, TestMapParser.class, TestNumberOfReinforcementArmies.class, TestPlayer.class,
-		})
+@SuiteClasses({ TestContinent.class, TestCountry.class, TestEdge.class, TestGameBoard.class, TestLand.class,
+		TestMap.class, TestMapParser.class, TestPlayer.class, })
 public class TestSuite {
 
 }

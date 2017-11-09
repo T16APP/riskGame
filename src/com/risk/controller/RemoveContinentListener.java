@@ -29,11 +29,11 @@ public class RemoveContinentListener extends JFrame implements ActionListener {
 	JLabel lblContinentNametoberemoved;
 
 	/**
-	 * Causes a new window to Pop-up. This window then asks the user to indicate the
-	 * Continent name, the Control value. The control value must be set as Integer
+	 * Causes a new window to Pop-up. This window then asks the user to indicate
+	 * the Continent name, the Control value. The control value must be set as
+	 * Integer
 	 * 
-	 * @param actionEvent
-	 *            Not used.
+	 * Not used.
 	 */
 
 	@Override

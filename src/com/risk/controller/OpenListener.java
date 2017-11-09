@@ -32,8 +32,8 @@ import com.risk.view.applicationWindow;
  */
 public class OpenListener implements ActionListener {
 	/**
-	 * Used to gain access to the globally shared graph, which needs to be altered
-	 * in this class.
+	 * Used to gain access to the globally shared graph, which needs to be
+	 * altered in this class.
 	 */
 	private applicationWindow gui;
 
@@ -45,8 +45,9 @@ public class OpenListener implements ActionListener {
 	}
 
 	/**
-	 * Causes a new window to Pop-up. This window then asks the user to indicate the
-	 * Continent name, the Control value. The control value must be set as Integer
+	 * Causes a new window to Pop-up. This window then asks the user to indicate
+	 * the Continent name, the Control value. The control value must be set as
+	 * Integer
 	 * 
 	 * @param actionEvent
 	 *            Not used.
@@ -78,8 +79,9 @@ public class OpenListener implements ActionListener {
 				MapParser.WriteMapToFile(gameboard.map, "output.txt");
 
 				/*
-				 * Gives the user a chance to save the work he's presently working on. If the
-				 * user chooses to proceed, all of his/her work is lost forever.
+				 * Gives the user a chance to save the work he's presently
+				 * working on. If the user chooses to proceed, all of his/her
+				 * work is lost forever.
 				 */
 				int userResponse = JOptionPane.showConfirmDialog(gui.getContentPane(),
 						"If you open this file without saving the one you're\n"

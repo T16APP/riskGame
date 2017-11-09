@@ -15,11 +15,10 @@ import com.risk.utility.staticApplicationVariables;
  */
 public class SavetofileListener implements ActionListener {
 	/**
-	 * Causes a new window to Pop-up. This window then asks the user to indicate the
-	 * Continent name, the Control value. The control value must be set as Integer
+	 * Causes a new window to Pop-up. This window then asks the user to indicate
+	 * the Continent name, the Control value. The control value must be set as
+	 * Integer
 	 * 
-	 * @param actionEvent
-	 *            Not used.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

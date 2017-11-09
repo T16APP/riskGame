@@ -8,9 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
- * This class is used for the lower window of the main frame
- * author Sandeep Swainch
- * version 1.0
+ * This class is used for the lower window of the main frame author Sandeep
+ * Swainch version 1.0
  */
 public class gameGuiPanel extends JPanel {
 

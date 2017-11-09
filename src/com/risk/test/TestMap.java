@@ -30,6 +30,7 @@ public class TestMap {
 	Map map;
 	Edge edge;
 	Country country;
+	GameBoard gameBoard;
 
 	/**
 	 * Test case Initialization for TestMap
@@ -53,7 +54,7 @@ public class TestMap {
 		System.out.println(author);
 		assertNull("new_name", author);
 	}
-	
+
 	/**
 	 * This Test case test the Edge is added
 	 */
@@ -90,7 +91,35 @@ public class TestMap {
 	}
 
 	/**
-	 * Perform post-test clean-up.
+	 * this method verifies the connectivity of the map
+	 * 
+	 * @throws Exception
+	 *             Exception if the logging window file does not exist
+	 * 
+	 */
+	@Test
+	public void TestMapConnectivity() throws Exception {
+		gameBoard = GameBoard.GetGameBoard();
+		gameBoard.LoadMap("Earth.map");
+		assertTrue(gameBoard.map.ValidationMapConnectivity());
+	}
+
+	/**
+	 * this method verifies if all continents are connected
+	 * 
+	 * @throws Exception
+	 *             Exception if the logging window file does not exist
+	 * 
+	 */
+	@Test
+	public void TestContinentsConnectivity() throws Exception {
+		gameBoard = GameBoard.GetGameBoard();
+		gameBoard.LoadMap("Earth.map");
+		assertTrue(gameBoard.map.ValidateContinentsConnectivity());
+	}
+
+	/**
+	 * Perform post-test clegan-up.
 	 * 
 	 * @throws Exception
 	 *             if the clean-up fails for some reason
@@ -105,4 +134,5 @@ public class TestMap {
 		assertNull(edge);
 		assertNull(country);
 	}
+
 }

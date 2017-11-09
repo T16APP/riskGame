@@ -16,13 +16,14 @@ public class Continent extends Land {
 	int playerId;
 
 	/**
-	 * This is the constructor of the Continent class, it inherits partially from
-	 * the parent superclass, Land, to set the continentId and the name and the
-	 * constructor sets the control value and assign -1 to playerId which means that
-	 * in Gameplay phase it will be assigned to a player
+	 * This is the constructor of the Continent class, it inherits partially
+	 * from the parent superclass, Land, to set the continentId and the name and
+	 * the constructor sets the control value and assign -1 to playerId which
+	 * means that in Gameplay phase it will be assigned to a player
 	 * 
 	 * @param prm_name
-	 *            this parameter will be the name of the continent which is created
+	 *            this parameter will be the name of the continent which is
+	 *            created
 	 * @param prm_control
 	 *            this parameter represents the value of the control of the
 	 *            continent
@@ -49,18 +50,24 @@ public class Continent extends Land {
 	public int GetControl() {
 		return control;
 	}
-    /**this method sets the playerId of the continent
-     * @param playerId is the id of the player who owns the continent
-     */
+
+	/**
+	 * this method sets the playerId of the continent
+	 * 
+	 * @param prm_playerId
+	 *            is the id of the player who owns the continent
+	 */
 	public void SetPlayerId(int prm_playerId) {
 		// TODO Auto-generated method stub
-		this.playerId=prm_playerId;
+		this.playerId = prm_playerId;
 	}
-	/**this method returns the id of the player
+
+	/**
+	 * this method returns the id of the player
 	 * 
 	 * @return the id of the player who owns the continent
 	 */
-	public int GetPlayerId(){
+	public int GetPlayerId() {
 		return this.playerId;
 	}
 

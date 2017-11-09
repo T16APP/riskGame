@@ -10,23 +10,82 @@ public class Console {
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 
-		//applicationWindow appWindow = new applicationWindow();
-		//System.out.println("Game started");
-		//appWindow.open();
-		LoggingWindow.Log("this is test");
-		LoggingWindow.Log("this is test2");
-		Demo_MapConnectivityValidation();
+		// applicationWindow appWindow = new applicationWindow();
+		// System.out.println("Game started");
+		// appWindow.open();
+		Demo_StartUp_Reinforcement();
 	}
 
- public static void Demo_MapConnectivityValidation() throws Exception { 
-	  GameBoard gameBoard = GameBoard.GetGameBoard(); //header validation
-	  //gameBoard.LoadMap("Earth_Validation_MapConnectivity.map"); 
-	  //gameBoard.LoadMap("Earth_Validation_ContinentConnectivity.map"); 
-	  gameBoard.LoadMap("Earth.map"); 
-	  //boolean isConnectivityValid = gameBoard.map.ValidationMapConnectivity();
-	  boolean isConnectivityValid = gameBoard.map.ValidateContinentsConnectivity();
-	  System.out.println(isConnectivityValid);
-	  } 
+	public static void Demo_StartUp_Reinforcement() throws Exception {
+		GameBoard gameBoard = GameBoard.GetGameBoard();
+		gameBoard.LoadMap("Earth.map");
+		gameBoard.StartupGame(3);
+		Player currentPlayer = gameBoard.turnOrganizer.GetCurrentPlayer();
+		Country defenderCountry = gameBoard.map.GetCountriesByPlayerId(currentPlayer.GetId()).get(0);
+		Country countryAttacker = gameBoard.map.GetCountriesByPlayerId(currentPlayer.GetId()).get(0);
+		Country countryNeighbor = gameBoard.map.GetNeighborsByCountryIdSamePlayer(countryAttacker.GetId()).get(0);
+		Player defenderPlayer = gameBoard.GetPlayerById(defenderCountry.GetPlayerId());
+		for (Country c : gameBoard.map.GetCountriesByPlayerId(currentPlayer.GetId())) {
+			if (gameBoard.map.GetNeighborsByCountryIdOpponentPlayer(c.GetId()).size() > 0) {
+				countryAttacker = c;
+				defenderCountry = gameBoard.map.GetNeighborsByCountryIdOpponentPlayer(c.GetId()).get(0);
+				break;
+			}
+		}
+		System.out.println("_____Reinforcement place armies demo_____");
+		System.out.println("Number of player armies befor reinforcement:" + currentPlayer.GetArmies());
+		System.out.println("Number of country armies befor reinforcement:" + countryAttacker.GetArmies());
+		currentPlayer.PlaceReinforcedArmiesOnCountry(countryAttacker.GetId(), 11);
+		System.out.println("Number of player armies after reinforcement:" + currentPlayer.GetArmies());
+		System.out.println("Number of country armies after reinforcement:" + countryAttacker.GetArmies());
+		System.out.println("_____End of Reinforcement place armies demo_____");
+		currentPlayer.EndReinforcementPhase();
+		System.out.println("Attack  demo_____");
+		System.out.println("Number of attacker country armies befor attck:" + countryAttacker.GetArmies());
+		System.out.println("Number of defender country armies befor attck:" + defenderCountry.GetArmies());
+		currentPlayer.DeclareAttack(countryAttacker.GetId(), defenderCountry.GetId(), defenderPlayer);
+		currentPlayer.Attack(2, 2);
+		System.out.println("Number of attacker country armies after attck:" + countryAttacker.GetArmies());
+		System.out.println("Number of defender country armies after attck:" + defenderCountry.GetArmies());
+		if (gameBoard.turnOrganizer.GetCurrentPlayer().attack.isCaptured) {
+			System.out.println("Number of attacker country armies befor occupation:" + countryAttacker.GetArmies());
+			System.out.println("Number of defender country armies befor occupation:" + defenderCountry.GetArmies());
+			currentPlayer.OccupyCountry(3);
+			System.out.println("Number of attacker country armies after occupation:" + countryAttacker.GetArmies());
+			System.out.println("Number of defender country armies after occupation:" + defenderCountry.GetArmies());
+		}
+		currentPlayer.EndAttackPhase();
+		System.out.println("End of Attack  demo_____");
+		System.out.println("Fortification  demo_____");
+		System.out.println("Number of source country armies befor fortification:" + countryAttacker.GetArmies());
+		System.out.println("Number of destination country armies befor fortification:" + countryNeighbor.GetArmies());
+		currentPlayer.MoveArmiesToCountryFromCountry(countryAttacker.GetId(), countryNeighbor.GetId(), 2);
+		System.out.println("Number of source country armies after fortification:" + countryAttacker.GetArmies());
+		System.out.println("Number of destination country armies after fortification:" + countryNeighbor.GetArmies());
+		System.out.println("End of Fortification  demo_____");
+	}
+
+	public static void Demo_MapConnectivityValidation() throws Exception {
+		GameBoard gameBoard = GameBoard.GetGameBoard(); // header validation
+		gameBoard.LoadMap("Earth_Validation_MapConnectivity.map");
+		// gameBoard.LoadMap("Earth_Validation_ContinentConnectivity.map");
+		// gameBoard.LoadMap("Earth.map");
+		boolean isConnectivityValid = gameBoard.map.ValidationMapConnectivity();
+		// boolean isConnectivityValid =
+		// gameBoard.map.ValidateContinentsConnectivity();
+		System.out.println(isConnectivityValid);
+	}
+
+	public static void Demo_ContinentConnectivityValidation() throws Exception {
+		GameBoard gameBoard = GameBoard.GetGameBoard(); // header validation
+		// gameBoard.LoadMap("Earth_Validation_MapConnectivity.map");
+		gameBoard.LoadMap("Earth_Validation_ContinentConnectivity.map");
+		// gameBoard.LoadMap("Earth.map");
+		// boolean isConnectivityValid =
+		// gameBoard.map.ValidationMapConnectivity();
+		boolean isConnectivityValid = gameBoard.map.ValidateContinentsConnectivity();
+		System.out.println(isConnectivityValid);
+	}
 }
 /*
  * public static void Demo_MapValidation() throws Exception { GameBoard

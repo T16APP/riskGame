@@ -98,14 +98,19 @@ public class MapParser {
 		}
 		return true;
 	}
-    /**this method validates the map file against the map, continents, and
-     * teritories headers
-     * @param is prm_input which is the name of the map file
-     * @return is boolean which is true if it passes validation
-     * otherwise flase
-     */
+
+	/**
+	 * this method validates the map file against the map, continents, and
+	 * teritories headers
+	 * 
+	 * @param prm_input
+	 *            which is the name of the map file
+	 * @return is boolean which is true if it passes validation otherwise flase
+	 * @throws Exception
+	 *             if the file map does not exist
+	 */
 	public static boolean MapValidator_Header(String prm_input) throws Exception {
-		boolean isValid=false;
+		boolean isValid = false;
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new FileReader(prm_input));
@@ -114,56 +119,60 @@ public class MapParser {
 			return isValid;
 		}
 		StringBuilder sb = new StringBuilder();
-			String line = br.readLine();
-			String header = "";
-			ArrayList arrMap = new ArrayList();
-			ArrayList arrContinents = new ArrayList();
-			ArrayList arrCountries = new ArrayList();
-			boolean existsMap = false;
-			boolean existsContinents = false;
-			boolean existsTerritories = false;
-			while (line != null) {
-				sb.append(line);
-				sb.append(System.lineSeparator());
-				if (line.startsWith("[Map]")) {
-					header = "Map";
-					existsMap = true;
-				} else if (line.startsWith("[Continents]")) {
-					header = "Continents";
-					existsContinents = true;
-				} else if (line.startsWith("[Territories]")) {
-					header = "Territories";
-					existsTerritories = true;
-				} else if (!line.isEmpty()) {
-					switch (header) {
-					case "Map":
-						arrMap.add(line);
-						break;
-					case "Continents":
-						arrContinents.add(line);
-						break;
-					case "Territories":
-						arrCountries.add(line);
-						break;
-					}
+		String line = br.readLine();
+		String header = "";
+		ArrayList arrMap = new ArrayList();
+		ArrayList arrContinents = new ArrayList();
+		ArrayList arrCountries = new ArrayList();
+		boolean existsMap = false;
+		boolean existsContinents = false;
+		boolean existsTerritories = false;
+		while (line != null) {
+			sb.append(line);
+			sb.append(System.lineSeparator());
+			if (line.startsWith("[Map]")) {
+				header = "Map";
+				existsMap = true;
+			} else if (line.startsWith("[Continents]")) {
+				header = "Continents";
+				existsContinents = true;
+			} else if (line.startsWith("[Territories]")) {
+				header = "Territories";
+				existsTerritories = true;
+			} else if (!line.isEmpty()) {
+				switch (header) {
+				case "Map":
+					arrMap.add(line);
+					break;
+				case "Continents":
+					arrContinents.add(line);
+					break;
+				case "Territories":
+					arrCountries.add(line);
+					break;
 				}
-				line = br.readLine();
 			}
-			br.close();
-			// validate headers: [Map],[Continents],[Territories]
-			if (existsMap == true && existsContinents == true && existsTerritories == true) {
-				isValid = true;
+			line = br.readLine();
+		}
+		br.close();
+		// validate headers: [Map],[Continents],[Territories]
+		if (existsMap == true && existsContinents == true && existsTerritories == true) {
+			isValid = true;
 
-			}
-			
+		}
 
 		return isValid;
 	}
-	/**this method validates the map file against the minimum number
-	 * of continents that is one
-	 * @param prm_input is the name of the map file
-	 * @return is boolean which is true if the validation passes otherwise false
+
+	/**
+	 * this method validates the map file against the minimum number of
+	 * continents that is one
 	 * 
+	 * @param prm_input
+	 *            is the name of the map file
+	 * @return is boolean which is true if the validation passes otherwise false
+	 * @throws Exception
+	 *             if the map file does not exist
 	 */
 	public static boolean MapValidator_MinContinents(String prm_input) throws Exception {
 		boolean isValid = false;
@@ -175,57 +184,63 @@ public class MapParser {
 			return isValid;
 		}
 		StringBuilder sb = new StringBuilder();
-			String line = br.readLine();
-			String header = "";
-			ArrayList arrMap = new ArrayList();
-			ArrayList arrContinents = new ArrayList();
-			ArrayList arrCountries = new ArrayList();
-			boolean existsMap = false;
-			boolean existsContinents = false;
-			boolean existsTerritories = false;
-			while (line != null) {
-				sb.append(line);
-				sb.append(System.lineSeparator());
-				if (line.startsWith("[Map]")) {
-					header = "Map";
-					existsMap = true;
-				} else if (line.startsWith("[Continents]")) {
-					header = "Continents";
-					existsContinents = true;
-				} else if (line.startsWith("[Territories]")) {
-					header = "Territories";
-					existsTerritories = true;
-				} else if (!line.isEmpty()) {
-					switch (header) {
-					case "Map":
-						arrMap.add(line);
-						break;
-					case "Continents":
-						arrContinents.add(line);
-						break;
-					case "Territories":
-						arrCountries.add(line);
-						break;
-					}
+		String line = br.readLine();
+		String header = "";
+		ArrayList arrMap = new ArrayList();
+		ArrayList arrContinents = new ArrayList();
+		ArrayList arrCountries = new ArrayList();
+		boolean existsMap = false;
+		boolean existsContinents = false;
+		boolean existsTerritories = false;
+		while (line != null) {
+			sb.append(line);
+			sb.append(System.lineSeparator());
+			if (line.startsWith("[Map]")) {
+				header = "Map";
+				existsMap = true;
+			} else if (line.startsWith("[Continents]")) {
+				header = "Continents";
+				existsContinents = true;
+			} else if (line.startsWith("[Territories]")) {
+				header = "Territories";
+				existsTerritories = true;
+			} else if (!line.isEmpty()) {
+				switch (header) {
+				case "Map":
+					arrMap.add(line);
+					break;
+				case "Continents":
+					arrContinents.add(line);
+					break;
+				case "Territories":
+					arrCountries.add(line);
+					break;
 				}
-				line = br.readLine();
 			}
-			br.close();
-			// continents validator: fails if there is no continent
-			if (arrContinents.size() >= 1) {
-				isValid=true;;
-			}
-		
+			line = br.readLine();
+		}
+		br.close();
+		// continents validator: fails if there is no continent
+		if (arrContinents.size() >= 1) {
+			isValid = true;
+			;
+		}
+
 		return isValid;
 	}
-	/**this method validates the map file against the minimum number
-	 * of countries that is 5
-	 * @param prm_input is the name of the map file
-	 * @return is boolean which is true if the validation passes otherwise false
+
+	/**
+	 * this method validates the map file against the minimum number of
+	 * countries that is 5
 	 * 
+	 * @param input
+	 *            is the name of the map file
+	 * @return is boolean which is true if the validation passes otherwise false
+	 * @throws Exception
+	 *             if the map file does not exist
 	 */
 	public static boolean MapValidator_MinCountries(String input) throws Exception {
-		boolean isValid=false;
+		boolean isValid = false;
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new FileReader(input));
@@ -234,49 +249,50 @@ public class MapParser {
 			return isValid;
 		}
 		StringBuilder sb = new StringBuilder();
-			String line = br.readLine();
-			String header = "";
-			ArrayList arrMap = new ArrayList();
-			ArrayList arrContinents = new ArrayList();
-			ArrayList arrCountries = new ArrayList();
-			boolean existsMap = false;
-			boolean existsContinents = false;
-			boolean existsTerritories = false;
-			while (line != null) {
-				sb.append(line);
-				sb.append(System.lineSeparator());
-				if (line.startsWith("[Map]")) {
-					header = "Map";
-					existsMap = true;
-				} else if (line.startsWith("[Continents]")) {
-					header = "Continents";
-					existsContinents = true;
-				} else if (line.startsWith("[Territories]")) {
-					header = "Territories";
-					existsTerritories = true;
-				} else if (!line.isEmpty()) {
-					switch (header) {
-					case "Map":
-						arrMap.add(line);
-						break;
-					case "Continents":
-						arrContinents.add(line);
-						break;
-					case "Territories":
-						arrCountries.add(line);
-						break;
-					}
+		String line = br.readLine();
+		String header = "";
+		ArrayList arrMap = new ArrayList();
+		ArrayList arrContinents = new ArrayList();
+		ArrayList arrCountries = new ArrayList();
+		boolean existsMap = false;
+		boolean existsContinents = false;
+		boolean existsTerritories = false;
+		while (line != null) {
+			sb.append(line);
+			sb.append(System.lineSeparator());
+			if (line.startsWith("[Map]")) {
+				header = "Map";
+				existsMap = true;
+			} else if (line.startsWith("[Continents]")) {
+				header = "Continents";
+				existsContinents = true;
+			} else if (line.startsWith("[Territories]")) {
+				header = "Territories";
+				existsTerritories = true;
+			} else if (!line.isEmpty()) {
+				switch (header) {
+				case "Map":
+					arrMap.add(line);
+					break;
+				case "Continents":
+					arrContinents.add(line);
+					break;
+				case "Territories":
+					arrCountries.add(line);
+					break;
 				}
-				line = br.readLine();
 			}
-			br.close();
-			// countries validator: fails if there are less than 5 countries
-			if (arrCountries.size() >= 5) {
-				isValid=true;
-			}
+			line = br.readLine();
+		}
+		br.close();
+		// countries validator: fails if there are less than 5 countries
+		if (arrCountries.size() >= 5) {
+			isValid = true;
+		}
 
 		return isValid;
 	}
+
 	/**
 	 * this method parse a map file and returns a map object
 	 * 
@@ -284,6 +300,7 @@ public class MapParser {
 	 *            is a file
 	 * @return a map object contains continents and countries
 	 * @throws Exception
+	 *             if the map file does not exist
 	 */
 	public static Map MapParser(String input) throws Exception {
 		map = new Map("map1");
@@ -304,7 +321,7 @@ public class MapParser {
 			ArrayList arrMap = new ArrayList();
 			ArrayList arrContinents = new ArrayList();
 			ArrayList arrCountries = new ArrayList();
-			//reading the map file line by line
+			// reading the map file line by line
 			while (line != null) {
 				sb.append(line);
 				sb.append(System.lineSeparator());
@@ -353,10 +370,14 @@ public class MapParser {
 				if (strLines.length > 4) {
 					for (int i = 4; i < strLines.length; i++) {
 						map.AddEdge(new Edge(map.GetCountryIdByName(strLines[0]), map.GetCountryIdByName(strLines[i])));
-						map.GetCountryById(map.GetCountryIdByName(strLines[0])).AddNeighbor(map.GetCountryById(map.GetCountryIdByName(strLines[i])));
+						map.GetCountryById(map.GetCountryIdByName(strLines[0]))
+								.AddNeighbor(map.GetCountryById(map.GetCountryIdByName(strLines[i])));
 					}
 				}
 
+			}
+			if (!map.ValidationMapConnectivity()) {
+				throw new Exception("The map is not connected");
 			}
 			return map;
 		} finally {
@@ -409,9 +430,7 @@ public class MapParser {
 	 * 
 	 * @param line
 	 *            is the line of a map
-	 * @param prm_id
-	 *            is the id of the country to be created
-	 * @return
+	 * @return is a land
 	 */
 	public static Land ParseCountries(String line) {
 		if (!line.isEmpty()) {

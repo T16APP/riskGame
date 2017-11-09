@@ -14,10 +14,8 @@ public class ExchangeCardsforAplayerListener extends JFrame implements ActionLis
 	 * Causes a new window to Pop-up. This window then asks the user to indicate the
 	 * Continent name, the Control value. The control value must be set as Integer
 	 * 
-	 * @param actionEvent
-	 *            Not used.
+	 * @param e is the event
 	 */
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try {
