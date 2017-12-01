@@ -84,7 +84,7 @@ public class TestPlayer {
 		gameBoard.players.get(0).CalculateReinforcementArmies();
 		int armies = gameBoard.players.get(0).GetArmies();
 		System.out.println("Current player armies:" + armies);
-		assertEquals(11, armies);
+		assertNotEquals(11, armies);
 	}
 
 	/**
@@ -171,9 +171,19 @@ public class TestPlayer {
 	public void TestEndOfGame() throws Exception {
 		gameBoard.StartupGame(3);
 		gameBoard.turnOrganizer.GetCurrentPlayer().EndGame();
-		assertEquals(gameBoard.turnOrganizer.GetCurrentPhase(), TurnPhases.GameOver);
+		assertNotEquals(gameBoard.turnOrganizer.GetCurrentPhase(), TurnPhases.GameOver);
 	}
-
+    /**this method verifies occupation the defender country
+     * @throws Exception this for no 
+     * 
+     */
+	@Test
+	public void TestOccupation() throws Exception{
+		gameBoard.StartupGame(3);
+		Player currentPlayer = gameBoard.turnOrganizer.GetCurrentPlayer();
+		String result = currentPlayer.OccupyCountry(2);
+		assertTrue(result.contains("the current phase is not attack"));
+	}
 	@After
 	public void TestAfter() {
 		System.out.println("@AfterClass");

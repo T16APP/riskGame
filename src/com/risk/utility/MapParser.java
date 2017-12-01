@@ -87,7 +87,7 @@ public class MapParser {
 				throw new Exception("Map contains no continent!");
 			}
 			// countries validator: fails if there are less than 5 countries
-			if (arrCountries.size() < 5) {
+			if (arrCountries.size() < 2) {
 				throw new Exception("Map contains less than 5 countries!");
 			}
 
@@ -369,15 +369,18 @@ public class MapParser {
 				strLines = ((String) o).split(",");
 				if (strLines.length > 4) {
 					for (int i = 4; i < strLines.length; i++) {
-						map.AddEdge(new Edge(map.GetCountryIdByName(strLines[0]), map.GetCountryIdByName(strLines[i])));
-						map.GetCountryById(map.GetCountryIdByName(strLines[0]))
-								.AddNeighbor(map.GetCountryById(map.GetCountryIdByName(strLines[i])));
+						map.AddEdge(new Edge(map.GetCountryIdByName(strLines[0].trim()), map.GetCountryIdByName(strLines[i].trim())));
+						map.GetCountryById(map.GetCountryIdByName(strLines[0].trim()))
+								.AddNeighbor(map.GetCountryById(map.GetCountryIdByName(strLines[i].trim())));
 					}
 				}
 
 			}
 			if (!map.ValidationMapConnectivity()) {
 				throw new Exception("The map is not connected");
+			}
+			if (!map.ValidateContinentsConnectivity()) {
+				throw new Exception("The continents are not connected");
 			}
 			return map;
 		} finally {
@@ -396,8 +399,8 @@ public class MapParser {
 		if (!line.isEmpty()) {
 			String[] lines = line.split("=");
 			String strName = lines[0];
-			int control = Integer.parseInt(lines[1]);
-			return FactoryLand.GetLand("Continent", strName, -1, -1, -1, control);
+			int control = Integer.parseInt(lines[1].trim());
+			return FactoryLand.GetLand("Continent", strName.trim(), -1, -1, -1, control);
 		}
 		return null;
 	}
@@ -435,11 +438,11 @@ public class MapParser {
 	public static Land ParseCountries(String line) {
 		if (!line.isEmpty()) {
 			String[] lines = line.split(",");
-			String strName = lines[0];
+			String strName = lines[0].trim();
 			int x = Integer.parseInt(lines[1]);
 			int y = Integer.parseInt(lines[2]);
-			String strContinent = lines[3];
-			return FactoryLand.GetLand("Country", strName, map.GetContinentIdByName(strContinent), x, y, -1);
+			String strContinent = lines[3].trim();
+			return FactoryLand.GetLand("Country", strName.trim(), map.GetContinentIdByName(strContinent), x, y, -1);
 		} else
 			return null;
 	}

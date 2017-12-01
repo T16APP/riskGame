@@ -13,7 +13,13 @@ import java.util.List;
 
 public class Continent extends Land {
 	int control;
-	int playerId;
+	/**this is standared constructor for json use
+	 * 
+	 */
+	public Continent(){
+		super();
+	}
+
 
 	/**
 	 * This is the constructor of the Continent class, it inherits partially

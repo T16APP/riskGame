@@ -16,6 +16,13 @@ public class Edge implements Comparable {
 	private int id;
 	private int countryId1;
 	private int countryId2;
+	
+	/**this is standard constructor for json use
+	 * 
+	 */
+	public Edge(){
+		
+	}
 
 	/**
 	 * This the constructor of the edge which set the object id and id of the

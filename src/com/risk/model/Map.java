@@ -24,6 +24,19 @@ public class Map extends Observable {
 	private String image;
 	public List<Land> lands;
 	public List<Edge> edges;
+	public List<Country> countries;
+	public List<Continent> continents;
+	
+	/**this is standard constrauctor for json 
+	 * 
+	 */
+	public Map(){
+		name="map1";
+		author="author1";
+		image="";
+		lands = new ArrayList<Land>();
+		edges = new ArrayList<Edge>();
+	}
 
 	/**
 	 * this is the constructor of the class which takes the name of the map
@@ -201,6 +214,13 @@ public class Map extends Observable {
 	public String AddCountry(String prm_name, int prm_continentId, int prm_x, int prm_y) {
 		if (!DoesExistCountry(prm_name)) {
 			this.lands.add(FactoryLand.GetLand("Country", prm_name, prm_continentId, prm_x, prm_y, -1));
+			Country countryS= GetCountryByName(prm_name);
+			Country countryD = null;
+			if(GetCountries().size()>1){
+				countryD=GetCountries().get(GetCountries().size()-2);
+			}
+			if(countryS!=null && countryD!=null )
+			AddEdge(countryS.id,countryD.id);
 			return "successful";
 		} else {
 			return "duplicate";
@@ -377,7 +397,7 @@ public class Map extends Observable {
 	public int GetContinentIdByName(String new_name) {
 		int id = -1;
 		for (Land l : this.lands) {
-			if (l instanceof Continent && l.GetName().equals(new_name)) {
+			if (l instanceof Continent && l.GetName().equalsIgnoreCase(new_name)) {
 				return l.GetId();
 			}
 		}
@@ -412,7 +432,7 @@ public class Map extends Observable {
 	public int GetCountryIdByName(String prm_name) {
 		int id = -1;
 		for (Land l : this.lands) {
-			if (l instanceof Country && l.GetName().equals(prm_name)) {
+			if (l instanceof Country && l.GetName().equalsIgnoreCase(prm_name)) {
 				return l.GetId();
 			}
 		}
@@ -910,6 +930,10 @@ public class Map extends Observable {
 			for (Country c : GetCountriesByContinentId(countinent.GetId())) {
 				if (!c.visited) {
 					continentIsValid = false;
+					System.out.println("_____Start message: Continent Connectivity Validation Failed_____");
+					System.out.println("Continent: "+countinent.GetName()+"is not connected continent!");
+					System.out.println("_____End message: Continent Connectivity Validation Failed_____");
+					
 					return false;
 				}
 			}
@@ -930,8 +954,8 @@ public class Map extends Observable {
 	public String AddArmiesToCountry(int prm_countryId, int prm_armies) {
 		this.GetCountryById(prm_countryId).AddArmies(prm_armies);
 		// trigger change
-		setChanged();
-		notifyObservers(this);
+		//setChanged();
+		//notifyObservers(this);
 		return "SuccessfullyAddedArmies";
 	}
 
@@ -950,7 +974,7 @@ public class Map extends Observable {
 		// trigger change
 		setChanged();
 		notifyObservers(this);
-		return "Lppser country is conquered!";
+		return "Looser country is conquered!";
 	}
 
 	/**
@@ -966,8 +990,8 @@ public class Map extends Observable {
 	public String TakeControlOfContinent(int prm_continentId, int prm_playerId) {
 		GetContinentById(prm_continentId).SetPlayerId(prm_playerId);
 		// trigger change
-		setChanged();
-		notifyObservers(this);
+		//setChanged();
+		//notifyObservers(this);
 		return "SuccessfullyTookControl";
 	}
 
@@ -1077,6 +1101,77 @@ public class Map extends Observable {
 		prm_country.SetPlayerId(prm_playerId);
 		setChanged();
 		notifyObservers(this);
+	}
+	/**this method returns the list of countries of a player that are exposed to attack
+	 * 
+	 * @param prm_playerId the id of the player
+	 * @return the list of weak countries
+	 */
+	public List<Country> GetWeakCountriesByPlayerId(int prm_playerId){
+		List<Country> countries = new ArrayList<Country>();
+		for(Country c : GetCountriesByPlayerId(prm_playerId)){
+			for(Country neighbor : GetNeighborsByCountryIdOpponentPlayer(c.GetId())){
+				if(neighbor.GetArmies()>0){
+					countries.add(c);
+					break;
+				}
+			}
+		}
+		return countries;
+	}
+	/**this method returns the weakest country
+	 * 
+	 * @param prm_playerId the id of the player
+	 * @return theweakest country
+	 */
+	public Country GetWeakestCountry(int prm_playerId){
+		Country weakestC = new Country();
+		int lowestArmies=10000;
+		for(Country c : GetWeakCountriesByPlayerId(prm_playerId)){
+			if(c.GetArmies()<=lowestArmies){
+				weakestC=c;
+			}
+		}
+		return weakestC;
+	}
+	/**this method returns the country with highest armies
+	 * 
+	 * @param prm_playerId the id of the player
+	 * @return the country with highest armies
+	 */
+	public Country GetHighArmiesCountry(int prm_playerId){
+		Country highestC = new Country();
+		int highestArmies=0;
+		for(Country c : GetCountriesByPlayerId(prm_playerId)){
+			if(c.GetArmies()<=highestArmies){
+				highestC=new Country();
+				highestC=c;
+			}
+		}
+		return highestC;
+	}
+	public Country GetBorderCountryByPlayerId(int prm_playerId){
+		Country country = new Country();
+		for(Country c : GetCountriesByPlayerId(prm_playerId)){
+			for(Country neighbor : GetNeighborsByCountryIdOpponentPlayer(c.GetId())){
+				if(c.GetArmies()>=2){
+					country=c;
+					return c;
+				}
+				
+			}
+		
+		}
+		return 	null;
+	}
+	public List<Country> GetBorderCountriesByPlayerId(int prm_playerId){
+		List<Country> countries = new ArrayList<Country>();
+		for(Country c : GetCountriesByPlayerId(prm_playerId)){
+			if(GetNeighborsByCountryIdOpponentPlayer(c.GetId()).size()>0){
+				countries.add(c);
+			}
+		}
+		return 	countries;
 	}
 
 }

@@ -72,7 +72,6 @@ public class TestEdge {
 
 		String countryresult2 = map.AddCountry("abc", 0, 34, 45);
 		System.out.println(countryresult2);
-
-		assertTrue(true);
+		assertTrue(countryresult2.contains("successful"));
 	}
 }

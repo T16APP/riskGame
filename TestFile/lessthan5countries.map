@@ -15,5 +15,3 @@ ONE=1
 [Territories]
 a1,153,51,ONE,a2,b1
 a2,218,51,ONE,a1,a3,b2
-a3,284,51,ONE,a2,a4,b3
-a4,349,51,ONE,a3,a5,b4

@@ -11,7 +11,13 @@ import java.util.Observable;
  * @version 1.0.0.0
  */
 public class CardExchange extends Observable {
-	private List<Card> hand;
+	public List<Card> hand;
+	
+	/**default constructor for json use
+	 * 
+	 */
+	public CardExchange() {
+	}
 
 	/**
 	 * this cunstruct builds the object and sets the hand cards

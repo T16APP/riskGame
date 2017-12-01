@@ -13,6 +13,12 @@ public class Card {
 	protected int id;
 	protected ECards type;
 	protected int playerId;
+	/**standard constructor for json use
+	 * 
+	 */
+	public Card(){
+		
+	}
 
 	/**
 	 * this is the constructor it takes the name and creates the card object

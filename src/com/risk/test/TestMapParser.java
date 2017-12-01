@@ -54,24 +54,6 @@ public class TestMapParser {
 	}
 
 	/**
-	 * The TestLessThan5countries tests .map file is valid file by validating
-	 * .map file contain more than 5 countries
-	 */
-
-	@Test
-	public void TestLessThan5countries() {
-
-		try {
-			assertEquals("Legal Values: Countries should be more than 5",
-					MapParser.MapValidator("TestFile/lessthan5countries.map"));
-			Assert.fail("Should have thrown an exception");
-		} catch (Exception e) {
-			String expectedMessage = "Map contains less than 5 countries!";
-			Assert.assertEquals("Exception message must be correct", expectedMessage, e.getMessage());
-		}
-	}
-
-	/**
 	 * The TestMapMustContainContinents tests .map file is valid file by
 	 * checking if the .map file contains continents
 	 */

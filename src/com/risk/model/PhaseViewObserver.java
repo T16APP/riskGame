@@ -13,6 +13,12 @@ import com.risk.utility.TurnPhases;
  */
 public class PhaseViewObserver implements Observer {
 	String phaseView = "";
+	/**standard constructor for json use
+	 * 
+	 */
+	public  PhaseViewObserver(){
+		
+	}
 
 	@Override
 	public void update(Observable o, Object arg) {
@@ -23,6 +29,8 @@ public class PhaseViewObserver implements Observer {
 					+ turnOrganizer.GetCurrentPlayer().GetName();
 		} else {
 			phaseView = "Current Phase: " + turnOrganizer.GetCurrentPhase();
+			if(turnOrganizer.GetCurrentPlayerId()!=-1)
+				phaseView+="\n" + "Current Player: " + turnOrganizer.GetCurrentPlayer().GetName();
 		}
 		System.out.println("_____Phase View_____");
 		System.out.println(phaseView);

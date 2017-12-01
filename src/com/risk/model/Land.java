@@ -13,6 +13,12 @@ public class Land implements ILand {
 	protected int id;
 	protected String name;
 	protected int playerId;
+	/**this is standared constrauctor for json use
+	 * 
+	 */
+	public Land(){
+		
+	}
 
 	/**
 	 * this constructor generates the land object it takes the name of the

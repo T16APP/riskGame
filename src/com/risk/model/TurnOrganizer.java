@@ -16,10 +16,13 @@ public class TurnOrganizer extends Observable {
 	private boolean isGameStarted;
 	private int currentPlayerId;
 	private TurnPhases currentPhase;
-	private boolean isAttackSuccessfull;
+	public boolean isAttackSuccessfull;
 	private String currentAction;
 	public List<Player> players;
 	public List<Integer> roundRobin;
+	public int turn;
+	public int turnMax;
+	public String winner;
 
 	/**
 	 * This the constructor of the class it initialize properties of the object
@@ -34,7 +37,22 @@ public class TurnOrganizer extends Observable {
 		 * 
 		 */
 		isAttackSuccessfull = true;
+		this.turnMax=100000000;
 	}
+	public TurnOrganizer(int prm_turnMax) {
+		isMapLoaded = false;
+		isGameStarted = false;
+		currentPlayerId = -1;
+		currentPhase = TurnPhases.PreGame;
+		/**
+		 * missing this should change once attack feature added
+		 * 
+		 */
+		isAttackSuccessfull = true;
+		this.turnMax=prm_turnMax;
+		this.turn=1;
+	}
+
 
 	/**
 	 * This method set map-loaded flag
@@ -164,13 +182,14 @@ public class TurnOrganizer extends Observable {
 		int nextPlayerId = -1;
 		if (roundRobin.size() < 1) {
 			InitRoundRobin();
+			turn+=1;
 		}
 		// tbd
 		nextPlayerId = roundRobin.get(0);
 		roundRobin.remove(0);
 		// tbd
+		this.currentPhase=TurnPhases.Reinforcement;
 		this.SetCurrentPlayerId(nextPlayerId);
-		this.SetCurrentPhase(TurnPhases.Reinforcement);
 		this.SetAttackSuccessful(false);
 		// tbd
 		GetCurrentPlayer().CalculateReinforcementArmies();
@@ -215,7 +234,7 @@ public class TurnOrganizer extends Observable {
 	 */
 	public Player GetCurrentPlayer() {
 		for (Player p : players) {
-			if (p.GetId() == this.GetCurrentPlayerId())
+			if (p.GetId() == this.currentPlayerId)
 				return p;
 		}
 		return null;

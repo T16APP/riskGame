@@ -16,9 +16,15 @@ public class Country extends Land {
 	private int continentId;
 	private int x;
 	private int y;
-	private List<Country> neighbors;
+	public List<Country> neighbors;
 	public boolean visited;
-
+	
+	/**this is standard constructor for json use
+	 * 
+	 */
+	public Country(){
+		super();
+	}
 	/**
 	 * This constructor initialize the object
 	 * 

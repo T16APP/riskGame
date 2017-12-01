@@ -1,11 +1,20 @@
 package com.risk.model;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import com.risk.utility.ECards;
 import com.risk.utility.LoggingWindow;
 import com.risk.utility.MapParser;
@@ -28,7 +37,7 @@ public class GameBoard {
 	public TurnOrganizer turnOrganizer;
 	public List<Card> deck;
 
-	public GameBoard() {
+	/*public GameBoard() {
 		if (this.instance == null) {
 			players = new ArrayList<Player>();
 			map = new Map("map");
@@ -36,6 +45,13 @@ public class GameBoard {
 			deck = new ArrayList<Card>();
 
 		}
+
+	}*/
+	public GameBoard() {
+		    players = new ArrayList<Player>();
+			map = new Map("map");
+			turnOrganizer = new TurnOrganizer();
+			deck = new ArrayList<Card>();
 
 	}
 
@@ -51,6 +67,198 @@ public class GameBoard {
 			return instance = new GameBoard();
 		} else
 			return instance;
+	}
+	/**this method is entrance of the application
+	 * @throws Exception file not exist
+	 * 
+	 */
+	public void GameEntry() throws Exception{
+		Scanner in = new Scanner(System.in); 
+	    System.out.println("Enter that mode: 0 for SingleMode, 1 for Tournament");
+		int mode = in.nextInt();
+		if(mode==0){
+			SingleModePlay();
+		}
+		else if(mode==1){
+			TournamentPlay();
+		}
+	}
+	/**this method selects the mode
+	 * @param mode the mode
+	 * @throws Exception file not exist
+	 * @return name of mode
+	 */
+	public String GameEntry(int mode) throws Exception{
+		if(mode==0){
+			return "SingleMode";
+		}
+		else if(mode==1){
+			return "Tournament";
+		}
+		else return "";
+	}
+
+	/**this method organizes the single mode play
+	 * @throws Exception file not exist
+	 * 
+	 */
+	public void SingleModePlay() throws Exception{
+		Scanner inInteger = new Scanner(System.in); 
+		Scanner inString = new Scanner(System.in); 
+	    System.out.println("New game or load a game from file: 0 for new game, 1 for already saved game");
+		int newOrLoad = inInteger.nextInt();
+		if(newOrLoad==0){
+			System.out.println("Enter map file:");
+			String file = inString.next();
+			LoadMap(file);
+			inInteger = new Scanner(System.in);
+			int numPlayers=0;
+			while(numPlayers<2 || numPlayers>5){
+				System.out.println("Enter number of players between 2 and 5:");
+				numPlayers = inInteger.nextInt();
+			}
+			int numStrategy=0;
+			List<String> strategyPlayers = new ArrayList<String>();
+			for(int i = 1;i<=numPlayers;i++){
+				System.out.println("Enter strategy player for player: "+i+"0:HumanPlayer, 1:AggressivePlayer, 2:BenevolentPlayer, 3:RandomPlayer, 4:CheaterPlayer");
+				numStrategy = inInteger.nextInt();
+				strategyPlayers.add(StrategyDic(numStrategy));
+			}
+			StartupStrategyGame(strategyPlayers);
+			System.out.println("Quit or save the game: 0 for quit, 1 for save the game");
+			int quitSave = inInteger.nextInt();
+			if(quitSave==1){
+				System.out.println("Enter the file to save the game into it:");
+				String fileOut = inString.next();
+				SaveGameToFile(fileOut);
+			}
+			
+		}
+		else if(newOrLoad==2){
+			inInteger = new Scanner(System.in);
+			System.out.println("Enter name of the file in which a game already saved:");
+			String file = inString.next();
+			instance = LoadGameFromFile(file);
+			switch(turnOrganizer.GetCurrentPhase()){
+				case Reinforcement:
+					turnOrganizer.GetCurrentPlayer().Reinforcement();
+					break;
+				case Attack:
+					turnOrganizer.GetCurrentPlayer().Attack();
+					break;
+				case Fortification:
+					turnOrganizer.GetCurrentPlayer().Fortification();
+					break;
+					
+			}
+		}
+	}
+	/**this method translate the number to name of strategy
+	 * 
+	 * @param prm_strategyKey the number
+	 * @return the name of strategy
+	 */
+	public String StrategyDic(int prm_strategyKey){
+		switch(prm_strategyKey){
+		case 0:
+			return "Human";
+		case 1:
+			return "Aggressive";
+		case 2:
+			return "Benevolent";
+		case 3:
+			return "Random";
+		case 4:
+			return "Cheater";
+		default:
+			return "Cheater";
+		}
+	}
+	/**this method organizes the tournament games
+	 * @throws Exception file not exist
+	 * 
+	 */
+	public void TournamentPlay() throws Exception{
+		Scanner inInteger = new Scanner(System.in); 
+		Scanner inString = new Scanner(System.in); 
+	    //set the map for tounament
+		System.out.println("Enter the number of maps:");
+		int numMaps = inInteger.nextInt();
+		while(numMaps<1 || numMaps>5){
+			System.out.println("Enter the number of maps between 1 and 5:");
+			numMaps = inInteger.nextInt();
+		}
+		//take map files one by one
+		String mapFile="";
+		List<String> mapFiles = new ArrayList<String>();
+		for(int i = 0;i<numMaps;i++){
+			System.out.println("Enter map file for map: "+i);
+			mapFile = inString.next();
+			mapFiles.add(mapFile);
+		}
+		//take number of players
+		int numPlayers=0;
+		while(numPlayers<2 || numPlayers>4){
+			System.out.println("Enter number of computer players between 2 and 4:");
+			numPlayers = inInteger.nextInt();
+		}
+		//take strategy players
+		int numStrategy=0;
+		List<String> strategyPlayers = new ArrayList<String>();
+		for(int i =1 ;i<=numPlayers;i++){
+			System.out.println("Enter computer strategy player for player: "+i+" 1:AggressivePlayer, 2:BenevolentPlayer, 3:RandomPlayer, 4:CheaterPlayer");
+			numStrategy = inInteger.nextInt();
+			strategyPlayers.add(StrategyDic(numStrategy));
+		}
+		//take the number of games
+		int numGame=0;
+		while(numGame<1 || numPlayers>6){
+			System.out.println("Enter number of games on each map between 1 and 5:");
+			numGame = inInteger.nextInt();
+		}
+		//take the number of turns
+		int numTurn=0;
+		while(numTurn<9 || numTurn>51){
+			System.out.println("Enter number of turns for each game  between 10 and 50:");
+			numTurn = inInteger.nextInt();
+		}
+		String[][] tournemantResult = new String[numMaps][numGame];
+		int mapIterator=0;
+		for(String map: mapFiles){
+			LoggingWindow.Log("Map: "+map+" is loaded");
+			for(int i=0;i<numGame;i++ ){
+				LoggingWindow.Log("Game: "+i+" is started on map: "+map);
+				this.LoadMap(map);
+				this.turnOrganizer = new TurnOrganizer(numTurn);
+				StartupStrategyGame(strategyPlayers);
+				tournemantResult[mapIterator][i]=this.turnOrganizer.winner;
+				LoggingWindow.Log("Game: "+i+" is finished on map: "+map);
+				}
+			mapIterator++;
+		}
+		LoggingWindow.Log("Tournament is finished");
+		for(int i=0;i<numMaps;i++){
+			System.out.print(mapFiles.get(i)+"|");
+			for(int j=0;j<numGame;j++){
+				System.out.print(tournemantResult[i][j]+"|");
+			}
+			System.out.println("");
+		}
+	}
+	/**this method sets up the player based on the strategies
+	 * 
+	 * @param prm_playersStrategy the list of strategies
+	 */
+	public void SetupStrategyPlayers(List<String> prm_playersStrategy) {
+		players = new ArrayList<Player>();
+		int i = 1;
+		for(String strategy : prm_playersStrategy){
+			players.add(new Player(i, strategy, this.map, this.deck, this.turnOrganizer,strategy));
+			i++;
+		}
+		roundRobin = new ArrayList<Integer>(players.size());
+		turnOrganizer.roundRobin = new ArrayList<Integer>(players.size());
+		InitRoundRobin();
 	}
 
 	/**
@@ -90,6 +298,43 @@ public class GameBoard {
 		LoggingWindow.Log("Load Map: Map loaded as a connected graph successfully");
 		turnOrganizer.MapLoaded();
 		return result = "SuccessfullyMapLoaded";
+	}
+	/**this method starts up the game according the strategy players
+	 * 
+	 * @param prm_strategyPlayer number of players
+	 * @return successful message
+	 * @throws Exception file not exist
+	 */
+	public String StartupStrategyGame(List<String> prm_strategyPlayer) throws Exception {
+		if (prm_strategyPlayer.size() < 2 || prm_strategyPlayer.size() > 5) {
+			LoggingWindow.Log("Startup Phase: number of players is out of range (between 2 and 5)");
+			return "PlayerNumberNotValid";
+		}
+		if (turnOrganizer.IsGameStarted()) {
+			return "Game already started";
+		}
+		WorldDominationObserver worldDomination = new WorldDominationObserver();
+		// attach world domination observer
+		worldDomination.GetWorldDomination();
+		PhaseViewObserver phaseViewObserver = new PhaseViewObserver();
+		// attach phase view observer
+		turnOrganizer.addObserver(phaseViewObserver);
+		this.map.addObserver(worldDomination);
+		turnOrganizer.SetCurrentPhase(TurnPhases.Startup);
+		;
+		BuildDeck(map.GetCountries().size());
+		SetupStrategyPlayers(prm_strategyPlayer);
+		turnOrganizer.players = this.players;
+		AssignCountriesRandom();
+		LoggingWindow.Log("Startup Phase: countries were allocated to the players randomly and evenly");
+		AllocateInitialArmies();
+		LoggingWindow.Log("Startup Phase: armies were allocated to players based on risk rules");
+		PlaceOneByOneArmies();
+		LoggingWindow.Log("Startup Phase: all armies placed one by one on countries in round-robin fashion");
+		turnOrganizer.GameStarted();
+		turnOrganizer.GetNextPlayerId();
+		turnOrganizer.GetCurrentPlayer().Reinforcement();
+		return "Game started successfully";
 	}
 
 	/**
@@ -369,6 +614,73 @@ public class GameBoard {
 				totArmies += c.GetControl();
 		}
 		return totArmies;
+	}
+	/**this method saves the game as json
+	 * 
+	 * @param file is the file in which the game is saved
+	 * @throws FileNotFoundException if the file is not valid
+	 * @return successful message
+	 */
+	public String SaveGameToFile(String file) throws FileNotFoundException{
+		//prepare game to save, this acivities should be reverse when load the game
+		for(Country c : this.map.GetCountries()) c.neighbors= new ArrayList<Country>();
+		for(Player p : this.players){
+			//p.map=null;
+			//p.deck=null;
+			p.turnOrganizer= new TurnOrganizer();
+			p.map = new Map();
+			p.deck = new ArrayList<Card>();
+			p.strategy = null;
+		}
+		
+		this.map.deleteObservers();
+		this.turnOrganizer.deleteObservers();
+		this.map.countries = this.map.GetCountries();
+		this.map.continents = this.map.GetContinents();
+		Gson _gson = new Gson();
+		String request = _gson.toJson(this);
+		try(  PrintWriter out = new PrintWriter(file)  ){
+			out.println( request );
+		}
+		return "Successful";
+	}
+	/**this method loads the game from a file
+	 * 
+	 * @param file the file to save the game
+	 * @throws JsonIOException exception of json 
+	 * @throws JsonSyntaxException exception of json
+	 * @throws FileNotFoundException exception of file not existing
+	 * @return an instance of game board
+	 */
+	public static GameBoard LoadGameFromFile(String file) throws JsonIOException, JsonSyntaxException, FileNotFoundException{
+		JsonParser parser = new JsonParser();
+		Object obj = parser.parse(new FileReader(file));
+		JsonObject jsonObject = (JsonObject)obj;
+		Gson gson = new Gson();
+		GameBoard gameBoardNew = gson.fromJson(jsonObject, GameBoard.class);
+		gameBoardNew.map.lands= new ArrayList<Land>();
+		for(Continent c:gameBoardNew.map.continents){
+			gameBoardNew.map.lands.add(c);
+		}
+		for(Country c:gameBoardNew.map.countries){
+			gameBoardNew.map.lands.add(c);
+		}
+		gameBoardNew.turnOrganizer.players=gameBoardNew.players;
+		WorldDominationObserver worldDomination = new WorldDominationObserver();
+		// attach world domination observer
+		gameBoardNew.map.addObserver(worldDomination);
+		PhaseViewObserver phaseViewObserver = new PhaseViewObserver();
+		//reattach phase view
+		gameBoardNew.turnOrganizer.addObserver(phaseViewObserver);
+		for(Player p : gameBoardNew.players){
+			//p.map=null;
+			//p.deck=null;
+			p.turnOrganizer=gameBoardNew.turnOrganizer;
+			p.map=gameBoardNew.map;
+			p.deck=gameBoardNew.deck;
+			p.setStrategy(p.GetName());
+		}
+		return gameBoardNew;
 	}
 
 }

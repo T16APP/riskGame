@@ -9,6 +9,7 @@ import java.util.Observer;
 import com.risk.utility.LoggingWindow;
 import com.risk.utility.TurnPhases;
 
+
 /**
  * This class represents a player it maintains id and name of the player also it
  * has different methods to change the status of the object
@@ -23,12 +24,45 @@ public class Player {
 	private int armies;
 	private int armiesFromCards;
 	public Attack attack;
-	private Map map;
-	private List<Card> deck;
+	public Map map;
+	public List<Card> deck;
 	public TurnOrganizer turnOrganizer;
 	public CardExchange cardExchange;
+	public StrategyPlayer strategy;
+	/**standard constructor for json use
+	 * 
+	 */
+	public Player(){
+		
+	}
 
 	/**
+	 * this is the constructor of the class it takes id and name and will asign
+	 * them to the player
+	 * 
+	 * @param prm_id
+	 *            , which its type is integer, will br the id of the player
+	 * @param prm_name
+	 *            ,which its type is string, will be the name of the player
+	 * @param prm_map
+	 *            the map
+	 * @param prm_deck
+	 *            the deck
+	 * @param prm_turnOrganizer
+	 *            the turn organizer
+	 * @param strategy type of strategy
+	 */
+	public Player(int prm_id, String prm_name, Map prm_map, List<Card> prm_deck, TurnOrganizer prm_turnOrganizer, String strategy) {
+		this.id = prm_id;
+		this.name = prm_name;
+		armies = 0;
+		armiesFromCards = 0;
+		this.map = prm_map;
+		this.deck = prm_deck;
+		this.turnOrganizer = prm_turnOrganizer;
+		setStrategy(strategy);
+	}
+	/**constrauctor with human as default
 	 * this is the constructor of the class it takes id and name and will asign
 	 * them to the player
 	 * 
@@ -51,6 +85,7 @@ public class Player {
 		this.map = prm_map;
 		this.deck = prm_deck;
 		this.turnOrganizer = prm_turnOrganizer;
+		setStrategy("Human");
 	}
 
 	/**
@@ -359,6 +394,7 @@ public class Player {
 	 * 
 	 */
 	public void EndExchangeCards() {
+		this.cardExchange.deleteObservers();
 		this.cardExchange = null;
 	}
 
@@ -398,19 +434,21 @@ public class Player {
 			DeckCard(prm_card2);
 			DeckCard(prm_card3);
 			this.AddArmiesFromCards(5);
-			LoggingWindow.Log("Three same cards were exchanged successfully and 5 armies added to the player's armies");
+			cardExchange.UpdateHandCards(GetCardsByPlayerId(this.GetId()));
+			LoggingWindow.Log("Three same cards were exchanged successfully and 5 armies added to the player's armies: "+this.GetName());
 			return "Successfully three same cards exchanged!";
 		} else if (IsThreeDifferentCards(prm_card1, prm_card2, prm_card3)) {
 			DeckCard(prm_card1);
 			DeckCard(prm_card2);
 			DeckCard(prm_card3);
 			this.AddArmiesFromCards(5);
+			cardExchange.UpdateHandCards(GetCardsByPlayerId(this.GetId()));
 			LoggingWindow
-					.Log("Three different cards were exchanged successfully and 5 armies added to the player's armies");
+					.Log("Three different cards were exchanged successfully and 5 armies added to the player's armies: "+this.GetName());
 			return "Successfully three different cards exchanged!";
 		} else {
 
-			LoggingWindow.Log("Three cards are not the same or different types so can not exchanged");
+			LoggingWindow.Log("Three cards are not the same or different types so can not exchanged for player: "+this.GetName());
 			return "Failed exchange!";
 		}
 	}
@@ -484,6 +522,7 @@ public class Player {
 		if (turnOrganizer.GetCurrentPhase() != TurnPhases.Reinforcement)
 			return "PhaseNotValid";
 		int countryArmies = map.GetCountryById(prm_countryId).GetArmies();
+		LoggingWindow.Log("Reinforcement country: " + prm_armies+" armies added to countryId: "+prm_countryId);
 		if (this.GetArmies() >= prm_armies) {
 			map.AddArmiesToCountry(prm_countryId, prm_armies);
 			this.AddArmies(-1 * prm_armies);
@@ -568,6 +607,9 @@ public class Player {
 		int result = 0;
 		if (GetUnassignedCards().get(0) != null) {
 			GetUnassignedCards().get(0).playerId = prm_playerId;
+			if(this.cardExchange!=null){
+				this.cardExchange.UpdateHandCards(GetCardsByPlayerId(this.id));
+			}
 			return result = 1;
 		} else
 			throw new Exception("DeckHasNoCard");
@@ -673,6 +715,208 @@ public class Player {
 	 */
 	public void EndReinforcementPhase() {
 		turnOrganizer.SetCurrentPhase(TurnPhases.Attack);
+	}
+	/**this method checks if there is three same card or three different card and returns them
+	 * 
+	 * @return three cards to exchange
+	 */
+	public List<Card> GetThreeCardsToExchange(){
+		List<Card> cards = new ArrayList<Card>();
+		List<Card> artilleries = new ArrayList<Card>();
+		List<Card> cavalries = new ArrayList<Card>();
+		List<Card> infantries = new ArrayList<Card>();
+		for(Card c : this.GetCardsByPlayerId(this.GetId())){
+			switch(c.GetType()){
+			case Artillery:
+				artilleries.add(c);
+				break;
+			case Cavalry:
+				cavalries.add(c);
+				break;
+			case Infantry:
+				infantries.add(c);
+				break;
+			}
+		}
+		if(artilleries.size()>=3){
+			for(int i=0;i<3;i++){
+				cards.add(artilleries.get(i));
+			}
+		} 
+		else if(cavalries.size()>=3){
+			for(int i=0;i<3;i++){
+				cards.add(cavalries.get(i));
+			}
+		} 
+		else if(infantries.size()>=3){
+			for(int i=0;i<3;i++){
+				cards.add(infantries.get(i));
+			}
+		} 
+		if(cards.size()<3){
+			if(artilleries.size()>1 && cavalries.size()>1 && infantries.size()>1){
+				cards = new ArrayList<Card>();
+				cards.add(artilleries.get(0));
+				cards.add(cavalries.get(0));
+				cards.add(infantries.get(0));
+			}
+		}
+		return cards;
+	}
+	/**this method performs automatic card exchange
+	 * 
+	 * @return successful message
+	 * @throws IOException if the window logging not available
+	 */
+	public String DoCardExchange() throws IOException{
+		List<Card> cardToDo = this.GetThreeCardsToExchange();
+		if(cardToDo.size()==3){
+			CardExchangeObserver cardExchangeObserver = new CardExchangeObserver();
+			this.PrepareExchangeCards(cardExchangeObserver);
+			this.cardExchange.UpdateHandCards(this.GetCardsByPlayerId(this.GetId()));
+			this.ExchangeCards(cardToDo.get(0),
+					cardToDo.get(1),
+					cardToDo.get(2));
+			this.EndExchangeCards();
+			return "CardExchangeDone";
+		}
+		return null;
+	}
+	/**this method deligates the reinforcement to the strategy
+	 * 
+	 * @return result message
+	 * @throws IOException if the looging window does not exist
+	 * @throws Exception general exception
+	 */
+	public String Reinforcement() throws IOException, Exception{
+		if(this.turnOrganizer.turn<this.turnOrganizer.turnMax){
+		strategy.Reinforcement(this);
+		}
+		else{
+			this.turnOrganizer.winner = "Draw";
+		}
+		return "";
+	}
+	/**this method deligates attack to strategy
+	 * 
+	 * @return successful message
+	 * @throws IOException if logging window does not exist
+	 * @throws Exception if strategy not plugged in
+	 */
+	public String Attack() throws IOException, Exception{
+		strategy.Attack(this);
+		return "";
+	}
+	/**this method performs the armies deduction
+	 * 
+	 * @param prm_currentPlayer the current player
+	 * @param attackerC attacker country
+	 * @param attackerDice attacker dice
+	 * @param defenderC defender country
+	 * @param defenderDice defender dice
+	 * @return successful message
+	 * @throws Exception if the logging window does not exist
+	 */
+	public String PerformDeduction(Player prm_currentPlayer,Country attackerC, int attackerDice, Country defenderC, int defenderDice) throws Exception{
+		List<Dice> attackerDices = new ArrayList<Dice>(attackerDice);
+		for (int i = 1; i <= attackerDice; i++) {
+			attackerDices.add(new Dice());
+		}
+		List<Dice> defenderDices = new ArrayList<Dice>(defenderDice);
+		for (int i = 1; i <= defenderDice; i++) {
+			defenderDices.add(new Dice());
+		}
+		// roll dices
+		for (Dice d : attackerDices)
+			d.RollDice();
+		for (Dice d : defenderDices)
+			d.RollDice();
+		// sort dices for each of attacker and defender country
+		Collections.sort(attackerDices);
+		Collections.reverse(attackerDices);
+		Collections.sort(defenderDices);
+		Collections.reverse(defenderDices);
+		LoggingWindow.Log("Attack: attacker dices are: "+attackerDice+"defender dices are "+defenderDice);
+		if (attackerDices.get(0).GetDice() > defenderDices.get(0).GetDice()) {
+			prm_currentPlayer.map.AddArmiesToCountry(attackerC.GetId(), 1);
+			prm_currentPlayer.map.AddArmiesToCountry(defenderC.GetId(), -1);
+			String deductionResult = "AttackWon";
+			LoggingWindow.Log("Propper number of 1 armies deducted from defender: "+defenderC.GetName()+" and that added to the attacker : "+attackerC.GetName()+"country");
+		} else {
+			prm_currentPlayer.map.AddArmiesToCountry(attackerC.GetId(), -1);
+			prm_currentPlayer.map.AddArmiesToCountry(defenderC.GetId(), 1);
+			String deductionResult = "AttackLost";
+			LoggingWindow.Log("Propper number of 1 armies deducted from attacker: "+attackerC.GetName()+" and that added to the defender: "+defenderC.GetName()+" country");
+		}
+		// the second decision if each has two dices
+		if (attackerDices.size() >= 2 && defenderDices.size() >= 2
+				&& defenderC.GetArmies() > 0) {
+			if (attackerDices.get(1).GetDice() > defenderDices.get(1).GetDice()) {
+				prm_currentPlayer.map.AddArmiesToCountry(attackerC.GetId(), 1);
+				prm_currentPlayer.map.AddArmiesToCountry(defenderC.GetId(), -1);
+				String deductionResult = "AttackWon";
+				LoggingWindow.Log("Propper number of 1 armies deducted from defender: "+defenderC.GetName()+" and that added to the attacker: "+attackerC.GetName()+" country");
+			} 
+			else if (defenderC.GetArmies() > 0) {
+				prm_currentPlayer.map.AddArmiesToCountry(attackerC.GetId(), -1);
+				prm_currentPlayer.map.AddArmiesToCountry(defenderC.GetId(), 1);
+				String deductionResult = "AttackLost";
+				LoggingWindow.Log("Propper number of 1 armies deducted from attacker: "+attackerC.GetName()+" and that added to the defender: "+defenderC.GetName()+" country");
+			}
+		}
+		if (defenderC.GetArmies() == 0) {
+			prm_currentPlayer.turnOrganizer.isAttackSuccessfull=true;
+			prm_currentPlayer.map.ConquerCountry(defenderC.GetId(), prm_currentPlayer.GetId());
+			prm_currentPlayer.turnOrganizer.SetAttackSuccessful(true);
+			LoggingWindow.Log("The defender: "+defenderC.GetName()+" country captured");
+			//occupy the defender
+			int occypyArmies = attackerC.GetArmies()>=2?attackerC.GetArmies()-2:0;
+			this.map.GetCountryByCountryId(attackerC.GetId()).AddArmies(-1 * occypyArmies);
+			this.map.GetCountryByCountryId(defenderC.GetId()).AddArmies(occypyArmies);
+			LoggingWindow.Log("The defender: "+defenderC.GetName()+" country occupied by player"+prm_currentPlayer.GetName());
+			if (prm_currentPlayer.map.IsContinentCaptured(prm_currentPlayer.GetId(), defenderC.GetContinentId())) {
+				LoggingWindow.Log("The continent " + defenderC.GetContinentId() + " is captured");
+			}
+			if (prm_currentPlayer.map.IsWorldCaptured(prm_currentPlayer.GetId())) {
+				// end of the game
+				prm_currentPlayer.EndGame();
+				LoggingWindow.Log("The game is over and the player: " + prm_currentPlayer.GetId() + " is winner");
+				return "the game is over you won";
+			} else {
+				return "you captured the defender country now you should occupy it";
+			}
+		}
+		if (!prm_currentPlayer.map.IsAttackPossibleByPlayerId(prm_currentPlayer.GetId())) {
+			prm_currentPlayer.EndAttackPhase();
+			LoggingWindow.Log("More attack is not possible and attack phase is ended");
+			return "More ttack is not possible";
+		}
+		return "";
+	}
+	/**this method sets the strategy for the player
+	 * 
+	 * @param strategy name of the strategy
+	 * @return the strategy object
+	 */
+	public StrategyPlayer setStrategy(String strategy){
+		switch(strategy){
+		case "Human":
+			return this.strategy=new HumanPlayer();
+		case "Aggressive":
+			return this.strategy=new AggressivePlayer();
+		case "Benevolent":
+			return this.strategy=new BenevolentPlayer();
+		case "Random":
+			return this.strategy=new RandomPlayer();
+		case "Cheater":
+			return this.strategy=new CheaterPlayer();
+		default:
+			return null;
+		}
+	}
+	public String Fortification() throws IOException, Exception{
+		this.strategy.Fortification(this);
+		return "";
 	}
 
 }

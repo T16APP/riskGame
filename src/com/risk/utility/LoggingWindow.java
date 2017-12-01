@@ -2,6 +2,10 @@ package com.risk.utility;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * this class provides a static method accesible everywhere to write into
@@ -19,9 +23,13 @@ public class LoggingWindow {
 	 */
 	public static void Log(String line) throws IOException {
 		String filename = "LoggingWindow.txt";
-		FileWriter fw = new FileWriter(filename, true); // the true will append
-														// the new data
-		fw.write(line + "\n");// appends the string to the file
+		FileWriter fw = new FileWriter(filename, true);
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Calendar cal = Calendar.getInstance();
+		// appends the string to the file
+		fw.write(dateFormat.format(cal.getTime())+ "\n");
+		// appends the string to the file
+		fw.write(line + "\n");
 		fw.close();
 	}
 
